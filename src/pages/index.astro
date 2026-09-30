@@ -1,0 +1,230 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/global.css';
+---
+<BaseLayout>
+  <div class="cursor" aria-hidden="true"><span></span></div>
+
+  <header class="site-header" data-header>
+    <a class="brand" href="#top" aria-label="Boomley home">
+      <span class="brand-mark" aria-hidden="true"><i></i></span>
+      <span>BOOMLEY®</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="#about">About</a>
+      <a href="#product">Product / 001</a>
+      <a href="#signal">Send a signal</a>
+    </nav>
+    <span class="header-status">TRANSMISSION / 001</span>
+  </header>
+
+  <main id="top">
+    <section class="hero section section--ink" aria-labelledby="hero-title">
+      <div class="grain" aria-hidden="true"></div>
+      <div class="signal-rail" aria-hidden="true"><span data-signal-dot></span></div>
+      <div class="section-meta">
+        <span>BOOMLEY® / PRODUCT COMPANY</span>
+        <span>NOTTINGHAM / UK → GLOBAL</span>
+      </div>
+
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow" data-reveal>WE FOLLOW THE SIGNAL.</p>
+          <h1 id="hero-title" class="hero-title" data-split>
+            WE NOTICE THINGS<br />
+            THAT SHOULDN'T<br />
+            <em>STILL BE THIS HARD.</em>
+          </h1>
+          <div class="hero-bottom" data-reveal>
+            <p class="hero-lead">Boomley looks for recurring friction in everyday life and technology — then investigates whether something better deserves to be built.</p>
+            <div class="actions">
+              <a class="button button--blue" href="#signal">SEND A SIGNAL <span>↗</span></a>
+              <a class="text-link" href="#product">FOLLOW THE BUILD <span>↓</span></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-workbench" data-reveal aria-label="Boomley working board placeholder">
+          <div class="workbench-top"><span>WORKBENCH / LIVE</span><span>2 PEOPLE</span></div>
+          <div class="workbench-art">
+            <div class="paper paper--one"><small>PRODUCT</small><b>What keeps getting in the way?</b><span>CHIDI / PM · STRATEGY · DESIGN</span></div>
+            <div class="paper paper--two"><small>ENGINEERING</small><b>Can technology materially improve it?</b><span>MICHAEL / TECHNICAL LEAD</span></div>
+            <div class="signal-stamp">SIGNAL<br/>RECEIVED</div>
+          </div>
+          <p class="media-note">[ IMAGE / FILM SLOT — replace with founder work footage or generated editorial still ]</p>
+        </div>
+      </div>
+
+      <div class="scroll-note" aria-hidden="true"><span>SCROLL TO TRACE THE SIGNAL</span><i></i></div>
+    </section>
+
+    <section id="about" class="section section--ivory intro-section">
+      <div class="section-meta"><span>01 / WHY BOOMLEY</span><span>THIS SHOULD WORK BETTER.</span></div>
+      <div class="intro-grid">
+        <h2 class="display-title" data-reveal>You probably<br/>know the feeling.</h2>
+        <div class="friction-list">
+          <article data-reveal><span>01</span><p>A process with six steps that should take two.</p></article>
+          <article data-reveal><span>02</span><p>Software you constantly have to work around.</p></article>
+          <article data-reveal><span>03</span><p>Technology that says it helps while competing for your attention.</p></article>
+          <article data-reveal><span>04</span><p>A problem everybody complains about but nobody seems to fix.</p></article>
+        </div>
+      </div>
+      <div class="signal-definition" data-reveal>
+        <span class="mono-label">WE CALL THAT</span>
+        <p>THAT'S A <em>SIGNAL.</em></p>
+      </div>
+    </section>
+
+    <section class="section section--blue process-section">
+      <div class="section-meta"><span>02 / HOW WE WORK</span><span>LISTEN → INVESTIGATE → BUILD</span></div>
+      <div class="process-copy">
+        <h2 class="display-title" data-reveal>Not every annoyance<br/>becomes a product.</h2>
+        <p data-reveal>We look for friction that repeats, matters, and can genuinely be improved with technology.</p>
+      </div>
+      <div class="process-track" data-process-track>
+        <article data-reveal><span>01</span><h3>NOTICE</h3><p>People tell us what keeps getting in the way.</p></article>
+        <article data-reveal><span>02</span><h3>INVESTIGATE</h3><p>We study the behaviour, system and real cost behind it.</p></article>
+        <article data-reveal><span>03</span><h3>BUILD</h3><p>If the signal holds up, we design, test and ship.</p></article>
+      </div>
+    </section>
+
+    <section class="section section--ink founders-section">
+      <div class="grain" aria-hidden="true"></div>
+      <div class="section-meta"><span>03 / THE COMPANY</span><span>TWO PEOPLE / FOR NOW</span></div>
+      <div class="founders-head">
+        <h2 class="display-title" data-reveal>One company.<br/>Two disciplines.</h2>
+        <p data-reveal>We are deliberately small. Product and engineering sit next to each other from the first question to the first release.</p>
+      </div>
+      <div class="founder-grid">
+        <article class="founder-card" data-reveal>
+          <div class="founder-image"><span>IMAGE SLOT / CHIDI</span></div>
+          <div class="founder-info"><span>01</span><h3>CHIDI</h3><p>Product Management · Strategy · Design · Outreach</p></div>
+        </article>
+        <article class="founder-card" data-reveal>
+          <div class="founder-image"><span>IMAGE SLOT / MICHAEL</span></div>
+          <div class="founder-info"><span>02</span><h3>MICHAEL</h3><p>Technical Lead · Engineering · Systems</p></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="product" class="section section--pale product-section">
+      <div class="section-meta"><span>04 / PRODUCT / 001</span><span>IN DEVELOPMENT</span></div>
+      <div class="product-grid">
+        <div class="product-copy">
+          <p class="eyebrow" data-reveal>WE'RE BUILDING SOMETHING.</p>
+          <h2 class="display-title" data-reveal>Some details are better<br/><em>kept quiet for now.</em></h2>
+          <p class="product-lead" data-reveal>Our first product started with a signal we think deserves a better answer. We are researching, prototyping and building it now — without publishing the mechanism before it is ready.</p>
+          <form class="notify-form" data-notify-form>
+            <label class="sr-only" for="launch-email">Email address</label>
+            <input id="launch-email" name="email" type="email" placeholder="EMAIL FOR PRODUCT / 001" required />
+            <button type="submit">TELL ME WHEN →</button>
+          </form>
+          <p class="form-status" data-notify-status aria-live="polite"></p>
+        </div>
+        <div class="teaser-visual" data-teaser>
+          <div class="teaser-noise"></div>
+          <div class="teaser-ui">
+            <span class="teaser-tag">PRIVATE BUILD / DO NOT DISTRIBUTE</span>
+            <div class="ghost-panel ghost-panel--a"></div>
+            <div class="ghost-panel ghost-panel--b"></div>
+            <div class="ghost-panel ghost-panel--c"></div>
+            <p>WHAT IF YOUR INTENTION HAD SOMEWHERE TECHNOLOGY COULDN'T FOLLOW?</p>
+          </div>
+          <span class="teaser-hint">MOVE CURSOR TO GLIMPSE / NEVER ENOUGH TO RECONSTRUCT</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--ivory roadmap-section">
+      <div class="section-meta"><span>05 / BUILD LOG</span><span>PRODUCT / 001</span></div>
+      <div class="roadmap-head">
+        <h2 class="display-title" data-reveal>From signal<br/>to release.</h2>
+        <p data-reveal>This is the part we can show: the work, not the secret.</p>
+      </div>
+      <div class="roadmap" data-roadmap>
+        <article class="is-complete"><span>01</span><h3>SIGNAL IDENTIFIED</h3><small>COMPLETE</small></article>
+        <article class="is-complete"><span>02</span><h3>RESEARCH</h3><small>COMPLETE</small></article>
+        <article class="is-active"><span>03</span><h3>SYSTEM MAPPING</h3><small>IN MOTION</small></article>
+        <article><span>04</span><h3>PROTOTYPE DEVELOPMENT</h3><small>NEXT</small></article>
+        <article><span>05</span><h3>PRIVATE TESTING</h3><small>QUEUED</small></article>
+        <article><span>06</span><h3>RELEASE TRANSMISSION</h3><small>WHEN READY</small></article>
+      </div>
+    </section>
+
+    <section id="signal" class="section section--ink signal-section">
+      <div class="grain" aria-hidden="true"></div>
+      <div class="section-meta"><span>06 / SEND A SIGNAL</span><span>THE BOX IS OPEN</span></div>
+      <div class="signal-head">
+        <h2 class="display-title" data-reveal>What have<br/><em>you noticed?</em></h2>
+        <p data-reveal>Don't pitch us a startup. Tell us what keeps getting in the way.</p>
+      </div>
+
+      <div class="signal-stage" data-signal-stage>
+        <form class="letter" data-letter-form>
+          <div class="letter-top"><span>TO / BOOMLEY</span><span>FROM / SOMEONE WHO NOTICED</span></div>
+          <label>THE THING THAT'S ANNOYING ME
+            <textarea name="friction" rows="3" required placeholder="It keeps happening when..."></textarea>
+          </label>
+          <label>WHO DOES THIS AFFECT?
+            <input name="who" type="text" required placeholder="People who..." />
+          </label>
+          <label>IF THIS WORKED PROPERLY, WHAT WOULD CHANGE?
+            <textarea name="change" rows="2" required placeholder="We would spend less time... and more time..."></textarea>
+          </label>
+          <button class="button button--blue letter-submit" type="submit">WRAP IT →</button>
+        </form>
+
+        <div class="envelope-zone" aria-live="polite">
+          <div class="envelope" data-envelope tabindex="0" aria-label="Signal envelope. Drag it into the Boomley Signal Box after wrapping your letter.">
+            <div class="envelope-flap"></div>
+            <span>BOOMLEY®</span><small>SIGNAL / READY</small>
+          </div>
+          <p data-envelope-instruction>WRITE YOUR SIGNAL FIRST.</p>
+        </div>
+
+        <div class="signal-box" data-signal-box>
+          <div class="box-slot"></div>
+          <div class="box-mark"><span class="brand-mark brand-mark--dark" aria-hidden="true"><i></i></span></div>
+          <b>BOOMLEY</b>
+          <small>SIGNAL BOX / 001</small>
+          <p data-box-status>WAITING FOR SIGNAL</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--blue community-section">
+      <div class="section-meta"><span>07 / COMMUNITY</span><span>BUILD WITH US / FOLLOW WITH US</span></div>
+      <div class="community-grid">
+        <h2 class="display-title" data-reveal>You don't need<br/>the next idea.<br/><em>Just notice something.</em></h2>
+        <div class="community-copy" data-reveal>
+          <p>We want Boomley to grow into a community of people who notice friction and people who know how to build.</p>
+          <p>Developers, engineers, designers, researchers, product thinkers — and people who simply know when something should work better.</p>
+          <form class="community-form" data-community-form>
+            <label class="sr-only" for="community-email">Email address</label>
+            <input id="community-email" type="email" placeholder="EMAIL ADDRESS" required />
+            <button type="submit">JOIN THE TRANSMISSION →</button>
+          </form>
+          <p class="form-status" data-community-status aria-live="polite"></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--ivory end-section">
+      <div class="section-meta"><span>TRANSMISSION / 001</span><span>END / FOR NOW</span></div>
+      <div class="end-copy">
+        <span class="brand-mark brand-mark--dark brand-mark--large" aria-hidden="true"><i></i></span>
+        <h2 class="display-title" data-reveal>We're just<br/>getting started.</h2>
+        <p data-reveal>And we're paying attention.</p>
+      </div>
+      <footer class="footer">
+        <span>BOOMLEY® © 2026</span>
+        <span class="box-open"><i></i> THE SIGNAL BOX IS OPEN</span>
+        <a href="mailto:hello@boomley.com">HELLO@BOOMLEY.COM</a>
+      </footer>
+    </section>
+  </main>
+
+  <script>
+    import '../scripts/home.ts';
+  </script>
+</BaseLayout>
