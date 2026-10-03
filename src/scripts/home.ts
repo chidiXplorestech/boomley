@@ -6,19 +6,33 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+function encodeForm(form: HTMLFormElement) {
+  const data = new FormData(form);
+  return new URLSearchParams(Array.from(data.entries()).map(([key, value]) => [key, String(value)])).toString();
+}
+
+async function postNetlifyForm(form: HTMLFormElement) {
+  const response = await fetch('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: encodeForm(form)
+  });
+  if (!response.ok) throw new Error('Form failed: ' + response.status);
+}
+
 function initCursor() {
   if (reduced || !window.matchMedia('(pointer:fine)').matches) return;
   const cursor = document.querySelector<HTMLElement>('.cursor');
   if (!cursor) return;
-  const xTo = gsap.quickTo(cursor, 'x', { duration: .2, ease: 'power3' });
-  const yTo = gsap.quickTo(cursor, 'y', { duration: .2, ease: 'power3' });
+  const xTo = gsap.quickTo(cursor, 'x', { duration: .18, ease: 'power3' });
+  const yTo = gsap.quickTo(cursor, 'y', { duration: .18, ease: 'power3' });
   window.addEventListener('pointermove', (event) => {
     cursor.style.opacity = '1';
     xTo(event.clientX);
     yTo(event.clientY);
   });
-  document.querySelectorAll('a,button,input,textarea,.envelope').forEach((el) => {
-    el.addEventListener('mouseenter', () => gsap.to(cursor, { scale: 1.8, duration: .2 }));
+  document.querySelectorAll('a,button,input,textarea,[tabindex]').forEach((el) => {
+    el.addEventListener('mouseenter', () => gsap.to(cursor, { scale: 1.9, duration: .2 }));
     el.addEventListener('mouseleave', () => gsap.to(cursor, { scale: 1, duration: .2 }));
   });
 }
@@ -33,20 +47,24 @@ function initHero() {
     autoSplit: true,
     onSplit(self) {
       const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
-      tl.from(self.lines, { yPercent: 115, rotate: 1.2, duration: 1.15, stagger: .08 })
-        .from('.hero .eyebrow', { y: 15, autoAlpha: 0, duration: .55 }, .15)
-        .from('.hero-bottom', { y: 24, autoAlpha: 0, duration: .8 }, .45)
-        .from('.hero-workbench', { y: 30, rotate: 4, autoAlpha: 0, duration: .9 }, .45);
+      tl.from(self.lines, { yPercent: 115, rotate: 1.2, duration: 1.05, stagger: .08 })
+        .from('.system-row', { y: 12, autoAlpha: 0, duration: .45 }, .1)
+        .from('.hero-summary', { y: 24, autoAlpha: 0, duration: .7 }, .42)
+        .from('.hero-actions', { y: 18, autoAlpha: 0, duration: .6 }, .54)
+        .from('.portrait--chidi', { x: 50, y: 35, rotate: 4, autoAlpha: 0, duration: .85 }, .28)
+        .from('.portrait--michael', { x: -45, y: -20, rotate: -3, autoAlpha: 0, duration: .85 }, .4)
+        .from('.hero-note,.hero-cross', { scale: .8, autoAlpha: 0, stagger: .08, duration: .45 }, .65);
       return tl;
     }
   });
 }
 
-function initScrollReveals() {
+function initScrollScenes() {
   if (reduced) return;
   gsap.utils.toArray<HTMLElement>('[data-reveal]').forEach((el) => {
+    if (el.closest('.hero')) return;
     gsap.from(el, {
-      y: 36,
+      y: 38,
       autoAlpha: 0,
       duration: .85,
       ease: 'power3.out',
@@ -54,141 +72,152 @@ function initScrollReveals() {
     });
   });
 
-  const railDot = document.querySelector<HTMLElement>('[data-signal-dot]');
-  if (railDot) {
-    gsap.to(railDot, {
-      left: '100%',
-      ease: 'none',
-      scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: .4 }
-    });
-  }
+  gsap.from('.signal-cards article', {
+    y: 55,
+    autoAlpha: 0,
+    stagger: .08,
+    duration: .7,
+    ease: 'power3.out',
+    scrollTrigger: { trigger: '.signal-cards', start: 'top 84%', once: true }
+  });
 
-  const process = document.querySelector('[data-process-track]');
-  if (process) {
-    ScrollTrigger.create({ trigger: process, start: 'top 75%', once: true, onEnter: () => process.classList.add('is-live') });
-  }
+  gsap.to('.ascii-wave', {
+    xPercent: -10,
+    yPercent: -8,
+    ease: 'none',
+    scrollTrigger: { trigger: '.signal-story', start: 'top bottom', end: 'bottom top', scrub: .8 }
+  });
 
-  const roadmap = document.querySelector('[data-roadmap]');
+  const roadmap = document.querySelector<HTMLElement>('[data-roadmap]');
   if (roadmap) {
-    gsap.from(roadmap.children, {
+    gsap.from(Array.from(roadmap.children), {
       y: 24,
       autoAlpha: 0,
-      stagger: .1,
+      stagger: .08,
       duration: .6,
       ease: 'power2.out',
-      scrollTrigger: { trigger: roadmap, start: 'top 82%', once: true }
+      scrollTrigger: { trigger: roadmap, start: 'top 84%', once: true }
+    });
+  }
+
+  const teaser = document.querySelector<HTMLElement>('[data-product-teaser]');
+  if (teaser) {
+    gsap.fromTo(teaser, { clipPath: 'inset(9% 12% 9% 12%)' }, {
+      clipPath: 'inset(0% 0% 0% 0%)',
+      ease: 'none',
+      scrollTrigger: { trigger: teaser, start: 'top 90%', end: 'center 55%', scrub: .7 }
     });
   }
 }
 
-function initTeaser() {
-  const teaser = document.querySelector<HTMLElement>('[data-teaser]');
-  if (!teaser) return;
-  teaser.addEventListener('pointermove', (event) => {
-    const rect = teaser.getBoundingClientRect();
-    const x = ((event.clientX - rect.left) / rect.width) * 100;
-    const y = ((event.clientY - rect.top) / rect.height) * 100;
-    teaser.style.setProperty('--mx', `${x}%`);
-    teaser.style.setProperty('--my', `${y}%`);
+function initFounders() {
+  document.querySelectorAll<HTMLElement>('[data-founder-card]').forEach((card) => {
+    card.addEventListener('pointermove', (event) => {
+      if (reduced || !window.matchMedia('(pointer:fine)').matches) return;
+      const rect = card.getBoundingClientRect();
+      const rx = ((event.clientY - rect.top) / rect.height - .5) * -4;
+      const ry = ((event.clientX - rect.left) / rect.width - .5) * 4;
+      gsap.to(card.querySelector('.founder-media'), { rotateX: rx, rotateY: ry, transformPerspective: 900, duration: .35, ease: 'power2.out' });
+    });
+    card.addEventListener('pointerleave', () => {
+      gsap.to(card.querySelector('.founder-media'), { rotateX: 0, rotateY: 0, duration: .45, ease: 'power3.out' });
+    });
   });
 }
 
-function initSimpleForms() {
-  const notify = document.querySelector<HTMLFormElement>('[data-notify-form]');
-  const notifyStatus = document.querySelector<HTMLElement>('[data-notify-status]');
-  notify?.addEventListener('submit', (event) => {
+function initWaitlist() {
+  const form = document.querySelector<HTMLFormElement>('form[name="declutter-waitlist"]');
+  const status = form?.querySelector<HTMLElement>('[data-form-status]');
+  if (!form || !status) return;
+  form.addEventListener('submit', async (event) => {
     event.preventDefault();
-    if (notifyStatus) notifyStatus.textContent = 'NOTED / FORM BACKEND WILL BE CONNECTED BEFORE PUBLIC LAUNCH.';
-  });
-
-  const community = document.querySelector<HTMLFormElement>('[data-community-form]');
-  const communityStatus = document.querySelector<HTMLElement>('[data-community-status]');
-  community?.addEventListener('submit', (event) => {
-    event.preventDefault();
-    if (communityStatus) communityStatus.textContent = 'TRANSMISSION REQUEST NOTED / BACKEND CONNECTION PENDING.';
+    if (!form.reportValidity()) return;
+    status.textContent = 'TRANSMITTING...';
+    try {
+      await postNetlifyForm(form);
+      status.textContent = 'RECEIVED / YOU ARE ON THE PRODUCT 001 EARLY-ACCESS LIST.';
+      form.reset();
+    } catch {
+      status.textContent = 'TRANSMISSION FAILED / PLEASE TRY AGAIN.';
+    }
   });
 }
 
 function initSignalBox() {
-  const form = document.querySelector<HTMLFormElement>('[data-letter-form]');
-  const envelope = document.querySelector<HTMLElement>('[data-envelope]');
-  const box = document.querySelector<HTMLElement>('[data-signal-box]');
-  const instruction = document.querySelector<HTMLElement>('[data-envelope-instruction]');
-  const boxStatus = document.querySelector<HTMLElement>('[data-box-status]');
-  if (!form || !envelope || !box || !instruction || !boxStatus) return;
+  const form = document.querySelector<HTMLFormElement>('[data-signal-form]');
+  const wrapButton = document.querySelector<HTMLButtonElement>('[data-wrap-button]');
+  const postButton = document.querySelector<HTMLButtonElement>('[data-post-button]');
+  const envelope = document.querySelector<HTMLElement>('[data-blue-envelope]');
+  const box = document.querySelector<HTMLElement>('[data-pillar-box]');
+  const status = document.querySelector<HTMLElement>('[data-signal-status]');
+  const steps = Array.from(document.querySelectorAll<HTMLElement>('.step'));
+  if (!form || !wrapButton || !postButton || !envelope || !box || !status) return;
 
-  let ready = false;
-  let dragging = false;
-  let startX = 0;
-  let startY = 0;
-  let dx = 0;
-  let dy = 0;
+  const activateStep = (n: number) => steps.forEach((step) => step.classList.toggle('is-active', step.dataset.step === String(n)));
 
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
+  let wrapped = false;
+
+  wrapButton.addEventListener('click', () => {
     if (!form.reportValidity()) return;
-    ready = true;
+    wrapped = true;
+    activateStep(2);
+    postButton.disabled = false;
+    wrapButton.disabled = true;
+    status.textContent = 'LETTER READY / PRESS POST IT.';
     envelope.classList.add('is-ready');
-    instruction.textContent = 'DRAG THE ENVELOPE INTO THE SIGNAL BOX.';
+
     if (!reduced) {
-      gsap.fromTo(envelope, { scale: .7, rotate: -8, autoAlpha: 0 }, { scale: 1, rotate: 0, autoAlpha: 1, duration: .65, ease: 'back.out(1.35)' });
+      const paper = envelope.querySelector<HTMLElement>('.blue-envelope__paper');
+      const flap = envelope.querySelector<HTMLElement>('.blue-envelope__flap');
+      const tl = gsap.timeline({ defaults: { ease: 'power3.inOut' } });
+      tl.fromTo(envelope, { scale: .75, rotate: -8, autoAlpha: 0 }, { scale: 1, rotate: -2, autoAlpha: 1, duration: .55 })
+        .to(paper, { y: 38, scaleY: .72, duration: .45 }, .12)
+        .fromTo(flap, { rotateX: 0 }, { rotateX: -170, transformOrigin: 'top center', duration: .5 }, .42)
+        .to(envelope, { rotate: 0, duration: .3 }, .72);
     }
   });
 
-  const resetEnvelope = () => {
-    dx = 0; dy = 0;
-    gsap.to(envelope, { x: 0, y: 0, duration: .45, ease: 'power3.out' });
-  };
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (!wrapped || !form.reportValidity()) return;
+    activateStep(3);
+    postButton.disabled = true;
+    status.textContent = 'POSTING SIGNAL...';
 
-  const isOverBox = () => {
-    const a = envelope.getBoundingClientRect();
-    const b = box.getBoundingClientRect();
-    const cx = a.left + a.width / 2;
-    const cy = a.top + a.height / 2;
-    return cx > b.left && cx < b.right && cy > b.top && cy < b.bottom;
-  };
+    const slot = box.querySelector<HTMLElement>('.pillar-slot');
+    const envelopeRect = envelope.getBoundingClientRect();
+    const slotRect = slot?.getBoundingClientRect();
 
-  envelope.addEventListener('pointerdown', (event) => {
-    if (!ready) return;
-    dragging = true;
-    startX = event.clientX - dx;
-    startY = event.clientY - dy;
-    envelope.setPointerCapture(event.pointerId);
-    envelope.classList.add('is-dragging');
-  });
+    if (!reduced && slotRect) {
+      const dx = (slotRect.left + slotRect.width / 2) - (envelopeRect.left + envelopeRect.width / 2);
+      const dy = (slotRect.top + slotRect.height / 2) - (envelopeRect.top + envelopeRect.height / 2);
+      await new Promise<void>((resolve) => {
+        gsap.timeline({ defaults: { ease: 'power2.inOut' }, onComplete: resolve })
+          .to(envelope, { x: dx, y: dy, rotate: -4, scale: .52, duration: .85 })
+          .to(envelope, { scaleY: .08, scaleX: .44, autoAlpha: .25, duration: .38, ease: 'power2.in' })
+          .to(box, { scale: .985, duration: .1, yoyo: true, repeat: 1 }, '<');
+      });
+    }
 
-  envelope.addEventListener('pointermove', (event) => {
-    if (!dragging) return;
-    dx = event.clientX - startX;
-    dy = event.clientY - startY;
-    gsap.set(envelope, { x: dx, y: dy });
-    box.classList.toggle('is-target', isOverBox());
-  });
-
-  envelope.addEventListener('pointerup', (event) => {
-    if (!dragging) return;
-    dragging = false;
-    envelope.releasePointerCapture(event.pointerId);
-    envelope.classList.remove('is-dragging');
-    box.classList.remove('is-target');
-    if (isOverBox()) {
-      ready = false;
-      box.classList.add('is-received');
-      boxStatus.textContent = 'SIGNAL RECEIVED';
-      instruction.textContent = 'RECEIVED / WE WILL DECIDE WHETHER IT HOLDS UP.';
-      gsap.to(envelope, { scale: .2, autoAlpha: 0, y: dy - 80, duration: .45, ease: 'power2.in', onComplete: () => {
-        form.reset();
-        setTimeout(() => {
-          envelope.classList.remove('is-ready');
-          box.classList.remove('is-received');
-          boxStatus.textContent = 'WAITING FOR SIGNAL';
-          instruction.textContent = 'WRITE YOUR SIGNAL FIRST.';
-          gsap.set(envelope, { x: 0, y: 0, scale: 1, autoAlpha: 1 });
-          dx = 0; dy = 0;
-        }, 2200);
-      }});
-    } else {
-      resetEnvelope();
+    try {
+      await postNetlifyForm(form);
+      status.textContent = 'SIGNAL RECEIVED / WE\'LL LISTEN.';
+      form.reset();
+      activateStep(1);
+      wrapped = false;
+      setTimeout(() => {
+        wrapButton.disabled = false;
+        postButton.disabled = true;
+        envelope.classList.remove('is-ready');
+        gsap.set(envelope, { clearProps: 'all' });
+        gsap.set(envelope.querySelector('.blue-envelope__paper'), { clearProps: 'all' });
+        gsap.set(envelope.querySelector('.blue-envelope__flap'), { clearProps: 'all' });
+        status.textContent = '';
+      }, 2600);
+    } catch {
+      status.textContent = 'SIGNAL COULD NOT BE POSTED / PLEASE TRY AGAIN.';
+      postButton.disabled = false;
+      if (!reduced) gsap.to(envelope, { x: 0, y: 0, scale: 1, scaleX: 1, scaleY: 1, autoAlpha: 1, duration: .5 });
     }
   });
 }
@@ -208,8 +237,8 @@ function initAnchorLinks() {
 
 initCursor();
 initHero();
-initScrollReveals();
-initTeaser();
-initSimpleForms();
+initScrollScenes();
+initFounders();
+initWaitlist();
 initSignalBox();
 initAnchorLinks();
