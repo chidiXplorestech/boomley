@@ -64,6 +64,11 @@ import '../styles/global.css';
 ::;;;iiirrssXXAA253hMHHGSS##9B&@@@@
         </div>
 
+        <div class="decoder-lens" data-decoder-lens aria-hidden="true">
+          <span>SCAN / SIGNAL</span>
+          <b>?</b>
+        </div>
+
         <div class="signal-resolve" data-signal-resolve>
           <span class="chapter">THE MOMENT IT REPEATS</span>
           <h2>THAT'S<br /><em>A SIGNAL.</em></h2>
@@ -80,10 +85,10 @@ import '../styles/global.css';
       </div>
 
       <div class="people-composition">
-        <article class="person person--primary" tabindex="0" data-person>
+        <article class="person person--primary" tabindex="0" data-person data-founder="chidi">
           <div class="person-media">
             <div class="sprite person-photo sprite-chidi" role="img" aria-label="Chidi portrait"></div>
-            <div class="sprite person-ascii sprite-chidi-ascii" role="img" aria-label="ASCII interpretation of Chidi portrait"></div>
+            <canvas class="ascii-canvas" data-ascii-canvas data-founder="chidi" aria-hidden="true"></canvas>
             <div class="person-hover">
               <span>BOOMLEY / 01</span>
               <strong>PRODUCT</strong>
@@ -97,10 +102,10 @@ import '../styles/global.css';
           </div>
         </article>
 
-        <article class="person person--secondary" tabindex="0" data-person>
+        <article class="person person--secondary" tabindex="0" data-person data-founder="michael">
           <div class="person-media">
             <div class="sprite person-photo sprite-michael" role="img" aria-label="Michael portrait"></div>
-            <div class="sprite person-ascii sprite-michael-ascii" role="img" aria-label="ASCII interpretation of Michael portrait"></div>
+            <canvas class="ascii-canvas" data-ascii-canvas data-founder="michael" aria-hidden="true"></canvas>
             <div class="person-hover">
               <span>BOOMLEY / 02</span>
               <strong>ENGINEERING</strong>
@@ -132,12 +137,37 @@ import '../styles/global.css';
           <p>Tasks here. Notes there. Timers somewhere else. Study tools in another tab. The tools were becoming part of the problem.</p>
         </div>
 
+        <div class="artifact artifact--margin" data-doc aria-hidden="true">
+          <span>NOTE / 07</span>
+          <b>THE TOOL<br />SHOULDN'T<br />BECOME THE TASK.</b>
+          <i>circle this ↑</i>
+        </div>
+
         <div class="product-document product-document--system" data-doc>
           <span>SYSTEM / 001</span>
           <div class="system-sketch" aria-hidden="true">
             <i>INTENT</i><b>→</b><i>FOCUS</i><b>→</b><i>COMMIT</i><b>→</b><i>FINISH</i>
           </div>
           <p>We started designing around intention instead of adding another list of features.</p>
+        </div>
+
+        <div class="artifact artifact--browser" data-doc aria-hidden="true">
+          <div class="artifact-browser-bar"><i></i><i></i><i></i><span>study-space / prototype</span></div>
+          <div class="artifact-browser-body">
+            <b>ONE THING.<br />STAY WITH IT.</b>
+            <span>recommendations / off</span>
+            <span>comments / off</span>
+            <span>noise / reduced</span>
+          </div>
+        </div>
+
+        <div class="artifact artifact--scribble" data-doc aria-hidden="true">
+          <span>IF IT PULLS YOU SIDEWAYS</span>
+          <strong>REMOVE IT.</strong>
+          <svg viewBox="0 0 260 120" role="presentation">
+            <path d="M8 78 C 54 20, 120 112, 246 28" fill="none" stroke="currentColor" stroke-width="3"/>
+            <path d="M182 15 L248 28 L205 66" fill="none" stroke="currentColor" stroke-width="3"/>
+          </svg>
         </div>
 
         <div class="product-reveal" data-product-reveal>
@@ -181,9 +211,9 @@ import '../styles/global.css';
         <p class="chapter">04 / THE BOX IS OPEN</p>
         <h2 class="serif-heading" data-reveal>Product 001 came from <em>a signal.</em><br />Product 002 might come from yours.</h2>
         <div class="signal-box-instructions" data-reveal>
-          <strong>WRITE THE PROBLEM.</strong>
-          <strong>WRAP THE LETTER.</strong>
-          <strong>POST IT.</strong>
+          <strong><span>01</span> WRITE THE PROBLEM.</strong>
+          <strong><span>02</span> WRAP THE LETTER.</strong>
+          <strong><span>03</span> POST IT.</strong>
           <p>Don't pitch us an app. Tell us what should not still be this difficult.</p>
         </div>
       </div>
@@ -230,6 +260,7 @@ import '../styles/global.css';
           <div class="pillar-shell" data-pillar-box aria-label="Boomley Signal Box">
             <div class="pillar-top"></div>
             <div class="pillar-cylinder">
+              <div class="pillar-crest">B</div>
               <div class="pillar-slot"><span>POST SIGNAL</span></div>
               <div class="pillar-plaque"><b>BOOMLEY</b><small>SIGNAL RECEIVER / 001</small></div>
               <div class="pillar-door"><span>THE BOX IS OPEN</span></div>
@@ -241,6 +272,7 @@ import '../styles/global.css';
     </section>
 
     <section class="continuation act act--ink">
+      <canvas class="signal-field" data-signal-field aria-hidden="true"></canvas>
       <div class="continuation-ascii" aria-hidden="true">
 SIGNAL / SIGNAL / SIGNAL / SIGNAL / SIGNAL
 00100010 01110101 01101001 01101100 01100100
