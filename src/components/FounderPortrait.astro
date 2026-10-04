@@ -1,0 +1,39 @@
+---
+interface Props {
+  id: string;
+  name: string;
+  role: string;
+  descriptor: string;
+  spriteClass: string;
+  asciiQuadrant: string;
+  handle?: string;
+}
+
+const {
+  id,
+  name,
+  role,
+  descriptor,
+  spriteClass,
+  asciiQuadrant,
+  handle = 'HANDLE TO ADD'
+} = Astro.props;
+---
+<article class="founder-piece" data-founder-card tabindex="0">
+  <div class="founder-piece__media" data-founder-media>
+    <div class:list={['founder-piece__photo','sprite',spriteClass]} role="img" aria-label={`${name}, ${role}`}></div>
+    <canvas class="founder-piece__ascii" data-ascii-canvas data-quadrant={asciiQuadrant} aria-hidden="true"></canvas>
+    <div class="founder-piece__overlay">
+      <span>BOOMLEY / {id}</span>
+      <strong>{role}</strong>
+      <small>X / {handle}</small>
+    </div>
+  </div>
+  <footer class="founder-piece__meta">
+    <span>{id}</span>
+    <div>
+      <h3>{name}</h3>
+      <p>{descriptor}</p>
+    </div>
+  </footer>
+</article>
