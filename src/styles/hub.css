@@ -726,6 +726,35 @@ button,input,textarea{font-family:var(--hub-sans)}
   position:absolute;
   inset:42% 0 0;
   opacity:.9;
+  overflow:hidden;
+}
+.hub-community__field i{
+  position:absolute;
+  width:var(--s);
+  height:calc(var(--s) * 2.2);
+  border-radius:999px 999px 40% 40%;
+  background:rgba(10,11,13,.34);
+  transform:translateX(var(--d));
+  transform-origin:50% 100%;
+  animation:hub-person-drift 5.5s ease-in-out infinite alternate;
+}
+.hub-community__field i:before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:calc(var(--s) * -.72);
+  width:calc(var(--s) * .72);
+  height:calc(var(--s) * .72);
+  border-radius:50%;
+  background:inherit;
+  transform:translateX(-50%);
+}
+.hub-community__field i.is-signal{
+  background:var(--hub-blue-deep);
+  box-shadow:0 0 0 5px rgba(130,189,247,.11);
+}
+@keyframes hub-person-drift{
+  to{transform:translateX(calc(var(--d) * -1))}
 }
 .hub-community__copy{
   position:relative;
