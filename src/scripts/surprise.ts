@@ -132,9 +132,9 @@ function initLiveAsciiPortraits() {
             : charset[Math.abs((index * 13 + frame * 7)) % charset.length];
 
           const brightness = Math.max(.13, cell.light);
-          const blue = 130 + Math.round(brightness * 59);
-          const green = 157 + Math.round(brightness * 32);
-          const red = 65 + Math.round(brightness * 45);
+          const red = 58 + Math.round(brightness * 72);
+          const green = 118 + Math.round(brightness * 70);
+          const blue = 176 + Math.round(brightness * 70);
           ctx.fillStyle = `rgba(${red},${green},${blue},${.38 + brightness * .62})`;
           ctx.fillText(char, cell.x * charW + charW / 2, cell.y * charH + charH / 2);
         });
