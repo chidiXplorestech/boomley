@@ -1,0 +1,363 @@
+
+/* Boomley authored layer — deliberately sparse, tactile and specific. */
+
+/* The black act should feel like intercepted information, not an empty section. */
+.noise {
+  background:
+    radial-gradient(circle at 18% 22%, rgba(130,189,247,.08), transparent 28%),
+    radial-gradient(circle at 78% 64%, rgba(130,189,247,.055), transparent 24%),
+    #0b0d10;
+}
+.noise-stage:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  opacity:.11;
+  background-image:
+    linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.05) 1px, transparent 1px);
+  background-size:54px 54px;
+  mask-image:linear-gradient(to bottom,transparent 0,#000 15%,#000 82%,transparent 100%);
+}
+.decoder-lens{
+  position:absolute;
+  z-index:8;
+  left:50%;
+  top:55vh;
+  width:132px;
+  height:132px;
+  border:1px solid rgba(130,189,247,.85);
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  color:var(--blue);
+  background:rgba(130,189,247,.04);
+  backdrop-filter:blur(3px) contrast(1.08);
+  box-shadow:
+    inset 0 0 0 8px rgba(130,189,247,.035),
+    0 0 45px rgba(130,189,247,.12);
+  pointer-events:none;
+  transform:translate(-50%,-50%);
+}
+.decoder-lens:before,
+.decoder-lens:after{
+  content:"";
+  position:absolute;
+  background:rgba(130,189,247,.62);
+}
+.decoder-lens:before{width:1px;height:154%;left:50%;top:-27%}
+.decoder-lens:after{height:1px;width:154%;top:50%;left:-27%}
+.decoder-lens span{
+  position:absolute;
+  top:14px;
+  font:500 6px/1 var(--mono);
+  letter-spacing:.12em;
+}
+.decoder-lens b{
+  font:400 56px/.8 var(--serif);
+}
+
+/* Founder hover is generated from the real portrait at runtime. */
+.ascii-canvas{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  opacity:0;
+  background:#0d1014;
+  transition:opacity .18s ease;
+}
+.person:hover .ascii-canvas,
+.person:focus .ascii-canvas{opacity:1}
+.person:hover .person-photo,
+.person:focus .person-photo{opacity:0}
+.person-hover{
+  mix-blend-mode:normal;
+  background:linear-gradient(180deg,transparent 52%,rgba(5,7,10,.76));
+}
+.person-media:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.08);
+}
+.person--primary .person-media{box-shadow:15px 15px 0 var(--blue)}
+.person--secondary .person-media{box-shadow:-11px 11px 0 var(--ink)}
+.people-side-note{
+  text-shadow:
+    2px 0 var(--paper),
+    -2px 0 var(--paper),
+    0 2px var(--paper),
+    0 -2px var(--paper);
+}
+
+/* Product evidence: not cards; fragments of the work. */
+.product-documentary{
+  min-height:2240px;
+}
+.artifact{
+  position:absolute;
+  z-index:2;
+  color:var(--ink);
+}
+.artifact--margin{
+  top:320px;
+  right:8%;
+  width:min(26vw,340px);
+  padding:18px 18px 42px;
+  background:#fff9dc;
+  border:1px solid rgba(11,13,16,.26);
+  box-shadow:6px 8px 0 rgba(11,13,16,.9);
+  transform:rotate(5deg);
+}
+.artifact--margin span{
+  font:500 7px/1 var(--mono);
+  letter-spacing:.08em;
+}
+.artifact--margin b{
+  display:block;
+  margin-top:24px;
+  font:800 clamp(22px,2.1vw,34px)/.88 var(--sans);
+  letter-spacing:-.055em;
+}
+.artifact--margin i{
+  position:absolute;
+  right:18px;
+  bottom:12px;
+  font:400 18px/1 var(--serif);
+  color:var(--blue-deep);
+  transform:rotate(-8deg);
+}
+.artifact--browser{
+  left:8%;
+  top:760px;
+  width:min(42vw,600px);
+  border:1px solid var(--ink);
+  background:var(--ink);
+  color:#fff;
+  box-shadow:10px 10px 0 var(--blue);
+  transform:rotate(-1.5deg);
+}
+.artifact-browser-bar{
+  height:34px;
+  padding:0 10px;
+  display:flex;
+  align-items:center;
+  gap:7px;
+  border-bottom:1px solid rgba(255,255,255,.18);
+  font:500 7px/1 var(--mono);
+  color:rgba(255,255,255,.55);
+}
+.artifact-browser-bar i{
+  width:7px;height:7px;border-radius:50%;
+  background:rgba(255,255,255,.28);
+}
+.artifact-browser-bar span{margin-left:auto}
+.artifact-browser-body{
+  min-height:300px;
+  padding:26px;
+  display:grid;
+  align-content:end;
+  gap:9px;
+  background:
+    linear-gradient(rgba(130,189,247,.08) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(130,189,247,.08) 1px,transparent 1px);
+  background-size:28px 28px;
+}
+.artifact-browser-body b{
+  font:800 clamp(38px,4vw,66px)/.82 var(--sans);
+  letter-spacing:-.06em;
+}
+.artifact-browser-body span{
+  font:500 8px/1 var(--mono);
+  color:var(--blue);
+}
+.artifact--scribble{
+  right:6%;
+  top:980px;
+  width:min(31vw,430px);
+  color:var(--blue-deep);
+  transform:rotate(4deg);
+}
+.artifact--scribble span{
+  display:block;
+  font:500 8px/1 var(--mono);
+  letter-spacing:.09em;
+}
+.artifact--scribble strong{
+  display:block;
+  margin-top:12px;
+  font:800 clamp(40px,4.7vw,76px)/.78 var(--sans);
+  letter-spacing:-.07em;
+}
+.artifact--scribble svg{
+  width:100%;
+  margin-top:6px;
+  overflow:visible;
+}
+.product-reveal{
+  bottom:90px;
+}
+.product-reveal:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg,transparent 0 48%,rgba(130,189,247,.06) 48% 48.15%,transparent 48.15%),
+    linear-gradient(transparent 0 74%,rgba(130,189,247,.06) 74% 74.2%,transparent 74.2%);
+}
+.product-reveal .chapter,
+.product-reveal h2,
+.product-reveal p{position:relative;z-index:2}
+
+/* Quiet the CTA so it reads like a subscription line, not a landing-page card. */
+.early-access{
+  align-items:end;
+}
+.waitlist-form{
+  padding-bottom:10px;
+}
+.email-line input::placeholder{
+  color:rgba(11,13,16,.48);
+}
+.email-line button{
+  transition:transform .2s ease;
+}
+.email-line button:hover{transform:translateX(5px)}
+
+/* Instruction hierarchy */
+.signal-box-instructions strong{
+  display:grid;
+  grid-template-columns:34px 1fr;
+  align-items:center;
+  padding:10px 0;
+  border-top:1px solid rgba(11,13,16,.18);
+}
+.signal-box-instructions strong:last-of-type{
+  border-bottom:1px solid rgba(11,13,16,.18);
+}
+.signal-box-instructions strong span{
+  font:500 8px/1 var(--mono);
+  opacity:.55;
+}
+
+/* The box should feel cast and physical rather than like a clean UI illustration. */
+.pillar-shell{
+  filter:
+    drop-shadow(0 34px 34px rgba(12,12,18,.24))
+    saturate(.96);
+}
+.pillar-top,
+.pillar-cylinder,
+.pillar-foot{
+  isolation:isolate;
+}
+.pillar-top:after,
+.pillar-cylinder:before,
+.pillar-foot:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  opacity:.23;
+  mix-blend-mode:multiply;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(0,0,0,.22) 0 1px, transparent 1.4px),
+    radial-gradient(circle at 74% 56%, rgba(255,255,255,.22) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 44% 83%, rgba(0,0,0,.15) 0 1px, transparent 1.2px);
+  background-size:33px 29px,41px 37px,27px 31px;
+}
+.pillar-top:after{border-radius:inherit}
+.pillar-foot:after{border-radius:inherit}
+.pillar-crest{
+  position:absolute;
+  z-index:3;
+  top:16px;
+  left:50%;
+  width:34px;height:34px;
+  display:grid;
+  place-items:center;
+  transform:translateX(-50%);
+  border:1px solid rgba(78,7,12,.9);
+  border-radius:50%;
+  background:rgba(119,13,20,.64);
+  color:#f3dadb;
+  box-shadow:inset 0 1px 2px rgba(255,255,255,.18);
+  font:700 12px/1 var(--serif);
+}
+.pillar-slot{
+  border-color:#5a080e;
+  box-shadow:
+    inset 0 10px 14px rgba(0,0,0,.75),
+    0 2px 0 rgba(255,255,255,.08);
+}
+.pillar-plaque{
+  background:
+    linear-gradient(180deg,#f3eee2,#dcd5c6);
+}
+.pillar-door{
+  box-shadow:
+    inset 0 0 25px rgba(79,5,11,.12),
+    0 1px 0 rgba(255,255,255,.07);
+}
+
+/* Ending: a field of people/signals rather than decorative binary. */
+.continuation{
+  min-height:110svh;
+}
+.signal-field{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  opacity:.82;
+  pointer-events:none;
+}
+.continuation-copy{
+  max-width:980px;
+}
+.continuation-copy:before{
+  content:"SIGNALS EXIST EVERYWHERE.";
+  display:block;
+  margin-bottom:22px;
+  color:var(--blue);
+  font:500 8px/1 var(--mono);
+  letter-spacing:.12em;
+}
+.continuation-ascii{
+  opacity:.28;
+}
+
+@media (max-width:1100px){
+  .decoder-lens{display:none}
+  .product-documentary{min-height:2140px}
+  .artifact--margin{right:2%;width:min(31vw,320px)}
+  .artifact--browser{left:2%;width:min(52vw,570px)}
+  .artifact--scribble{right:1%;width:min(38vw,400px)}
+}
+@media (max-width:760px){
+  .person--primary .person-media,
+  .person--secondary .person-media{box-shadow:7px 7px 0 var(--blue)}
+  .product-documentary{min-height:auto}
+  .artifact{
+    position:relative!important;
+    left:auto!important;
+    right:auto!important;
+    top:auto!important;
+    width:100%!important;
+    margin:0 0 54px;
+    transform:none!important;
+  }
+  .artifact--margin{max-width:82%;margin-left:auto}
+  .artifact--browser{max-width:none}
+  .artifact--scribble{max-width:78%;margin-left:4%}
+  .product-reveal{margin-top:54px}
+  .signal-field{opacity:.55}
+}
+@media (prefers-reduced-motion:reduce){
+  .decoder-lens{display:none}
+}
