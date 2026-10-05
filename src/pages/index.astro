@@ -1,352 +1,246 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import '../styles/blank-canvas.css';
+import '../styles/boomley-cinematic.css';
+const nav = [['about','About'],['process','Process'],['history','History'],['builds','Builds'],['community','Community'],['signal','Signal']];
+const sym = `<path d='M4 2h3.4v11H4z'/><circle cx='5.7' cy='20.3' r='1.7'/><path fill-rule='evenodd' d='M14 9.5a6 6 0 1 1 0 12 6 6 0 0 1 0-12zm0 3a3 3 0 1 0 0 6 3 3 0 0 0 0-6z'/>`;
+const stages = [
+ ['Notice','Find repeated friction rather than isolated annoyance.','the same workaround, again.','-1.5deg'],
+ ['Listen','Understand who experiences it and what it costs them.','who / when / what it costs','1.2deg'],
+ ['Question','Decide whether software should exist at all.','should this be software?','-.8deg'],
+ ['Investigate','Study the strongest pattern until it is understood, or rejected.','evidence over opinion','1.6deg'],
+ ['Build','Product and engineering turn the strongest signal into something tangible.','smallest credible version','-1.1deg'],
+ ['Test','Reality gets the final vote.','put it in front of people','.9deg'],
+];
 ---
-<BaseLayout title="boomley — problems become signals" description="boomley is a two-person product company and growing community for turning meaningful problems into products worth building.">
-  <div class="boot" data-boot aria-hidden="true">
-    <div class="boot__count"><span data-boot-count>000</span>%</div>
-    <div class="boot__phrase" data-boot-phrase>PROBLEM.</div>
-    <div class="boot__logo" data-boot-logo>
-      <svg viewBox="0 0 64 64" aria-hidden="true">
-        <rect x="18" y="10" width="28" height="7" rx="3.5" class="sig"/>
-        <path d="M20 19C20 16.8 21.8 15 24 15h3c2.2 0 4 1.8 4 4v10.1c2.8-2.2 6.2-3.3 9.8-3.1C49.2 26.5 54 32.1 54 40c0 8.6-6.1 14-15.6 14H24c-2.2 0-4-1.8-4-4V19Zm11 19v7h7c3.8 0 6-2.1 6-5.3 0-3-2.2-5-5.6-5-3.2 0-5.7 1.1-7.4 3.3Z"/>
-      </svg>
-      <span>boomley</span>
-    </div>
-    <div class="boot__welcome" data-boot-welcome>WELCOME.</div>
+<!doctype html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<meta name='viewport' content='width=device-width,initial-scale=1' />
+<title>boomley — problems become signals. signals become things.</title>
+<meta name='description' content='boomley is a community-driven product company that turns recurring real-world problems into signals, and the strongest signals into products worth building.' />
+<meta name='theme-color' content='#ece6da' />
+<link rel='icon' href='/boomley-symbol.svg' type='image/svg+xml' />
+<link rel='preconnect' href='https://fonts.googleapis.com' /><link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
+<link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono&family=Poppins:wght@400;500;600&display=swap' />
+<script is:inline>
+  document.documentElement.classList.add('js');
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('reduced');
+</script>
+<script is:inline defer src='https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js'></script>
+<script is:inline defer src='https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js'></script>
+<script is:inline defer src='https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js'></script>
+<noscript><style>#loader{display:none!important}.fr0 canvas{display:none}</style></noscript>
+</head>
+<body class='lock'>
+<a class='skip' href='#main'>Skip to content</a>
+
+<div id='loader' aria-hidden='true'>
+  <div class='wd disp' id='ldw'>problem.</div>
+  <div class='br wm' id='ldb'><span>b</span><i>oomley</i></div>
+  <div class='cnt' id='ldc'>000%</div>
+  <div class='wl mono' id='ldwl'>Welcome.</div>
+</div>
+
+<header class='nav' id='nav'>
+  <a class='logo wm' href='#top' aria-label='boomley, back to top'><svg class='sym' viewBox='0 0 24 24' aria-hidden='true' set:html={sym}></svg>boomley</a>
+  <nav aria-label='Primary'><ul>{nav.map(([id,l]) => <li><a href={'#'+id} data-nav={id}>{l}</a></li>)}</ul></nav>
+  <span class='stat mono'><b>Est. 2026</b><i></i><b>Building</b></span>
+  <button class='mbtn' id='mbtn' aria-expanded='false' aria-controls='smenu'>Menu</button>
+</header>
+<div class='sheet-menu' id='smenu' role='dialog' aria-label='Menu'>
+  <nav aria-label='Mobile'>{nav.map(([id,l]) => <a class='disp' href={'#'+id}>{l}</a>)}</nav>
+  <p class='mono'>Est. 2026 / Building</p>
+</div>
+
+<main id='main'>
+<section class='hero' id='top' aria-labelledby='h1'>
+  <figure class='pa'><img src='/img/founder-profile.webp' alt='Portrait of a boomley founder in glasses, looking away from the camera against a blue backdrop' width='1080' height='1080' fetchpriority='high' /></figure>
+  <figure class='pb'><img src='/img/founder-smile.webp' alt='Portrait of the other boomley founder, smiling with arms crossed against a blue backdrop' width='1080' height='1080' /></figure>
+  <div class='wrap' style='width:100%'>
+    <h1 id='h1' class='disp'>Problems are <span class='ser'>everywhere.</span><br />We pay attention.</h1>
+    <p class='sub'>boomley notices the problems people keep learning to live with — then investigates the ones worth turning into products.</p>
+    <div class='meta mono'><span>02 People</span><span>01 Active build</span><span>Est. 2026</span><span><span class='dot'>●</span> The box is open</span></div>
   </div>
+</section>
 
-  <header class="nav" data-nav>
-    <a class="nav__brand" href="#top" aria-label="boomley home">
-      <svg viewBox="0 0 64 64" aria-hidden="true">
-        <rect x="18" y="10" width="28" height="7" rx="3.5" class="sig"/>
-        <path d="M20 19C20 16.8 21.8 15 24 15h3c2.2 0 4 1.8 4 4v10.1c2.8-2.2 6.2-3.3 9.8-3.1C49.2 26.5 54 32.1 54 40c0 8.6-6.1 14-15.6 14H24c-2.2 0-4-1.8-4-4V19Zm11 19v7h7c3.8 0 6-2.1 6-5.3 0-3-2.2-5-5.6-5-3.2 0-5.7 1.1-7.4 3.3Z"/>
-      </svg>
-      <span>boomley</span>
-    </a>
-    <nav class="nav__links" aria-label="Primary">
-      <a href="#about">About</a>
-      <a href="#process">Process</a>
-      <a href="#builds">Builds</a>
-      <a href="#community">Community</a>
-    </nav>
-    <a class="nav__signal" href="#signal-box">Send a signal ↗</a>
-  </header>
+<section class='scene' id='about' aria-labelledby='about-h'>
+  <div class='stage'>
+    <h2 class='sr' id='about-h'>About: it starts with a problem</h2>
+    <p class='tag0 mono'>Act 02 / the signal</p>
+    <div class='st' data-s='1'><p class='disp'>It starts with<br />a problem.</p></div>
+    <div class='st' data-s='2'><p class='disp'>A <span class='ser'>thought.</span></p></div>
+    <div class='st' data-s='3'><p class='disp'>An <span class='ser'>idea.</span></p></div>
+    <div class='st' data-s='4'><p class='disp'>It happens<br /><span class='ser'>again.</span></p></div>
+    <div class='frags' id='frags' aria-hidden='true'></div>
+    <div class='scan' id='scan' aria-hidden='true'><div>&gt; reading fragments…</div><div>&gt; ‘still this difficult to…’ × 3</div><div>&gt; pattern: repeated friction</div><div>&gt; status: <b>SIGNAL</b></div></div>
+    <div class='st sig dk' data-s='5' style='background:var(--ink)'><p class='disp'>That's a <span class='blue ser'>signal.</span></p></div>
+    <div class='st sig dk' data-s='6' style='background:var(--ink)'><p class='wm'><b>b</b>oomley</p></div>
+    <a class='btn skipb' href='#process'>Skip ↓</a>
+  </div>
+</section>
 
-  <main id="top">
-    <section class="hero">
-      <div class="hero__copy">
-        <p class="kicker">A PRODUCT COMPANY / A PUBLIC WORKBENCH / A GROWING COMMUNITY</p>
-        <h1>
-          Problems are
-          <span>everywhere.</span>
-          We pay attention.
-        </h1>
-        <p class="hero__deck">boomley notices the problems people keep learning to live with — then investigates the ones worth turning into products.</p>
+<section class='process' id='process' aria-labelledby='proc-h'>
+  <div class='wrap'>
+    <p class='mono'>03 / Process</p>
+    <h2 class='disp' id='proc-h'>One continuous loop.<br /><span class='ser'>No theatre.</span></h2>
+    <div class='plist' id='plist' role='list'>
+      <div class='pline' aria-hidden='true'><i></i></div>
+      {stages.map(([w,d,a,r],i) => (
+        <div class='prow' role='listitem'><span class='mono'>0{i+1}</span><div><div class='w disp'>{w}</div><p>{d}</p></div><div class='art' style={'--r:'+r}>{a}</div></div>
+      ))}
+      <div class='prow' role='listitem'><span class='mono'>0↻</span><div><div class='w disp'><span class='ser'>Listen again.</span></div><p>The loop starts over, with better information.</p></div>
+        <div class='ploop'><svg viewBox='0 0 84 44' aria-hidden='true'><path d='M78 36H20a14 14 0 0 1 0-28h52M64 2l8 6-8 6' /></svg><span class='mono'>back to notice</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class='hist' id='history' aria-labelledby='hist-h'>
+  <div class='wrap dark'>
+    <p class='mono'>04 / Archive</p>
+    <h2 class='disp' id='hist-h'>You found us <span class='ser blue'>early.</span></h2>
+    <p style='max-width:420px;margin-top:20px;color:#b9bcc0'>No mythology. No fake milestones. Just the actual beginning.</p>
+    <div class='arch'>
+      <article class='ent'><span class='mono'>2026</span><h3>Two disciplines begin building together.</h3><p>Product management and software engineering start exploring recurring frustrations.</p><span class='stamp mono'>Filed</span></article>
+      <article class='ent'><span class='mono'>Signal / 001</span><h3>Research begins.</h3><p>The first problem becomes serious enough to document rather than just discuss.</p><span class='stamp mono'>Logged</span></article>
+      <article class='ent'><span class='mono'>Documentation</span><h3>The first system becomes clearer.</h3><p>Notes become structure. Structure becomes something that can be built.</p><span class='stamp mono'>Open</span></article>
+      <article class='ent cur'><span class='mono'>Current</span><h3>Still building.</h3><p>Research, systems and experience design are taking shape.</p><span class='stamp mono'>Now</span></article>
+      <article class='ent'><span class='mono'>Next</span><h3>Testing.</h3><p>Let real people challenge the assumptions before anything deserves a launch.</p><span class='stamp mono'>Pending</span></article>
+    </div>
+  </div>
+</section>
+
+<section class='people' aria-labelledby='ppl-h'>
+  <div class='wrap'>
+    <p class='mono'>05 / People</p>
+    <h2 class='disp' id='ppl-h'>Two people.<br />Two disciplines.<br /><span class='ser blue'>One intolerance</span> for friction.</h2>
+    <div class='pgrid'>
+      <figure class='fig a'>
+        <div class='fr0'><img src='/img/founder-smile.webp' alt='Portrait of the boomley product founder, smiling with arms crossed' loading='lazy' /><canvas aria-hidden='true'></canvas><div class='ov'><p class='mono'>Product</p><p class='disp'>Asks why.</p></div></div>
+        <figcaption><span class='disp'>Product</span><button class='tg' type='button' aria-pressed='false'>Read signal</button></figcaption>
+      </figure>
+      <figure class='fig b'>
+        <div class='fr0'><img src='/img/founder-profile.webp' alt='Portrait of the boomley engineering founder, in glasses, looking to the side' loading='lazy' /><canvas aria-hidden='true'></canvas><div class='ov'><p class='mono'>Engineering</p><p class='disp'>Makes it real.</p></div></div>
+        <figcaption><span class='disp'>Engineering</span><button class='tg' type='button' aria-pressed='false'>Read signal</button></figcaption>
+      </figure>
+    </div>
+    <p class='mono' style='margin-top:30px;color:var(--grey)'>The machine interprets the human. Hover, tap or press the button.</p>
+  </div>
+</section>
+
+<section class='builds' id='builds' aria-labelledby='bld-h'>
+  <div class='wrap dark'>
+    <p class='mono'>06 / Builds</p>
+    <h2 class='disp' id='bld-h'>We found our <span class='ser blue'>first signal.</span></h2>
+    <p class='b0' aria-label='1000001'>1000001</p>
+    <p style='max-width:460px;color:#b9bcc0'>We are not explaining everything yet. We are documenting it, questioning it and building it. Partially opened archive.</p>
+    <div class='drawer'>
+      <div class='dr r1'><h3>Research note</h3><p>Repeated friction, documented. Participants, contexts and costs recorded.</p><span class='red' style='width:80%'></span><span class='red' style='width:55%'></span><span class='red' style='width:68%'></span></div>
+      <div class='dr r2'><h3>Documentation</h3><span class='red' style='width:40%'></span><p>Section 3.2 — [redacted]</p><span class='red' style='width:90%'></span><span class='red' style='width:62%'></span></div>
+      <div class='dr r3'><h3>UI crop</h3><svg viewBox='0 0 200 120' aria-hidden='true'><rect x='1' y='1' width='198' height='118' fill='none' stroke='#86b9f2'/><rect x='14' y='14' width='80' height='10' fill='#ece6da'/><rect x='14' y='34' width='120' height='50' fill='#86b9f2' opacity='.35'/><rect x='14' y='92' width='50' height='14' fill='#ece6da'/></svg></div>
+      <div class='dr r4'><h3>System map</h3><svg viewBox='0 0 300 90' aria-hidden='true' fill='none' stroke='#86b9f2'><circle cx='30' cy='45' r='10'/><circle cx='110' cy='20' r='10'/><circle cx='110' cy='70' r='10'/><circle cx='200' cy='45' r='10' fill='#86b9f2'/><circle cx='275' cy='45' r='10'/><path d='M40 42l60-18M40 48l60 18M120 22l70 20M120 68l70-20M210 45h55' stroke-dasharray='3 3'/></svg></div>
+      <div class='dr r5'><h3>Prototype frame</h3><svg viewBox='0 0 300 90' aria-hidden='true'><rect x='100' y='4' width='100' height='82' rx='10' fill='none' stroke='#ece6da'/><rect x='112' y='16' width='76' height='8' fill='#86b9f2'/><rect x='112' y='32' width='76' height='30' fill='#ece6da' opacity='.25'/></svg></div>
+    </div>
+    <ul class='status' aria-label='Build status'><li class='done'><span>Research</span><span>Complete</span></li><li class='act'><span>Documentation</span><span>Active</span></li><li class='act'><span>Experience</span><span>Active</span></li><li><span>Build</span><span>Next</span></li><li class='later'><span>Test</span><span>Later</span></li></ul>
+    <form class='fld' name='early-access' method='POST' data-netlify='true' netlify-honeypot='bot-field' data-form='wait' novalidate>
+      <input type='hidden' name='form-name' value='early-access' />
+      <p class='sr'><label>Do not fill <input name='bot-field' tabindex='-1' autocomplete='off' /></label></p>
+      <h3 class='disp' style='font-size:clamp(30px,4.4vw,60px);margin-bottom:26px'>Want to be there when 1000001 opens?</h3>
+      <label class='mono' for='we'>Enter email</label>
+      <div class='row'><input id='we' name='email' type='email' autocomplete='email' inputmode='email' required aria-describedby='we-e we-n' /><button type='submit'>Keep me close →</button></div>
+      <p class='err' id='we-e' role='alert'></p>
+      <p class='note-s' id='we-n'>Used only to tell you when 1000001 opens. Nothing else.</p>
+    </form>
+  </div>
+</section>
+
+<section class='comm' id='community' aria-labelledby='com-h'>
+  <div class='wrap'>
+    <p class='mono'>07 / Community</p>
+    <h2 class='disp' id='com-h'>Some people notice things.<span class='ser'>Some people build them.</span>We want both.</h2>
+    <p class='lede'>boomley is not a large community yet. It is a beginning — a meeting point for problem-noticers, developers, designers, researchers, students, founders, engineers, builders and curious people.</p>
+    <div class='cta2'><a href='#signal'><span class='disp'>I have a problem</span><span>→</span></a><a href='mailto:hello@boomley.com?subject=I%20want%20to%20build'><span class='disp'>I want to build</span><span>→</span></a></div>
+  </div>
+  <div class='field'><p class='cap mono'>Signals can come from anyone</p><canvas id='fld1' role='img' aria-label='A field of small figures, some turning blue'></canvas></div>
+</section>
+
+<section class='signal' id='signal' aria-labelledby='sig-h'>
+  <div class='wrap'>
+    <p class='mono'>08 / Signal box</p>
+    <h2 class='disp' id='sig-h'>What have you<br /><span class='ser'>noticed?</span></h2>
+    <ol class='steps mono'><li>01 Write the problem.</li><li>02 Wrap the letter.</li><li>03 Post it.</li></ol>
+    <p style='font-size:19px;max-width:420px;margin-top:20px'>Don't pitch us an app.<br />Tell us what shouldn't still be this difficult.</p>
+    <div class='sg'>
+      <div class='bench' id='bench'>
+        <form class='paper' id='sheet' name='signal' method='POST' data-netlify='true' netlify-honeypot='bot-field' novalidate>
+          <input type='hidden' name='form-name' value='signal' />
+          <p class='sr'><label>Do not fill <input name='bot-field' tabindex='-1' autocomplete='off' /></label></p>
+          <div class='hd mono'><span>Signal / sheet</span><span>boomley</span></div>
+          <label for='s1'><span class='mono'>The problem</span><textarea id='s1' name='problem' rows='3' required placeholder='It should not still be this difficult to…' aria-describedby='s1e'></textarea></label><p class='err' id='s1e' role='alert'></p>
+          <label for='s2'><span class='mono'>Who experiences it?</span><textarea id='s2' name='who' rows='2' placeholder='People who…'></textarea></label>
+          <label for='s3'><span class='mono'>What would change if it was fixed?</span><textarea id='s3' name='change' rows='2' placeholder='It would make it easier to…'></textarea></label>
+          <label for='s4'><span class='mono'>Your email</span><input id='s4' name='email' type='email' autocomplete='email' required aria-describedby='s4e s4n' placeholder='so we can tell you what we find' /></label><p class='err' id='s4e' role='alert'></p>
+          <p class='note-s' id='s4n' style='color:#6b6f75'>Your sheet is read by the two of us. Your email is used only to reply about this signal.</p>
+          <div class='go'><button class='btn solid' type='submit' id='wrap'>Wrap it →</button></div>
+        </form>
+        <div class='fold' id='fold' aria-hidden='true'></div>
+        <div class='clip' id='clip'><div class='env' id='env' aria-hidden='true'><div class='bk'></div><div class='ltr'></div><div class='fr1'></div><div class='fl' id='flap'></div><div class='seal' id='seal'><svg class='sym' viewBox='0 0 24 24' set:html={sym}></svg></div></div></div>
+        <div class='post' id='post'><button class='btn solid' type='button' id='postbtn'>Post it →</button><p class='err' id='poste' role='alert' style='color:#a02017'></p></div>
       </div>
-
-      <div class="hero__media" data-founder-rotator>
-        <figure class="hero-photo hero-photo--a" data-founder-photo="chidi">
-          <img src="/media/founders/chidi.webp" alt="Chidi, Product" width="2048" height="2048" />
-          <figcaption>PRODUCT</figcaption>
-        </figure>
-        <figure class="hero-photo hero-photo--b" data-founder-photo="michael">
-          <img src="/media/founders/michael.webp" alt="Michael, Engineering" width="2048" height="2048" />
-          <figcaption>ENGINEERING</figcaption>
-        </figure>
-
-        <div class="hero__scribble hero__scribble--one">TWO PEOPLE.<br/>FOR NOW.</div>
-        <div class="hero__scribble hero__scribble--two">EST. 2026</div>
-
-        <div class="signal-module">
-          <small>SIGNAL RECEIVER / 01</small>
-          <strong>LISTENING</strong>
-          <div class="signal-module__meter"><i></i></div>
-        </div>
-      </div>
-
-      <div class="hero__foot">
-        <span>02 PEOPLE</span>
-        <span>01 ACTIVE BUILD</span>
-        <span>THE BOX IS OPEN</span>
-        <a href="#about">TRACE THE SIGNAL ↓</a>
-      </div>
-    </section>
-
-    <div class="ticker" aria-hidden="true">
-      <div class="ticker__track">
-        <span>PROBLEM</span><b>→</b><span>THOUGHT</span><b>→</b><span>IDEA</span><b>→</b><span>SIGNAL</span><b>→</b><span>boomley</span>
-        <span>PROBLEM</span><b>→</b><span>THOUGHT</span><b>→</b><span>IDEA</span><b>→</b><span>SIGNAL</span><b>→</b><span>boomley</span>
+      <div class='box'>
+        <svg viewBox='0 0 300 470' id='bx' role='img' aria-label='The boomley signal box, a red cast-metal pillar box'>
+          <defs>
+            <linearGradient id='gb' x1='0' x2='1'><stop offset='0' stop-color='#4a070c'/><stop offset='.18' stop-color='#8e0f17'/><stop offset='.36' stop-color='#c3222a'/><stop offset='.55' stop-color='#a5131b'/><stop offset='.85' stop-color='#6b0a11'/><stop offset='1' stop-color='#3b0509'/></linearGradient>
+            <linearGradient id='gc' x1='0' x2='1'><stop offset='0' stop-color='#3f060a'/><stop offset='.4' stop-color='#b81c24'/><stop offset='.6' stop-color='#8c0f16'/><stop offset='1' stop-color='#37050a'/></linearGradient>
+            <linearGradient id='gs' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#0a0305'/><stop offset='1' stop-color='#2a0c10'/></linearGradient>
+            <filter id='gr'><feTurbulence baseFrequency='.75' numOctaves='2' seed='4'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .22 0'/></filter>
+            <filter id='bl'><feGaussianBlur stdDeviation='7'/></filter>
+            <clipPath id='bodyc'><rect x='70' y='120' width='160' height='290' rx='6'/></clipPath>
+          </defs>
+          <ellipse cx='150' cy='448' rx='120' ry='14' fill='#000' opacity='.4' filter='url(#bl)'/>
+          <g id='boxg'>
+            <rect x='48' y='428' width='204' height='16' rx='3' fill='#2d0408'/>
+            <rect x='58' y='404' width='184' height='28' rx='3' fill='url(#gc)'/>
+            <rect x='70' y='120' width='160' height='290' rx='6' fill='url(#gb)'/>
+            <g clip-path='url(#bodyc)'><rect x='70' y='120' width='160' height='290' filter='url(#gr)'/><g id='scr' stroke='#e9a09a' stroke-linecap='round' fill='none' opacity='.5'></g></g>
+            <path d='M76 120h148M76 300h148' stroke='#2a0307' stroke-width='1.5' opacity='.6'/><path d='M76 121.5h148M76 301.5h148' stroke='#e86a6d' stroke-width='.6' opacity='.35'/>
+            <rect x='60' y='106' width='180' height='18' rx='4' fill='url(#gc)'/>
+            <path d='M64 108Q62 46 150 38Q238 46 236 108Z' fill='url(#gb)'/>
+            <path d='M92 100Q100 62 150 50' stroke='#ff9b98' stroke-width='3' fill='none' opacity='.3' stroke-linecap='round'/>
+            <rect x='140' y='26' width='20' height='14' rx='3' fill='url(#gc)'/><circle cx='150' cy='24' r='8' fill='url(#gc)'/>
+            <rect x='82' y='138' width='136' height='14' rx='3' fill='url(#gc)'/>
+            <rect id='slot' x='94' y='156' width='112' height='14' rx='3' fill='url(#gs)' stroke='#5a1a1f' stroke-width='1.5'/>
+            <rect x='96' y='168' width='108' height='1.5' fill='#e86a6d' opacity='.4'/>
+            <rect x='96' y='204' width='108' height='86' rx='2' fill='#7e0d14' stroke='#f1d9b8' stroke-width='1.5'/>
+            <text x='150' y='240' text-anchor='middle' font-family='Caer, Instrument Serif, serif' font-size='30' fill='#f1d9b8'>boomley</text>
+            <text x='150' y='266' text-anchor='middle' font-family='JetBrains Mono, monospace' font-size='7.5' letter-spacing='1.4' fill='#f1d9b8'>SIGNAL RECEIVER / 001</text>
+            <g fill='#2a0307' stroke='#e86a6d' stroke-width='.6'><circle cx='102' cy='210' r='2.2'/><circle cx='198' cy='210' r='2.2'/><circle cx='102' cy='284' r='2.2'/><circle cx='198' cy='284' r='2.2'/><circle cx='150' cy='330' r='2.2'/><circle cx='150' cy='392' r='2.2'/></g>
+          </g>
+        </svg>
+        <div class='rcv' aria-live='polite' id='rcv'></div>
       </div>
     </div>
+  </div>
+</section>
 
-    <section id="about" class="about">
-      <div class="chapter"><span>01</span><b>ABOUT</b><p>We don't start with apps. We start by asking whether the problem deserves one.</p></div>
+<section class='ending' aria-label='Ending'>
+  <div class='stage dark'>
+    <canvas id='fld2' aria-hidden='true'></canvas>
+    <div class='endt'><p class='e1 mono'>Signals exist everywhere.</p><h2 class='e2 disp'>This is only<br />the beginning.</h2><p class='e3 ser'>We're listening.</p><p class='e4 wm' id='e4'>boomley</p></div>
+  </div>
+</section>
+</main>
 
-      <div class="about__layout">
-        <div class="about__story">
-          <article>
-            <span>01</span>
-            <h2>It starts with a <em>problem.</em></h2>
-            <p>Something takes too long. Feels unnecessarily difficult. Makes people invent workarounds.</p>
-          </article>
-          <article>
-            <span>02</span>
-            <h2>Then a <em>thought.</em></h2>
-            <p>Why does it work this way? Why has everybody accepted it?</p>
-          </article>
-          <article>
-            <span>03</span>
-            <h2>Then an <em>idea.</em></h2>
-            <p>Not necessarily a product yet. Just the possibility that something could be better.</p>
-          </article>
-          <article>
-            <span>04</span>
-            <h2>Then a <em>signal.</em></h2>
-            <p>When the pattern repeats, boomley starts listening more closely.</p>
-          </article>
-        </div>
-
-        <div class="scanner" data-scanner>
-          <div class="scanner__top"><span>LIVE SIGNAL INTERPRETATION</span><span>001</span></div>
-          <canvas class="scanner__canvas" data-scanner-canvas aria-hidden="true"></canvas>
-          <div class="scanner__scope">
-            <div class="scanner__reticle" data-reticle><span>SEARCHING</span></div>
-            <p>Noise is everywhere.<br/>The pattern is the interesting part.</p>
-          </div>
-          <div class="scanner__bottom"><span>PROBLEM → THOUGHT → IDEA</span><b>SIGNAL</b></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="process" class="process">
-      <div class="chapter chapter--dark"><span>02</span><b>HOW WE WORK</b><p>One continuous loop. No theatre.</p></div>
-
-      <div class="process__shell">
-        <div class="process__copy">
-          <h2>We don't start<br/>with <em>apps.</em></h2>
-          <p>We start by asking whether the problem deserves one.</p>
-
-          <div class="process__nav" role="list">
-            <button class="is-active" data-step="0"><span>01</span>NOTICE</button>
-            <button data-step="1"><span>02</span>LISTEN</button>
-            <button data-step="2"><span>03</span>QUESTION</button>
-            <button data-step="3"><span>04</span>BUILD</button>
-            <button data-step="4"><span>05</span>TEST</button>
-            <button data-step="5"><span>06</span>LISTEN AGAIN</button>
-          </div>
-        </div>
-
-        <div class="process__stage">
-          <article class="step is-active" data-step-panel="0">
-            <div class="step__copy"><span>01 / NOTICE</span><h3>Find repeated friction rather than isolated annoyance.</h3></div>
-            <div class="scene scene--notice" aria-hidden="true"><i></i><i></i><i></i><b>?</b></div>
-          </article>
-          <article class="step" data-step-panel="1">
-            <div class="step__copy"><span>02 / LISTEN</span><h3>Understand who experiences it and what it costs them.</h3></div>
-            <div class="scene scene--listen" aria-hidden="true"><div class="wave wave--a"></div><div class="wave wave--b"></div><div class="wave wave--c"></div></div>
-          </article>
-          <article class="step" data-step-panel="2">
-            <div class="step__copy"><span>03 / QUESTION</span><h3>Decide whether software should exist at all.</h3></div>
-            <div class="scene scene--question" aria-hidden="true"><div class="question-mark">?</div><div class="grid"></div></div>
-          </article>
-          <article class="step" data-step-panel="3">
-            <div class="step__copy"><span>04 / BUILD</span><h3>Product and engineering turn the strongest signal into something tangible.</h3></div>
-            <div class="scene scene--build" aria-hidden="true"><div class="window w1"></div><div class="window w2"></div><div class="window w3"></div></div>
-          </article>
-          <article class="step" data-step-panel="4">
-            <div class="step__copy"><span>05 / TEST</span><h3>Reality gets the final vote.</h3></div>
-            <div class="scene scene--test" aria-hidden="true"><span>PASS</span><span>FAIL</span><i></i></div>
-          </article>
-          <article class="step" data-step-panel="5">
-            <div class="step__copy"><span>06 / LISTEN AGAIN</span><h3>The loop starts over.</h3></div>
-            <div class="scene scene--loop" aria-hidden="true"><div class="loop-ring r1"></div><div class="loop-ring r2"></div><div class="loop-ring r3"></div></div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="history">
-      <div class="chapter"><span>03</span><b>HISTORY</b><p>No mythology. No fake milestones. Just the actual beginning.</p></div>
-      <h2>You found us <span>early.</span></h2>
-
-      <div class="history__line">
-        <article><span>2026</span><h3>Two disciplines meet.</h3><p>Product management and software engineering begin exploring recurring frustrations together.</p></article>
-        <article><span>SIGNAL / 001</span><h3>Research begins.</h3><p>The first problem becomes serious enough to document rather than just discuss.</p></article>
-        <article class="is-now"><span>NOW</span><h3>Building in public.</h3><p>Research, systems, experience design and the first private build are taking shape.</p></article>
-        <article><span>NEXT</span><h3>Test with people.</h3><p>Let real users challenge the assumptions before anything deserves a launch.</p></article>
-      </div>
-    </section>
-
-    <section class="people" id="people">
-      <div class="chapter"><span>04</span><b>PEOPLE</b><p>Two people. Two disciplines. One shared intolerance for unnecessary friction.</p></div>
-      <h2>Who's actually<br/>opening the box?</h2>
-
-      <div class="people__gallery" data-people-rotator>
-        <article class="person" data-person="chidi">
-          <div class="person__visual">
-            <img src="/media/founders/chidi.webp" alt="Chidi" width="2048" height="2048" />
-            <canvas data-founder-ascii="chidi" aria-hidden="true"></canvas>
-            <div class="person__overlay"><span>PRODUCT</span><b>ASKS WHY.</b></div>
-          </div>
-          <div class="person__meta"><b>CHIDI</b><span>Product management / strategy / research / experience</span></div>
-        </article>
-
-        <article class="person" data-person="michael">
-          <div class="person__visual">
-            <img src="/media/founders/michael.webp" alt="Michael" width="2048" height="2048" />
-            <canvas data-founder-ascii="michael" aria-hidden="true"></canvas>
-            <div class="person__overlay"><span>ENGINEERING</span><b>MAKES IT REAL.</b></div>
-          </div>
-          <div class="person__meta"><b>MICHAEL</b><span>Software engineering / systems / architecture / build</span></div>
-        </article>
-      </div>
-      <p class="people__note">HOVER A PORTRAIT / THE MACHINE INTERPRETS THE HUMAN.</p>
-    </section>
-
-    <section id="builds" class="builds">
-      <div class="chapter chapter--dark"><span>05</span><b>BUILDS</b><p>WE FOUND OUR FIRST SIGNAL.</p></div>
-
-      <div class="builds__hero">
-        <span>PRIVATE BUILD / SIGNAL 001</span>
-        <h2>1000001</h2>
-        <p>We're not explaining it yet. We're documenting it, questioning it and building it.</p>
-      </div>
-
-      <div class="builds__collage">
-        <article class="artifact artifact--paper">
-          <small>RESEARCH / 001</small>
-          <h3>ATTENTION WAS FRAGMENTED BEFORE WE TRIED TO FIX IT.</h3>
-          <p>Research artifact / selected note</p>
-        </article>
-
-        <article class="artifact artifact--ui">
-          <div class="ui__bar"><i></i><i></i><i></i><span>private build</span></div>
-          <div class="ui__body">
-            <small>1000001 / INTERNAL</small>
-            <h3>ONE THING.<br/>STAY WITH IT.</h3>
-            <div class="ui__rail"><i></i><i></i><i></i></div>
-          </div>
-        </article>
-
-        <article class="artifact artifact--note">
-          <small>RULE / 07</small>
-          <h3>THE TOOL SHOULD NOT BECOME THE TASK.</h3>
-        </article>
-
-        <div class="builds__ascii" aria-hidden="true">
-          <pre>00110010
-01001010
-01110101
-01110011
-01110100</pre>
-        </div>
-      </div>
-
-      <div class="builds__status">
-        <div><span>RESEARCH</span><b>COMPLETE</b></div>
-        <div><span>DOCUMENTATION</span><b>ACTIVE</b></div>
-        <div><span>EXPERIENCE</span><b>ACTIVE</b></div>
-        <div><span>BUILD</span><b>NEXT</b></div>
-        <div><span>TEST</span><b>LATER</b></div>
-      </div>
-
-      <form class="waitlist" name="product-1000001" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-        <input type="hidden" name="form-name" value="product-1000001" />
-        <p class="honeypot"><label>Do not fill this out: <input name="bot-field" /></label></p>
-        <label for="product-email">Want to be there when 1000001 opens?</label>
-        <div><input id="product-email" type="email" name="email" placeholder="ENTER EMAIL" required autocomplete="email" /><button type="submit">KEEP ME CLOSE ↗</button></div>
-        <p class="status" data-product-status aria-live="polite"></p>
-      </form>
-    </section>
-
-    <section id="community" class="community">
-      <div class="chapter"><span>06</span><b>COMMUNITY</b><p>boomley is becoming a home for problem-noticers, developers, designers, researchers, students, founders and people who are simply curious enough to ask why something still works this way.</p></div>
-
-      <div class="community__headline">
-        <h2>Some people <span>notice things.</span></h2>
-        <h2>Some people <span>build them.</span></h2>
-        <p>We want both.</p>
-      </div>
-
-      <div class="community__mosaic" aria-hidden="true">
-        <div class="mosaic mosaic--people"><span>PEOPLE</span><div class="dots"></div></div>
-        <div class="mosaic mosaic--why"><span>WHY?</span><b>WHY?</b><strong>WHY?</strong></div>
-        <div class="mosaic mosaic--code"><span>BUILDERS</span><pre>00101
-11010
-01011
-10100</pre></div>
-        <div class="mosaic mosaic--signal"><span>SIGNAL</span><b>↗</b></div>
-        <div class="mosaic mosaic--listen"><span>LISTEN</span><div class="listening-wave"></div></div>
-      </div>
-
-      <div class="community__actions">
-        <a href="#signal-box">I HAVE A PROBLEM →</a>
-        <a href="mailto:hello@boomley.com">I WANT TO BUILD →</a>
-      </div>
-    </section>
-
-    <section id="signal-box" class="signal">
-      <div class="chapter"><span>07</span><b>SEND A SIGNAL</b><p>Don't pitch us an app. Tell us what shouldn't still be this difficult.</p></div>
-
-      <div class="signal__head">
-        <h2>What have <span>you</span> noticed?</h2>
-        <div class="signal__steps"><b><i>01</i>WRITE THE PROBLEM.</b><b><i>02</i>WRAP THE LETTER.</b><b><i>03</i>POST IT.</b></div>
-      </div>
-
-      <div class="signal__workspace">
-        <form class="letter" name="boomley-signal" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-signal-form>
-          <input type="hidden" name="form-name" value="boomley-signal" />
-          <p class="honeypot"><label>Do not fill this out: <input name="bot-field" /></label></p>
-          <div class="letter__head"><span>boomley / signal form</span><span>001</span></div>
-          <h3>WHAT'S BOTHERING YOU?</h3>
-          <p>Write the problem. We'll worry about the product.</p>
-          <label>THE PROBLEM<textarea name="friction" rows="4" required placeholder="It shouldn't still be this difficult to..."></textarea></label>
-          <label>WHO DEALS WITH IT?<input name="who" type="text" required placeholder="People who..." /></label>
-          <label>WHAT CHANGES IF IT'S FIXED?<textarea name="change" rows="2" required placeholder="It would make it easier to..."></textarea></label>
-          <label>YOUR EMAIL<input name="email" type="email" required autocomplete="email" placeholder="you@example.com" /></label>
-          <div class="letter__actions"><button type="button" data-wrap>WRAP IT →</button><button type="submit" data-post disabled>POST IT →</button></div>
-          <p class="status" data-signal-status aria-live="polite"></p>
-        </form>
-
-        <div class="posting">
-          <div class="envelope" data-envelope aria-hidden="true"><div class="envelope__paper">SIGNAL / READY</div><div class="envelope__flap"></div><span>TO / boomley</span></div>
-          <div class="postbox" data-postbox>
-            <div class="postbox__cap"></div>
-            <div class="postbox__body">
-              <div class="postbox__badge">b</div>
-              <div class="postbox__slot"><span>POST SIGNAL</span></div>
-              <div class="postbox__plaque"><b>boomley</b><small>SIGNAL RECEIVER / 001</small></div>
-              <div class="postbox__door"><span>THE BOX IS OPEN</span></div>
-            </div>
-            <div class="postbox__base"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="finale">
-      <canvas data-ending-field aria-hidden="true"></canvas>
-      <div class="finale__copy">
-        <span>SIGNALS EXIST EVERYWHERE.</span>
-        <h2>This is only<br/><em>the beginning.</em></h2>
-        <p>We're listening.</p>
-        <div class="finale__brand">
-          <svg viewBox="0 0 64 64" aria-hidden="true"><rect x="18" y="10" width="28" height="7" rx="3.5" class="sig"/><path d="M20 19C20 16.8 21.8 15 24 15h3c2.2 0 4 1.8 4 4v10.1c2.8-2.2 6.2-3.3 9.8-3.1C49.2 26.5 54 32.1 54 40c0 8.6-6.1 14-15.6 14H24c-2.2 0-4-1.8-4-4V19Zm11 19v7h7c3.8 0 6-2.1 6-5.3 0-3-2.2-5-5.6-5-3.2 0-5.7 1.1-7.4 3.3Z"/></svg>
-          <b>boomley</b>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="footer__brand"><b>boomley</b><p>Problems become signals. Signals become things.</p></div>
-    <div><span>EXPLORE</span><a href="#about">About</a><a href="#process">Process</a><a href="#builds">Builds</a><a href="#community">Community</a></div>
-    <div><span>PARTICIPATE</span><a href="#signal-box">Send a Signal</a><a href="mailto:hello@boomley.com">Contact</a></div>
-    <div><span>LEGAL</span><a href="#">Privacy</a><a href="#">Terms</a><small>© 2026 boomley</small></div>
-  </footer>
-
-  <script>
-    import '../scripts/blank-canvas.ts';
-  </script>
-</BaseLayout>
+<footer class='foot' id='footer'>
+  <div class='wrap'>
+    <p class='wm' aria-label='boomley'>boomley</p>
+    <div class='fc'>
+      <nav aria-label='Footer'><h3>Explore</h3><ul><li><a href='#about'>About</a></li><li><a href='#process'>Process</a></li><li><a href='#history'>History</a></li><li><a href='#builds'>Builds</a></li><li><a href='#community'>Community</a></li><li><a href='#signal'>Send a Signal</a></li></ul></nav>
+      <div><h3>Contact</h3><ul><li><a href='mailto:hello@boomley.com'>hello@boomley.com</a></li><!-- Add Instagram / X / LinkedIn only when real links exist --></ul></div>
+      <div><h3>Legal</h3><ul><li><a href='/privacy'>Privacy</a></li><li><a href='/terms'>Terms</a></li></ul></div>
+    </div>
+    <div class='fb mono'><span>© 2026 boomley</span><span>Problems become signals. Signals become things.</span></div>
+  </div>
+</footer>
+<script>import '../scripts/boomley-cinematic.js';</script>
+</body>
+</html>
