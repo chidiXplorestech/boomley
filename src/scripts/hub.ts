@@ -47,7 +47,7 @@ function initLoader() {
 
   gsap.to(counter, {
     value: 100,
-    duration: 3.65,
+    duration: 2.95,
     ease: 'power1.inOut',
     onUpdate: () => {
       if (count) count.textContent = String(Math.round(counter.value)).padStart(3, '0');
@@ -63,18 +63,18 @@ function initLoader() {
   });
 
   phrases.forEach((phrase, index) => {
-    const at = index * .53;
+    const at = index * .43;
     tl.to(line, { autoAlpha: 0, y: -12, duration: .18 }, at)
       .call(() => { if (line) line.textContent = phrase; }, undefined, at + .18)
       .fromTo(line, { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: .22 }, at + .2);
   });
 
-  tl.to(line, { autoAlpha: 0, duration: .2 }, 3.2)
-    .to(mark, { autoAlpha: 1, duration: .25 }, 3.45)
-    .fromTo('.hub-loader__b', { scale: .7 }, { scale: 1, duration: .42, ease: 'back.out(1.7)' }, 3.45)
-    .to(rest, { autoAlpha: 1, x: 0, duration: .45 }, 3.7)
-    .to(welcome, { autoAlpha: 1, y: 0, duration: .25 }, 4.0)
-    .to(loader, { clipPath: 'inset(0 0 100% 0)', duration: .72, ease: 'power4.inOut' }, 4.35)
+  tl.to(line, { autoAlpha: 0, duration: .18 }, 2.62)
+    .to(mark, { autoAlpha: 1, duration: .22 }, 2.78)
+    .fromTo('.hub-loader__b', { scale: .78 }, { scale: 1, duration: .34, ease: 'power3.out' }, 2.78)
+    .to(rest, { autoAlpha: 1, x: 0, duration: .34 }, 2.98)
+    .to(welcome, { autoAlpha: 1, y: 0, duration: .22 }, 3.18)
+    .to(loader, { clipPath: 'inset(0 0 100% 0)', duration: .58, ease: 'power4.inOut' }, 3.42)
     .set(loader, { display: 'none' });
 }
 
@@ -108,7 +108,7 @@ function initHero() {
     mask: 'lines',
     autoSplit: true,
     onSplit(self) {
-      return gsap.timeline({ delay: 4.7, defaults: { ease: 'power4.out' } })
+      return gsap.timeline({ delay: 3.72, defaults: { ease: 'power4.out' } })
         .from(self.lines, { yPercent: 115, rotate: .5, duration: 1, stagger: .07 })
         .from('.hub-hero__portrait--one', { x: 60, y: 40, rotate: 4, autoAlpha: 0, duration: .85 }, .18)
         .from('.hub-hero__portrait--two', { x: -45, y: -20, rotate: -4, autoAlpha: 0, duration: .85 }, .3)
@@ -233,15 +233,18 @@ function initAsciiPortraits() {
   const canvases = Array.from(document.querySelectorAll<HTMLCanvasElement>('[data-hub-ascii]'));
   if (!canvases.length) return;
 
-  const image = new Image();
-  image.src = '/media/founders-sprite.webp';
+  canvases.forEach((canvas) => {
+    const founder = (canvas.dataset.founder || 'chidi') as FounderKey;
+    const card = canvas.closest<HTMLElement>('[data-hub-person]');
+    if (!card) return;
 
-  image.addEventListener('load', () => {
-    canvases.forEach((canvas) => {
-      const founder = (canvas.dataset.founder || 'chidi') as FounderKey;
-      const card = canvas.closest<HTMLElement>('[data-hub-person]');
-      if (!card) return;
+    const image = new Image();
+    image.decoding = 'async';
+    image.src = founder === 'michael'
+      ? '/media/founders/michael.webp'
+      : '/media/founders/chidi.webp';
 
+    image.addEventListener('load', () => {
       const charset = ' .,:;irsXA253hMHGS#9B&@';
       let cells: Array<{ char:string; light:number; x:number; y:number }> = [];
       let cols = 0;
@@ -252,10 +255,10 @@ function initAsciiPortraits() {
       const measure = () => {
         const rect = canvas.getBoundingClientRect();
         const cssW = Math.max(180, rect.width);
-        const cssH = Math.max(220, rect.height);
+        const cssH = Math.max(180, rect.height);
         const cell = Math.max(6, Math.min(10, Math.round(cssW / 64)));
         cols = Math.max(24, Math.floor(cssW / cell));
-        rows = Math.max(30, Math.floor(cssH / (cell * 1.15)));
+        rows = Math.max(24, Math.floor(cssH / (cell * 1.05)));
 
         const dpr = Math.min(2, window.devicePixelRatio || 1);
         canvas.width = Math.floor(cssW * dpr);
@@ -267,10 +270,10 @@ function initAsciiPortraits() {
         const sctx = sample.getContext('2d', { willReadFrequently:true });
         if (!sctx) return;
 
-        const halfW = image.naturalWidth / 2;
-        const halfH = image.naturalHeight / 2;
-        const sx = founder === 'michael' ? halfW : 0;
-        sctx.drawImage(image, sx, 0, halfW, halfH, 0, 0, cols, rows);
+        const srcSize = Math.min(image.naturalWidth, image.naturalHeight);
+        const sx = (image.naturalWidth - srcSize) / 2;
+        const sy = (image.naturalHeight - srcSize) / 2;
+        sctx.drawImage(image, sx, sy, srcSize, srcSize, 0, 0, cols, rows);
 
         const pixels = sctx.getImageData(0,0,cols,rows).data;
         cells = [];
@@ -314,10 +317,10 @@ function initAsciiPortraits() {
 
       const animate = () => {
         cancelAnimationFrame(raf);
-        const start = performance.now();
+        const started = performance.now();
         const tick = (now:number) => {
           frame++;
-          const p = Math.min(1,(now-start)/500);
+          const p = Math.min(1,(now-started)/500);
           draw(1-Math.pow(1-p,3));
           if (p<1) raf=requestAnimationFrame(tick);
         };
@@ -327,9 +330,33 @@ function initAsciiPortraits() {
       card.addEventListener('pointerenter',animate);
       card.addEventListener('focus',animate);
       measure();
-      window.addEventListener('resize',() => setTimeout(measure,100));
+
+      let resizeTimer = 0;
+      window.addEventListener('resize',() => {
+        window.clearTimeout(resizeTimer);
+        resizeTimer = window.setTimeout(measure,120);
+      });
     });
   });
+}
+
+function initFounderRotation() {
+  const hero = document.querySelector<HTMLElement>('.hub-hero__art');
+  const people = document.querySelector<HTMLElement>('.hub-people__grid');
+  if (!hero || !people || reduced) return;
+
+  let swapped = false;
+  const rotate = () => {
+    swapped = !swapped;
+    hero.classList.toggle('is-swapped', swapped);
+    people.classList.toggle('is-swapped', swapped);
+  };
+
+  // Equal founders: neither position is permanently primary.
+  window.setTimeout(() => {
+    rotate();
+    window.setInterval(rotate, 8000);
+  }, 7600);
 }
 
 function initBuilds() {
@@ -536,6 +563,7 @@ initStory();
 initProcess();
 initHistory();
 initAsciiPortraits();
+initFounderRotation();
 initBuilds();
 initCommunityField();
 initEndingField();
