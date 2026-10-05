@@ -1,257 +1,401 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import '../styles/global.css';
+import '../styles/hub.css';
+import '../styles/brand-refresh.css';
 ---
-<BaseLayout>
+<BaseLayout title="boomley — problems become signals" description="boomley is a two-person product company and growing community for turning meaningful problems into products worth building.">
+  <div class="hub-loader" data-loader aria-hidden="true">
+    <div class="hub-loader__progress"><span data-loader-count>000</span><small>%</small></div>
+    <div class="hub-loader__copy">
+      <p data-loader-line>WE ALL HAVE THEM.</p>
+    </div>
+    <div class="hub-loader__mark" data-loader-mark>
+      <span class="hub-loader__b">b</span><span class="hub-loader__rest">oomley</span>
+    </div>
+    <p class="hub-loader__welcome" data-loader-welcome>WELCOME.</p>
+  </div>
+
   <div class="cursor" aria-hidden="true"><span></span></div>
 
-  <header class="site-header" data-header>
-    <a class="brand" href="#top" aria-label="Boomley home">BOOMLEY®</a>
-    <nav class="nav" aria-label="Primary navigation">
-      <a href="#signal-story">Signal</a>
-      <a href="#founders">People</a>
-      <a href="#product">Product / 001</a>
-      <a href="#postbox">Send a signal</a>
+  <header class="hub-nav" data-hub-nav>
+    <a class="hub-brand" href="#top" aria-label="boomley home">
+      <svg class="hub-symbol" viewBox="0 0 32 32" aria-hidden="true">
+        <circle cx="16" cy="16" r="13"></circle>
+        <path d="M16 3v26M3 16h26"></path>
+        <path d="M16 16 29 3"></path>
+      </svg>
+      <span>boomley</span>
+    </a>
+
+    <nav class="hub-nav__links" aria-label="Primary">
+      <a href="#about">About</a>
+      <a href="#process">Process</a>
+      <a href="#builds">Builds</a>
+      <a href="#community">Community</a>
+      <a href="#signal-box">Signal</a>
     </nav>
-    <span class="header-status">TEAM / 02 · STATUS / BUILDING</span>
+
+    <div class="hub-nav__meta">
+      <span>EST. 2026</span>
+      <span class="hub-live-dot">BUILDING</span>
+    </div>
   </header>
 
   <main id="top">
-    <section class="hero section section--paper" aria-labelledby="hero-title">
-      <div class="hero-grid">
-        <div class="hero-copy">
-          <div class="system-row" data-reveal>
-            <span>BOOMLEY / TRANSMISSION 001</span>
-            <span>PRODUCT × ENGINEERING</span>
-          </div>
-          <h1 id="hero-title" class="hero-title" data-split>
-            BUILD THE THINGS<br />
-            PEOPLE <em>WISH</em><br />
-            EXISTED.
-          </h1>
-          <div class="hero-summary" data-reveal>
-            <p>Boomley is two people building software around the problems people should not still have.</p>
-            <div class="hero-facts" aria-label="Company status">
-              <span><b>02</b> people</span>
-              <span><b>01</b> product</span>
-              <span><b>OPEN</b> signal box</span>
+    <section class="hub-hero">
+      <div class="hub-hero__copy">
+        <p class="hub-eyebrow" data-hub-reveal>A PRODUCT COMPANY / A PUBLIC WORKBENCH / A GROWING COMMUNITY</p>
+        <h1 data-hub-hero-title>
+          PROBLEMS<br />
+          ARE <em>EVERYWHERE.</em><br />
+          WE PAY ATTENTION.
+        </h1>
+        <p class="hub-hero__deck" data-hub-reveal>
+          boomley notices the problems people keep learning to live with — then investigates the ones worth turning into products.
+        </p>
+      </div>
+
+      <div class="hub-hero__art" data-hub-hero-art>
+        <div class="hub-hero__portrait hub-hero__portrait--one" data-founder-card="chidi">
+          <img class="hub-founder-shot" src="/media/founders/chidi.webp" alt="Chidi, Product" width="2048" height="2048" />
+          <span>PRODUCT</span>
+        </div>
+        <div class="hub-hero__portrait hub-hero__portrait--two" data-founder-card="michael">
+          <img class="hub-founder-shot" src="/media/founders/michael.webp" alt="Michael, Engineering" width="2048" height="2048" />
+          <span>ENGINEERING</span>
+        </div>
+        <div class="hub-hero__stamp">TWO PEOPLE.<br />FOR NOW.</div>
+        <div class="hub-hero__signal">SIGNAL<br />RECEIVER</div>
+      </div>
+
+      <div class="hub-hero__bottom">
+        <span>02 PEOPLE</span>
+        <span>01 ACTIVE BUILD</span>
+        <span>THE BOX IS OPEN</span>
+        <a href="#about">ENTER ↓</a>
+      </div>
+    </section>
+
+    <section id="about" class="hub-story hub-dark">
+      <div class="hub-section-label">01 / ABOUT</div>
+
+      <div class="hub-story__track" data-story-track>
+        <article class="hub-story__beat is-first">
+          <span>01</span>
+          <h2>IT STARTS<br />WITH A <em>PROBLEM.</em></h2>
+          <p>Something takes too long. Feels unnecessarily difficult. Makes people invent workarounds.</p>
+        </article>
+
+        <article class="hub-story__beat">
+          <span>02</span>
+          <h2>THEN A<br /><em>THOUGHT.</em></h2>
+          <p>Why does it work this way? Why has everybody accepted it?</p>
+        </article>
+
+        <article class="hub-story__beat">
+          <span>03</span>
+          <h2>THEN AN<br /><em>IDEA.</em></h2>
+          <p>Not necessarily a product yet. Just the possibility that something could be better.</p>
+        </article>
+
+        <article class="hub-story__beat is-signal">
+          <span>04</span>
+          <h2>THEN A<br /><em>SIGNAL.</em></h2>
+          <p>When the pattern repeats, boomley starts listening more closely.</p>
+        </article>
+      </div>
+
+      <div class="hub-story__resolution" data-story-resolution>
+        <span>PROBLEM → THOUGHT → IDEA → SIGNAL</span>
+        <h3>boomley</h3>
+      </div>
+    </section>
+
+    <section id="process" class="hub-process">
+      <div class="hub-section-label">02 / HOW WE WORK</div>
+      <div class="hub-process__intro">
+        <h2 data-hub-reveal>WE DON'T START<br />WITH <em>APPS.</em></h2>
+        <p data-hub-reveal>We start by asking whether the problem deserves one.</p>
+      </div>
+
+      <div class="hub-process__rail" data-process-rail>
+        <article>
+          <span>01</span>
+          <h3>NOTICE</h3>
+          <p>Find repeated friction rather than isolated annoyance.</p>
+        </article>
+        <article>
+          <span>02</span>
+          <h3>LISTEN</h3>
+          <p>Understand who experiences it and what it costs them.</p>
+        </article>
+        <article>
+          <span>03</span>
+          <h3>QUESTION</h3>
+          <p>Decide whether software should exist at all.</p>
+        </article>
+        <article>
+          <span>04</span>
+          <h3>BUILD</h3>
+          <p>Product and engineering turn the strongest signal into something tangible.</p>
+        </article>
+        <article>
+          <span>05</span>
+          <h3>TEST</h3>
+          <p>Reality gets the final vote.</p>
+        </article>
+        <article>
+          <span>06</span>
+          <h3>LISTEN AGAIN</h3>
+          <p>The loop starts over.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="history" class="hub-history hub-blue">
+      <div class="hub-section-label">03 / HISTORY</div>
+      <div class="hub-history__intro">
+        <h2 data-hub-reveal>YOU FOUND US<br /><em>EARLY.</em></h2>
+        <p data-hub-reveal>No mythology. No fake milestones. Just the actual beginning.</p>
+      </div>
+
+      <div class="hub-history__timeline" data-history-timeline>
+        <article class="is-done">
+          <span>2026</span>
+          <h3>TWO DISCIPLINES MEET.</h3>
+          <p>Product management and software engineering begin exploring recurring frustrations together.</p>
+        </article>
+        <article class="is-done">
+          <span>SIGNAL / 001</span>
+          <h3>RESEARCH BEGINS.</h3>
+          <p>The first problem becomes serious enough to document rather than just discuss.</p>
+        </article>
+        <article class="is-now">
+          <span>NOW</span>
+          <h3>BUILDING IN PUBLIC.</h3>
+          <p>Research, systems, experience design and the first private build are taking shape.</p>
+        </article>
+        <article>
+          <span>NEXT</span>
+          <h3>TEST WITH PEOPLE.</h3>
+          <p>Let real users challenge the assumptions before anything deserves a launch.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="people" class="hub-people">
+      <div class="hub-section-label">04 / PEOPLE</div>
+      <div class="hub-people__intro">
+        <h2 data-hub-reveal>WHO'S ACTUALLY<br />OPENING THE BOX?</h2>
+        <p data-hub-reveal>Two people. Two disciplines. One shared intolerance for unnecessary friction.</p>
+      </div>
+
+      <div class="hub-people__grid">
+        <article class="hub-person" tabindex="0" data-hub-person data-founder="chidi">
+          <div class="hub-person__media">
+            <img class="hub-person__photo" src="/media/founders/chidi.webp" alt="Chidi" width="2048" height="2048" />
+            <canvas class="hub-person__ascii" data-hub-ascii data-founder="chidi" aria-hidden="true"></canvas>
+            <div class="hub-person__overlay">
+              <span>01 / PRODUCT</span>
+              <strong>ASKS<br />WHY.</strong>
+              <small>SOCIAL / TO ADD</small>
             </div>
           </div>
-          <div class="hero-actions" data-reveal>
-            <a class="button button--ink" href="#product">SEE WHAT WE'RE BUILDING <span>↓</span></a>
-            <a class="button button--ghost" href="#postbox">SEND A SIGNAL <span>↗</span></a>
+          <div class="hub-person__meta">
+            <b>CHIDI</b>
+            <span>Product management / strategy / research / experience</span>
           </div>
-        </div>
-
-        <div class="hero-collage" data-reveal>
-          <figure class="portrait portrait--hero portrait--chidi">
-            <div class="sprite portrait-image sprite-chidi" role="img" aria-label="Boomley founder portrait"></div>
-            <figcaption><span>PRODUCT</span><small>01 / QUESTIONS EVERYTHING</small></figcaption>
-          </figure>
-          <figure class="portrait portrait--hero portrait--michael">
-            <div class="sprite portrait-image sprite-michael" role="img" aria-label="Boomley founder portrait"></div>
-            <figcaption><span>ENGINEERING</span><small>02 / MAKES IT REAL</small></figcaption>
-          </figure>
-          <div class="hero-note note-a">CURRENTLY / RESEARCH → BUILD</div>
-          <div class="hero-note note-b">MODERN-DAY PROBLEMS REQUIRE MODERN SOLUTIONS.</div>
-          <div class="hero-cross" aria-hidden="true">+</div>
-        </div>
-      </div>
-
-      <div class="ascii-ribbon" aria-hidden="true">
-        <div class="ascii-ribbon__track">01001 SIGNAL 01100 BUILD 10010 NOTICE 00101 QUESTION 11010 LISTEN 00110 DESIGN 10110 TEST 00101 SHIP 01001 SIGNAL 01100 BUILD 10010 NOTICE 00101 QUESTION 11010 LISTEN 00110 DESIGN 10110 TEST 00101 SHIP</div>
-      </div>
-    </section>
-
-    <section id="signal-story" class="section section--blue signal-story">
-      <div class="section-kicker">01 / THE SIGNAL</div>
-      <div class="signal-layout">
-        <div class="signal-title-wrap">
-          <span class="tiny-label">SOMETHING FEELS OFF.</span>
-          <h2 class="poster-title" data-reveal>THAT'S<br />NOT NOISE.<br /><em>THAT'S A SIGNAL.</em></h2>
-        </div>
-        <div class="signal-copy" data-reveal>
-          <p>People complain. They create workarounds. They learn to live with software that makes simple things harder.</p>
-          <p>We look for the patterns underneath that friction — then ask a harder question:</p>
-          <blockquote>Does this deserve a better product?</blockquote>
-        </div>
-      </div>
-      <div class="signal-cards" data-reveal>
-        <article><span>01</span><h3>NOTICE</h3><p>Find the repeated pain.</p></article>
-        <article><span>02</span><h3>UNDERSTAND</h3><p>Study the people and the cost.</p></article>
-        <article><span>03</span><h3>BUILD</h3><p>Make the answer tangible.</p></article>
-        <article><span>04</span><h3>LISTEN AGAIN</h3><p>Let reality sharpen the product.</p></article>
-      </div>
-      <pre class="ascii-wave" aria-hidden="true">.............................................:::::::::::::::;;;;;;;;;;;;;;;iiiiiiiiiiiiiirrrrrrrrrrrrrrssssssssssssssXXXXXXXXXXXXXXAAAAAAA2222222555555533333333333333hhhhhhhhhhhMMMMMMMMMHHHHHHHHHGGGGGGGGGSSSSSSS#######9999BBBB&&&&@@@@
-.................................::::::::::::;;;;;;;;;;;;iiiiiiiiirrrrrrrrrrrrsssssssssXXXXXXXXAAAAAA222222555555333333hhhhhhhhMMMMMMMHHHHHGGGGGSSSSS#####99BBB&&@@@
-.....................::::::::::::;;;;;;;;;;iiiiiiiirrrrrrrrrrssssssssXXXXXAAAAA22222555533333hhhhhMMMMMHHHHGGGGSSSS###999BBB&&@@@
-.............::::::::::::;;;;;;;;iiiiiiirrrrrrrrssssssXXXXXAAAA222255553333hhhhMMMMHHHGGGSSS###99BB&&@@
-......:::::::::::;;;;;;;iiiiiirrrrrrsssssXXXXAAA222555333hhhMMMHHHGGSS##99BB&&@@</pre>
-    </section>
-
-    <section id="founders" class="section section--ink founders">
-      <div class="section-kicker section-kicker--light">02 / TWO PEOPLE / FOR NOW</div>
-      <div class="founders-head">
-        <h2 class="display-serif" data-reveal>Product asks <em>why.</em><br />Engineering asks <em>how.</em></h2>
-        <p data-reveal>Boomley happens somewhere between those two questions.</p>
-      </div>
-
-      <div class="founder-grid">
-        <article class="founder-card" data-founder-card tabindex="0">
-          <div class="founder-media">
-            <div class="founder-photo sprite sprite-chidi" role="img" aria-label="Chidi, Product Management"></div>
-            <div class="founder-ascii sprite sprite-chidi-ascii" role="img" aria-label="ASCII interpretation of Chidi's portrait"></div>
-            <div class="founder-hover-copy"><span>BOOMLEY / 01</span><b>PRODUCT MANAGEMENT</b><small>X / HANDLE TO ADD</small></div>
-          </div>
-          <div class="founder-meta"><span>01</span><h3>CHIDI</h3><p>Product Management · Strategy · Research · Experience</p></div>
         </article>
 
-        <article class="founder-card" data-founder-card tabindex="0">
-          <div class="founder-media">
-            <div class="founder-photo sprite sprite-michael" role="img" aria-label="Michael, Software Engineering"></div>
-            <div class="founder-ascii sprite sprite-michael-ascii" role="img" aria-label="ASCII interpretation of Michael's portrait"></div>
-            <div class="founder-hover-copy"><span>BOOMLEY / 02</span><b>SOFTWARE ENGINEERING</b><small>X / HANDLE TO ADD</small></div>
+        <article class="hub-person" tabindex="0" data-hub-person data-founder="michael">
+          <div class="hub-person__media">
+            <img class="hub-person__photo" src="/media/founders/michael.webp" alt="Michael" width="2048" height="2048" />
+            <canvas class="hub-person__ascii" data-hub-ascii data-founder="michael" aria-hidden="true"></canvas>
+            <div class="hub-person__overlay">
+              <span>02 / ENGINEERING</span>
+              <strong>MAKES<br />IT REAL.</strong>
+              <small>SOCIAL / TO ADD</small>
+            </div>
           </div>
-          <div class="founder-meta"><span>02</span><h3>MICHAEL</h3><p>Software Engineering · Systems · Architecture · Build</p></div>
+          <div class="hub-person__meta">
+            <b>MICHAEL</b>
+            <span>Software engineering / systems / architecture / build</span>
+          </div>
         </article>
-      </div>
-
-      <div class="founder-line" data-reveal>
-        <span>ONE COMPANY.</span><span>TWO DISCIPLINES.</span><span>A LOT LEFT TO FIGURE OUT.</span><strong>PERFECT.</strong>
       </div>
     </section>
 
-    <section id="product" class="section section--paper product-section">
-      <div class="section-kicker">03 / PRODUCT / 001</div>
-      <div class="product-hero">
-        <div class="product-copy">
-          <span class="status-pill">IN DEVELOPMENT</span>
-          <h2 class="product-name" data-reveal>DECLUTTER.</h2>
-          <p class="product-sub" data-reveal>A calmer space for people trying to do meaningful work without being dragged sideways by everything else.</p>
+    <section id="builds" class="hub-builds hub-dark">
+      <div class="hub-section-label">05 / BUILDS</div>
+      <div class="hub-builds__intro">
+        <p class="hub-eyebrow" data-hub-reveal>WE FOUND OUR FIRST SIGNAL.</p>
+        <h2 data-hub-reveal>1000001</h2>
+        <p class="hub-builds__deck" data-hub-reveal>We're not explaining it yet. We're documenting it, questioning it and building it.</p>
+      </div>
+
+      <div class="hub-builds__evidence">
+        <div class="hub-evidence hub-evidence--paper" data-hub-reveal>
+          <span>RESEARCH / 001</span>
+          <b>ATTENTION WAS FRAGMENTED BEFORE WE TRIED TO FIX IT.</b>
+          <p>Research artifact / selected note</p>
         </div>
-        <div class="product-teaser" data-product-teaser>
-          <div class="teaser-grid" aria-hidden="true"></div>
-          <div class="teaser-scan" aria-hidden="true"></div>
-          <div class="teaser-word">LOCK<br /><em>IN.</em></div>
-          <span class="teaser-label">PRIVATE BUILD / SIGNAL 001</span>
+
+        <div class="hub-evidence hub-evidence--screen" data-hub-reveal>
+          <div class="hub-screen-bar"><i></i><i></i><i></i><span>private build</span></div>
+          <strong>ONE THING.<br />STAY WITH IT.</strong>
+          <small>1000001 / INTERNAL</small>
+        </div>
+
+        <div class="hub-evidence hub-evidence--note" data-hub-reveal>
+          <span>RULE / 07</span>
+          <b>THE TOOL SHOULD NOT BECOME THE TASK.</b>
         </div>
       </div>
 
-      <div class="roadmap" data-roadmap>
-        <article class="done"><span>01</span><h3>RESEARCH</h3><small>COMPLETE</small></article>
-        <article class="done"><span>02</span><h3>DOCUMENTATION</h3><small>COMPLETE</small></article>
-        <article class="active"><span>03</span><h3>EXPERIENCE + SYSTEMS</h3><small>YOU ARE HERE</small></article>
-        <article><span>04</span><h3>BUILD</h3><small>NEXT</small></article>
-        <article><span>05</span><h3>PRIVATE TESTING</h3><small>QUEUED</small></article>
-        <article><span>06</span><h3>FIRST RELEASE</h3><small>WHEN READY</small></article>
+      <div class="hub-builds__status">
+        <div><span>RESEARCH</span><b>COMPLETE</b></div>
+        <div><span>DOCUMENTATION</span><b>ACTIVE</b></div>
+        <div><span>EXPERIENCE</span><b>ACTIVE</b></div>
+        <div><span>BUILD</span><b>NEXT</b></div>
+        <div><span>TEST</span><b>LATER</b></div>
       </div>
 
-      <div class="early-access" data-reveal>
+      <form class="hub-builds__waitlist" name="product-1000001" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-netlify-form>
+        <input type="hidden" name="form-name" value="product-1000001" />
+        <p class="honeypot"><label>Do not fill this out: <input name="bot-field" /></label></p>
+        <label for="product-email">Want to be there when 1000001 opens?</label>
         <div>
-          <span class="tiny-label">EARLY ACCESS / PRODUCT 001</span>
-          <h3>THIS ISN'T<br />FOR EVERYONE.</h3>
-          <p>Good. Declutter is being built for people willing to take their own intentions seriously.</p>
+          <input id="product-email" type="email" name="email" placeholder="ENTER EMAIL" autocomplete="email" required />
+          <button type="submit">KEEP ME CLOSE ↗</button>
         </div>
-        <form class="waitlist-form" name="declutter-waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-netlify-form>
-          <input type="hidden" name="form-name" value="declutter-waitlist" />
-          <p class="honeypot"><label>Do not fill this out: <input name="bot-field" /></label></p>
-          <label for="waitlist-email">Coming soon — be among the first to experience real lock-in power.</label>
-          <div class="input-row">
-            <input id="waitlist-email" type="email" name="email" placeholder="ENTER EMAIL" autocomplete="email" required />
-            <button type="submit">I'M SERIOUS →</button>
-          </div>
-          <p class="form-status" data-form-status aria-live="polite"></p>
-        </form>
+        <p class="form-status" data-product-form-status aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section id="community" class="hub-community">
+      <div class="hub-section-label">06 / COMMUNITY</div>
+      <div class="hub-community__headline">
+        <h2 data-hub-reveal>SOME PEOPLE<br /><em>NOTICE THINGS.</em></h2>
+        <h2 data-hub-reveal>SOME PEOPLE<br /><em>BUILD THEM.</em></h2>
+        <p data-hub-reveal>We want both.</p>
+      </div>
+
+      <div class="hub-community__field" data-community-field aria-hidden="true"></div>
+
+      <div class="hub-community__copy" data-hub-reveal>
+        <p>boomley is becoming a home for problem-noticers, developers, designers, researchers, students, founders and people who are simply curious enough to ask why something still works this way.</p>
+        <a href="#signal-box">I HAVE A PROBLEM →</a>
+        <a href="mailto:hello@boomley.com">I WANT TO BUILD →</a>
       </div>
     </section>
 
-    <section id="postbox" class="section section--mist postbox-section">
-      <div class="section-kicker">04 / SEND A SIGNAL</div>
-      <div class="postbox-head">
-        <h2 class="display-serif" data-reveal>What have <em>you</em><br />noticed?</h2>
-        <div class="instructions" data-reveal>
-          <p>Tell us about a problem, frustration or experience that should not still be this difficult.</p>
-          <strong>Don't pitch us an app. Tell us what's broken.</strong>
+    <section id="signal-box" class="hub-signal hub-mist">
+      <div class="hub-section-label">07 / SEND A SIGNAL</div>
+      <div class="hub-signal__intro">
+        <h2 data-hub-reveal>WHAT HAVE<br /><em>YOU</em> NOTICED?</h2>
+        <div data-hub-reveal>
+          <strong><span>01</span> WRITE THE PROBLEM.</strong>
+          <strong><span>02</span> WRAP THE LETTER.</strong>
+          <strong><span>03</span> POST IT.</strong>
+          <p>Don't pitch us an app. Tell us what shouldn't still be this difficult.</p>
         </div>
       </div>
 
-      <div class="postbox-workspace" data-signal-stage>
-        <div class="mail-instructions" aria-live="polite">
-          <span class="step is-active" data-step="1"><b>01</b> WRITE YOUR SIGNAL</span>
-          <span class="step" data-step="2"><b>02</b> WRAP THE LETTER</span>
-          <span class="step" data-step="3"><b>03</b> POST IT</span>
-        </div>
-
-        <form class="letter" name="boomley-signal" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-signal-form>
+      <div class="hub-signal__workspace">
+        <form class="hub-letter" name="boomley-signal" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-hub-signal-form>
           <input type="hidden" name="form-name" value="boomley-signal" />
           <p class="honeypot"><label>Do not fill this out: <input name="bot-field" /></label></p>
-          <div class="letter-top"><span>BOOMLEY SIGNAL FORM / 001</span><span>THE BOX IS OPEN</span></div>
+          <div class="hub-letter__meta"><span>boomley / signal form</span><span>001</span></div>
           <h3>WHAT'S BOTHERING YOU?</h3>
-          <p class="letter-prompt">Write the problem, not the product you think we should build.</p>
+          <p>Write the problem. We'll worry about the product.</p>
+
           <label>THE PROBLEM
             <textarea name="friction" rows="4" required placeholder="It shouldn't still be this difficult to..."></textarea>
           </label>
-          <label>WHO DEALS WITH THIS?
+          <label>WHO DEALS WITH IT?
             <input name="who" type="text" required placeholder="People who..." />
           </label>
-          <label>WHAT WOULD CHANGE IF IT WAS FIXED?
+          <label>WHAT CHANGES IF IT'S FIXED?
             <textarea name="change" rows="2" required placeholder="It would make it easier to..."></textarea>
           </label>
           <label>YOUR EMAIL
             <input name="email" type="email" required autocomplete="email" placeholder="you@example.com" />
           </label>
-          <div class="letter-actions">
-            <button class="button button--blue" type="button" data-wrap-button>WRAP IT →</button>
-            <button class="button button--red" type="submit" data-post-button disabled>POST IT →</button>
+
+          <div class="hub-letter__actions">
+            <button type="button" data-hub-wrap>WRAP IT →</button>
+            <button type="submit" data-hub-post disabled>POST IT →</button>
           </div>
-          <p class="form-status" data-signal-status aria-live="polite"></p>
+          <p class="form-status" data-hub-signal-status aria-live="polite"></p>
         </form>
 
-        <div class="envelope-stage" aria-hidden="true">
-          <div class="blue-envelope" data-blue-envelope>
-            <div class="blue-envelope__paper">SIGNAL / 001</div>
-            <div class="blue-envelope__flap"></div>
-            <span>TO / BOOMLEY</span>
+        <div class="hub-posting">
+          <div class="hub-envelope" data-hub-envelope aria-hidden="true">
+            <div class="hub-envelope__paper">SIGNAL / READY</div>
+            <div class="hub-envelope__flap"></div>
+            <span>TO / boomley</span>
           </div>
-        </div>
 
-        <div class="pillar-wrap">
-          <div class="pillar-box" data-pillar-box aria-label="Boomley Signal Box">
-            <div class="pillar-cap"></div>
-            <div class="pillar-neck"></div>
-            <div class="pillar-body">
-              <div class="pillar-highlight"></div>
-              <div class="pillar-slot"><span>POST SIGNAL</span></div>
-              <div class="pillar-plaque"><b>BOOMLEY</b><small>SIGNAL BOX / 001</small></div>
-              <div class="pillar-door"><span>THE BOX IS OPEN</span></div>
+          <div class="hub-postbox" data-hub-postbox aria-label="boomley Signal Box">
+            <div class="hub-postbox__top"></div>
+            <div class="hub-postbox__body">
+              <div class="hub-postbox__badge">b</div>
+              <div class="hub-postbox__slot"><span>POST SIGNAL</span></div>
+              <div class="hub-postbox__plaque"><b>boomley</b><small>SIGNAL RECEIVER / 001</small></div>
+              <div class="hub-postbox__door"><span>THE BOX IS OPEN</span></div>
             </div>
-            <div class="pillar-base"></div>
+            <div class="hub-postbox__base"></div>
           </div>
-          <p class="pillar-caption">A British pillar-box-inspired Boomley object. No pitch deck required. Just the problem.</p>
         </div>
       </div>
     </section>
 
-    <section class="section section--ink finale">
-      <pre class="final-ascii" aria-hidden="true">B O O M L E Y    /    S I G N A L    R E C E I V E R
-01010011 01001001 01000111 01001110 01000001 01001100
-PEOPLE  ×  PROBLEMS  ×  PRODUCTS
-01000010 01010101 01001001 01001100 01000100
-THE BOX IS OPEN.</pre>
-      <div class="final-copy">
-        <span>END OF TRANSMISSION?</span>
-        <h2 class="display-serif" data-reveal>Not even<br /><em>close.</em></h2>
-        <p data-reveal>Declutter is the first thing we're building. It won't be the last.</p>
+    <section class="hub-ending hub-dark">
+      <canvas class="hub-ending__field" data-hub-ending-field aria-hidden="true"></canvas>
+      <div class="hub-ending__copy">
+        <span>SIGNALS EXIST EVERYWHERE.</span>
+        <h2 data-hub-reveal>THIS IS ONLY<br /><em>THE BEGINNING.</em></h2>
+        <p data-hub-reveal>We're listening.</p>
+        <div class="hub-ending__brand" data-hub-reveal>
+          <svg class="hub-symbol hub-symbol--large" viewBox="0 0 32 32" aria-hidden="true">
+            <circle cx="16" cy="16" r="13"></circle>
+            <path d="M16 3v26M3 16h26"></path>
+            <path d="M16 16 29 3"></path>
+          </svg>
+          <b>boomley</b>
+        </div>
       </div>
-      <footer class="footer">
-        <span>BOOMLEY® © 2026</span>
-        <span>PRODUCT × ENGINEERING</span>
-        <a href="#postbox">SEND SOMETHING ↑</a>
-      </footer>
     </section>
   </main>
 
+  <footer class="hub-footer">
+    <div class="hub-footer__brand">
+      <b>boomley</b>
+      <p>Problems become signals. Signals become things.</p>
+    </div>
+    <div>
+      <span>EXPLORE</span>
+      <a href="#about">About</a>
+      <a href="#process">Process</a>
+      <a href="#history">History</a>
+      <a href="#builds">Builds</a>
+    </div>
+    <div>
+      <span>PARTICIPATE</span>
+      <a href="#community">Community</a>
+      <a href="#signal-box">Send a Signal</a>
+      <a href="mailto:hello@boomley.com">Contact</a>
+    </div>
+    <div>
+      <span>LEGAL</span>
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <small>© 2026 boomley</small>
+    </div>
+  </footer>
+
   <script>
-    import '../scripts/home.ts';
+    import '../scripts/hub.ts';
   </script>
 </BaseLayout>

@@ -1,0 +1,158 @@
+:root{
+  --hub-logo:'Caer','Times New Roman',serif;
+  --hub-display:'Bootzy TM','Poppins',ui-sans-serif,system-ui,sans-serif;
+  --hub-signal:#f2c94c;
+}
+
+/* Identity */
+.hub-brand span,
+.hub-story__resolution h3,
+.hub-ending__brand b,
+.hub-footer__brand b,
+.hub-loader__mark{
+  font-family:var(--hub-logo);
+  font-weight:400;
+  letter-spacing:-.055em;
+}
+
+.hub-hero__copy h1,
+.hub-story__beat h2,
+.hub-process__intro h2,
+.hub-history__intro h2,
+.hub-people__intro h2,
+.hub-builds__intro h2,
+.hub-community__headline h2,
+.hub-signal__intro h2,
+.hub-ending__copy h2,
+.hub-person__overlay strong,
+.hub-evidence--paper b,
+.hub-evidence--screen strong,
+.hub-evidence--note b,
+.hub-letter h3{
+  font-family:var(--hub-display);
+  font-weight:500;
+  letter-spacing:-.055em;
+}
+
+/* Keep the copy, reduce the shout. */
+.hub-hero__copy h1{line-height:.84}
+.hub-story__beat h2,
+.hub-process__intro h2,
+.hub-history__intro h2,
+.hub-people__intro h2,
+.hub-signal__intro h2,
+.hub-ending__copy h2{line-height:.82}
+.hub-process__rail h3,
+.hub-history__timeline h3{
+  font-weight:600;
+}
+
+/* Founder assets: never stretch, never crop unnaturally. */
+.hub-founder-shot,
+.hub-person__photo{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  object-position:center;
+}
+
+/* Equal founder hierarchy in the hero. */
+.hub-hero__portrait{
+  width:min(26vw,390px);
+  aspect-ratio:1 / 1;
+  transition:
+    right 1.05s cubic-bezier(.22,.8,.22,1),
+    left 1.05s cubic-bezier(.22,.8,.22,1),
+    top 1.05s cubic-bezier(.22,.8,.22,1),
+    bottom 1.05s cubic-bezier(.22,.8,.22,1),
+    transform 1.05s cubic-bezier(.22,.8,.22,1);
+}
+.hub-hero__portrait--one{
+  right:30%;
+  top:18%;
+  bottom:auto;
+  transform:rotate(-2deg);
+}
+.hub-hero__portrait--two{
+  right:3%;
+  top:18%;
+  bottom:auto;
+  transform:rotate(2deg);
+}
+.hub-hero__art.is-swapped .hub-hero__portrait--one{
+  right:3%;
+  transform:rotate(2deg);
+}
+.hub-hero__art.is-swapped .hub-hero__portrait--two{
+  right:30%;
+  transform:rotate(-2deg);
+}
+
+/* Equal founder hierarchy in People. */
+.hub-people__grid{
+  position:relative;
+  min-height:auto;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:clamp(26px,4vw,64px);
+  align-items:start;
+}
+.hub-person,
+.hub-person--offset{
+  position:relative;
+  inset:auto;
+  width:100%;
+  max-width:none;
+  transition:transform .9s cubic-bezier(.22,.8,.22,1);
+}
+.hub-person__media{
+  aspect-ratio:1 / 1;
+}
+.hub-people__grid.is-swapped .hub-person:first-child{order:2}
+.hub-people__grid.is-swapped .hub-person:last-child{order:1}
+
+/* Slightly more grown-up navigation and UI type. */
+.hub-nav__links a,
+.hub-nav__meta,
+.hub-eyebrow,
+.hub-section-label,
+.hub-hero__bottom,
+.hub-history__timeline span,
+.hub-builds__status span,
+.hub-builds__status b{
+  font-weight:400;
+}
+
+/* Signal color: only a small, purposeful cue. */
+.hub-live-dot:before{background:var(--hub-signal)}
+.hub-story__resolution{background:var(--hub-blue)}
+
+@media (max-width:1100px){
+  .hub-hero__portrait{
+    width:min(39vw,390px);
+    top:auto;
+    bottom:12%;
+  }
+  .hub-hero__portrait--one{right:50%}
+  .hub-hero__portrait--two{right:5%}
+  .hub-hero__art.is-swapped .hub-hero__portrait--one{right:5%}
+  .hub-hero__art.is-swapped .hub-hero__portrait--two{right:50%}
+}
+
+@media (max-width:760px){
+  .hub-hero__portrait{
+    width:44vw;
+    bottom:14%;
+  }
+  .hub-hero__portrait--one{right:52%}
+  .hub-hero__portrait--two{right:2%}
+  .hub-hero__art.is-swapped .hub-hero__portrait--one{right:2%}
+  .hub-hero__art.is-swapped .hub-hero__portrait--two{right:52%}
+  .hub-people__grid{
+    grid-template-columns:1fr;
+    gap:56px;
+  }
+  .hub-people__grid.is-swapped .hub-person:first-child,
+  .hub-people__grid.is-swapped .hub-person:last-child{order:initial}
+}
