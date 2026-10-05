@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import '../styles/global.css';
 import '../styles/hub.css';
+import '../styles/brand-refresh.css';
 ---
 <BaseLayout title="boomley — problems become signals" description="boomley is a two-person product company and growing community for turning meaningful problems into products worth building.">
   <div class="hub-loader" data-loader aria-hidden="true">
@@ -56,13 +57,13 @@ import '../styles/hub.css';
       </div>
 
       <div class="hub-hero__art" data-hub-hero-art>
-        <div class="hub-hero__portrait hub-hero__portrait--one">
-          <div class="sprite hub-founder-shot sprite-chidi" role="img" aria-label="Product founder portrait"></div>
-          <span>PRODUCT / 01</span>
+        <div class="hub-hero__portrait hub-hero__portrait--one" data-founder-card="chidi">
+          <img class="hub-founder-shot" src="/media/founders/chidi.webp" alt="Chidi, Product" width="2048" height="2048" />
+          <span>PRODUCT</span>
         </div>
-        <div class="hub-hero__portrait hub-hero__portrait--two">
-          <div class="sprite hub-founder-shot sprite-michael" role="img" aria-label="Engineering founder portrait"></div>
-          <span>ENGINEERING / 02</span>
+        <div class="hub-hero__portrait hub-hero__portrait--two" data-founder-card="michael">
+          <img class="hub-founder-shot" src="/media/founders/michael.webp" alt="Michael, Engineering" width="2048" height="2048" />
+          <span>ENGINEERING</span>
         </div>
         <div class="hub-hero__stamp">TWO PEOPLE.<br />FOR NOW.</div>
         <div class="hub-hero__signal">SIGNAL<br />RECEIVER</div>
@@ -193,7 +194,7 @@ import '../styles/hub.css';
       <div class="hub-people__grid">
         <article class="hub-person" tabindex="0" data-hub-person data-founder="chidi">
           <div class="hub-person__media">
-            <div class="sprite hub-person__photo sprite-chidi" role="img" aria-label="Chidi portrait"></div>
+            <img class="hub-person__photo" src="/media/founders/chidi.webp" alt="Chidi" width="2048" height="2048" />
             <canvas class="hub-person__ascii" data-hub-ascii data-founder="chidi" aria-hidden="true"></canvas>
             <div class="hub-person__overlay">
               <span>01 / PRODUCT</span>
@@ -207,9 +208,9 @@ import '../styles/hub.css';
           </div>
         </article>
 
-        <article class="hub-person hub-person--offset" tabindex="0" data-hub-person data-founder="michael">
+        <article class="hub-person" tabindex="0" data-hub-person data-founder="michael">
           <div class="hub-person__media">
-            <div class="sprite hub-person__photo sprite-michael" role="img" aria-label="Michael portrait"></div>
+            <img class="hub-person__photo" src="/media/founders/michael.webp" alt="Michael" width="2048" height="2048" />
             <canvas class="hub-person__ascii" data-hub-ascii data-founder="michael" aria-hidden="true"></canvas>
             <div class="hub-person__overlay">
               <span>02 / ENGINEERING</span>
