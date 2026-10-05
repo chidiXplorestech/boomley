@@ -12,7 +12,7 @@
   --line-light:rgba(255,255,255,.17);
   --body:'Poppins',system-ui,sans-serif;
   --display:'Bootzy TM','Bricolage Grotesque','Arial Rounded MT Bold',system-ui,sans-serif;
-  --logo:'Caer','Cormorant Garamond',Georgia,serif;
+  --logo:'Caer','Bricolage Grotesque','Poppins',ui-sans-serif,system-ui,sans-serif;
   --mono:'IBM Plex Mono',ui-monospace,monospace;
   --pad:clamp(18px,3.2vw,54px);
   --section:clamp(92px,10vw,168px);
@@ -61,7 +61,7 @@ img{display:block;max-width:100%}
 .loader-logo svg{width:54px;height:54px;fill:var(--white)}
 .loader-logo .signal-dash{fill:var(--signal)}
 .loader-logo span{
-  font:400 clamp(80px,14vw,210px)/.8 var(--logo);
+  font:500 clamp(80px,14vw,210px)/.8 var(--logo);
   letter-spacing:-.06em;
 }
 .loader-welcome{
@@ -80,7 +80,7 @@ img{display:block;max-width:100%}
 .brand{display:flex;align-items:center;gap:9px}
 .brand svg{width:24px;height:24px;fill:currentColor}
 .brand .signal-dash{fill:var(--signal)}
-.brand span{font:400 19px/1 var(--logo);letter-spacing:-.055em}
+.brand span{font:500 19px/1 var(--logo);letter-spacing:-.07em}
 .site-nav nav{justify-self:center;display:flex;gap:clamp(14px,2vw,28px)}
 .site-nav nav a,.signal-cta{
   font:500 8px/1 var(--mono);letter-spacing:.075em;text-transform:uppercase;opacity:.7
@@ -466,7 +466,7 @@ img{display:block;max-width:100%}
 .postbox-slot{position:absolute;z-index:3;top:66px;left:11%;right:11%;height:40px;display:flex;align-items:center;justify-content:center;border:4px solid #5a080e;border-radius:7px;background:#0d0d0f;box-shadow:inset 0 10px 14px rgba(0,0,0,.75)}
 .postbox-slot span{font:500 7px/1 var(--mono);color:#fff}
 .postbox-plaque{position:absolute;z-index:3;top:132px;left:18%;right:18%;padding:13px 10px;border:2px solid #6f0f16;background:linear-gradient(180deg,#f3eee2,#dcd5c6);text-align:center}
-.postbox-plaque b{display:block;font:400 21px/1 var(--logo)}
+.postbox-plaque b{display:block;font:500 21px/1 var(--logo)}
 .postbox-plaque small{font:500 7px/1 var(--mono)}
 .postbox-door{position:absolute;z-index:3;left:18%;right:18%;bottom:44px;height:190px;padding:12px;display:flex;align-items:flex-end;justify-content:center;border:2px solid #761018;border-radius:10px}
 .postbox-door:before{content:"";position:absolute;right:14px;top:50%;width:10px;height:10px;border-radius:50%;background:#3b080c;box-shadow:0 0 0 3px #9e1019}
@@ -485,13 +485,13 @@ img{display:block;max-width:100%}
 .ending-copy p{margin:0;font:400 clamp(28px,4vw,58px)/1 var(--body);color:rgba(255,255,255,.64)}
 .ending-brand{display:flex;align-items:center;gap:18px;margin-top:72px}
 .ending-brand svg{width:46px;height:46px;fill:#fff}.ending-brand .signal-dash{fill:var(--signal)}
-.ending-brand b{font:400 clamp(64px,9vw,138px)/.8 var(--logo);letter-spacing:-.055em}
+.ending-brand b{font:500 clamp(64px,9vw,138px)/.8 var(--logo);letter-spacing:-.055em}
 
 .footer{
   display:grid;grid-template-columns:2fr repeat(3,1fr);gap:40px;
   padding:70px var(--pad) 36px;background:var(--paper);border-top:1px solid var(--ink)
 }
-.footer-brand b{display:block;font:400 clamp(52px,6vw,90px)/.8 var(--logo);letter-spacing:-.055em}
+.footer-brand b{display:block;font:500 clamp(52px,6vw,90px)/.8 var(--logo);letter-spacing:-.055em}
 .footer-brand p{max-width:360px;font:400 18px/1.35 var(--body)}
 .footer>div:not(.footer-brand){display:flex;flex-direction:column;gap:9px}
 .footer>div>span{margin-bottom:10px;font:500 8px/1 var(--mono);letter-spacing:.08em;opacity:.55}
