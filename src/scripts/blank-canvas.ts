@@ -473,7 +473,7 @@ function initEndingField() {
 }
 
 function initForms() {
-  const waitlist = document.querySelector<HTMLFormElement>('form[name="product-1000001"]');
+  const waitlist = document.querySelector<HTMLFormElement>('form[name="product-0001"]');
   const waitStatus = waitlist?.querySelector<HTMLElement>('[data-product-status]');
 
   if (waitlist && waitStatus) {
