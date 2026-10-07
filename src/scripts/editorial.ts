@@ -1,10 +1,44 @@
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-const intro = document.querySelector<HTMLElement>('.intro');
+const intro = document.querySelector<HTMLDialogElement>('.intro');
 let visited = false;
-try { visited = sessionStorage.getItem('boomley-intro') === 'seen'; } catch {}
-if (intro && !reduced.matches && !visited) {
-  intro.classList.add('intro--active');
-  window.setTimeout(() => { intro.classList.remove('intro--active'); try { sessionStorage.setItem('boomley-intro','seen'); } catch {} }, 1500);
+try { visited = sessionStorage.getItem('boomley-story') === 'seen'; } catch {}
+if (intro && !reduced.matches && !visited && typeof intro.showModal === 'function') {
+  const story = intro.querySelector<HTMLElement>('.intro__story');
+  const ending = intro.querySelector<HTMLElement>('.intro__ending');
+  const timers: number[] = [];
+  const previousOverflow = document.body.style.overflow;
+  const finish = () => intro.close();
+  intro.addEventListener('close', () => {
+    timers.forEach(window.clearTimeout);
+    document.body.style.overflow = previousOverflow;
+    try { sessionStorage.setItem('boomley-story', 'seen'); } catch {}
+    const main = document.querySelector<HTMLElement>('#main');
+    main?.setAttribute('tabindex', '-1');
+    main?.focus({ preventScroll: true });
+  }, { once: true });
+  intro.querySelector('.intro__skip')?.addEventListener('click', finish);
+  intro.querySelector('.intro__enter')?.addEventListener('click', finish);
+  reduced.addEventListener('change', () => { if (reduced.matches && intro.open) finish(); });
+  intro.showModal();
+  document.body.style.overflow = 'hidden';
+  const beats = ['More noise. Less room to think.', 'Every problem holds a signal.'];
+  beats.forEach((line, index) => {
+    timers.push(window.setTimeout(() => {
+      if (!story) return;
+      story.textContent = line;
+      story.getAnimations().forEach(animation => animation.cancel());
+      story.animate(
+        [{ opacity: 0, transform: 'translateY(16px)', filter: 'blur(5px)' },
+         { opacity: 1, transform: 'translateY(0)', filter: 'blur(0)' }],
+        { duration: 650, easing: 'ease-out', fill: 'both' }
+      );
+    }, (index + 1) * 2200));
+  });
+  timers.push(window.setTimeout(() => {
+    if (story) story.hidden = true;
+    if (ending) ending.hidden = false;
+    intro.classList.add('intro--ready');
+  }, 6600));
 }
 const menu = document.querySelector<HTMLButtonElement>('.menu-toggle');
 const mobileNav = document.querySelector<HTMLElement>('#mobile-nav');

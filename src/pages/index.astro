@@ -9,7 +9,19 @@ const steps = [
 ---
 <BaseLayout>
   <a class="skip-link" href="#main">Skip to content</a>
-  <div class="intro" aria-hidden="true"><span class="intro__caption">A LITTLE LESS NOISE.</span><span class="intro__word">boomley<span class="brand-dot">.</span></span><span class="intro__line"></span></div>
+  <dialog class="intro" aria-label="Welcome to Boomley">
+    <button class="intro__skip" type="button" autofocus>Skip intro <span aria-hidden="true">↗</span></button>
+    <div class="intro__stage">
+      <p class="intro__caption">FROM NOISE TO POSSIBILITY</p>
+      <p class="intro__story" aria-live="polite" aria-atomic="true">A world that never stops.</p>
+      <div class="intro__ending" hidden>
+        <p class="intro__word">boomley<span class="brand-dot">.</span></p>
+        <p class="intro__promise">Less noise. More possibility.</p>
+        <button class="intro__enter" type="button">Explore what’s possible <span aria-hidden="true">↗</span></button>
+      </div>
+    </div>
+    <span class="intro__line" aria-hidden="true"></span>
+  </dialog>
   <header class="header">
     <a href="#top" class="wordmark" aria-label="Boomley home">boomley<span class="brand-dot">.</span></a>
     <nav class="desktop-nav" aria-label="Primary"><a href="#about">The company</a><a href="#builds">In the works <span>01</span></a><a href="#people">The people</a></nav>
