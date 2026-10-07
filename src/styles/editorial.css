@@ -4,19 +4,30 @@
 @media(max-width:480px){.hero__aside{display:block}.hero__aside p{max-width:310px}.hero__aside .text-link{margin-top:10px}.hero-film{height:420px}.film-bottom p{font-size:39px}.film-note{max-width:100px;font-size:8px}.film-top>span{font-size:8px}.hero-caption>span{max-width:170px}.section-label span:last-child{max-width:135px}.principle>.eyebrow{display:none}.principle p{font-size:24px}.people-heading{flex-direction:column;gap:20px}.people-grid{grid-template-columns:1fr;gap:35px}.person-michael{padding-top:0}.person-meta{flex-direction:row;align-items:center}.portrait-caption{font-size:10px}.person-meta>span{font-size:10px}.person>p{max-width:none}.footer-top{flex-direction:column;align-items:flex-start}.footer-top p{font-size:32px}.process-step h3{font-size:18px}.process-step summary{gap:12px}.process-step>p{padding-left:26px}.community-main h2,.signal-copy h2{font-size:58px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}.intro{display:none}}
 
-/* Paired team motion: equal travel, half a cycle apart. */
+/* Shared baseline lets the founders exchange high and low positions. */
 @media (prefers-reduced-motion: no-preference) {
+  .people-grid {
+    --team-travel: 52px;
+    padding-block: var(--team-travel);
+  }
   .people-grid .person {
     animation: team-float 8s ease-in-out infinite;
   }
   .people-grid .person-michael {
+    padding-top: 0;
     animation-delay: -4s;
   }
   .motion-paused .people-grid .person {
     animation-play-state: paused;
   }
 }
+@media (max-width: 800px) and (prefers-reduced-motion: no-preference) {
+  .people-grid { --team-travel: 32px; }
+}
+@media (max-width: 480px) and (prefers-reduced-motion: no-preference) {
+  .people-grid { --team-travel: 20px; gap: 75px; }
+}
 @keyframes team-float {
-  0%, 100% { translate: 0 12px; }
-  50% { translate: 0 -12px; }
+  0%, 100% { translate: 0 var(--team-travel); }
+  50% { translate: 0 calc(-1 * var(--team-travel)); }
 }
