@@ -79,3 +79,73 @@ document.querySelectorAll<HTMLFormElement>('[data-async-form]').forEach(form=>{
     finally{clearTimeout(timeout);sending=false;button.disabled=false;form.removeAttribute('aria-busy');}
   });
 });
+
+
+// A letter is only "posted" after the server accepts its contents.
+const letter = document.querySelector<HTMLFormElement>('[data-signal-mail]');
+if (letter) {
+  const fields = letter.querySelector<HTMLFieldSetElement>('fieldset')!;
+  const status = document.querySelector<HTMLElement>('.mail-status')!;
+  const receipt = document.querySelector<HTMLElement>('.mail-receipt')!;
+  const envelope = document.querySelector<HTMLElement>('.mail-envelope')!;
+  const slot = document.querySelector<HTMLElement>('.postbox-slot')!;
+  const flap = envelope.querySelector<HTMLElement>('.envelope-flap')!;
+  const seal = envelope.querySelector<HTMLElement>('.envelope-seal')!;
+  let sending = false;
+  const animate = async (element: HTMLElement, frames: Keyframe[], duration: number) => {
+    if (reduced.matches || manuallyPaused) return;
+    try { await element.animate(frames, { duration, easing: 'cubic-bezier(.22,.7,.2,1)', fill: 'forwards' }).finished; } catch {}
+  };
+  const cleanAnimations = () => [letter,envelope,flap,seal].forEach(el => el.getAnimations().forEach(a => a.cancel()));
+  document.querySelector('.mail-again')?.addEventListener('click', () => {
+    receipt.hidden = true; letter.hidden = false; status.textContent = '';
+    letter.querySelector<HTMLInputElement>('#mail-subject')?.focus();
+  });
+  letter.addEventListener('submit', async event => {
+    event.preventDefault();
+    if (sending || !letter.reportValidity()) return;
+    sending = true;
+    const data = new URLSearchParams();
+    new FormData(letter).forEach((value,key) => data.append(key,String(value)));
+    fields.disabled = true; letter.setAttribute('aria-busy','true');
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(),15000);
+    // Attach the rejection handler immediately while the folding animation runs.
+    const delivery = fetch('/', { method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:data.toString(),signal:controller.signal })
+      .then(response => response.ok && !response.url.includes('/login')).catch(() => false);
+    try {
+      status.textContent = 'Folding your letter…';
+      const source = letter.getBoundingClientRect();
+      envelope.style.left = (source.left + source.width / 2 - 90) + 'px';
+      envelope.style.top = Math.max(30,Math.min(window.innerHeight - 150,source.top + source.height / 2 - 58)) + 'px';
+      await animate(letter,[{transform:'rotate(-1deg) scaleY(1)',opacity:1},{transform:'rotate(-1deg) scaleY(.15)',opacity:0}],650);
+      envelope.hidden = false;
+      await animate(flap,[{transform:'rotateX(165deg)'},{transform:'rotateX(0deg)'}],550);
+      status.textContent = 'Sealing your signal…';
+      await animate(seal,[{opacity:0,transform:'scale(1.6)'},{opacity:1,transform:'scale(1)'}],300);
+      status.textContent = 'Waiting for delivery confirmation…';
+      if (!await delivery) throw new Error('Delivery unconfirmed');
+      status.textContent = 'Posting your signal…';
+      // On small screens bring the real slot into view before the flight.
+      const box = slot.getBoundingClientRect();
+      if (box.top < 30 || box.bottom > window.innerHeight - 30) slot.scrollIntoView({behavior:'instant',block:'center'});
+      const target = slot.getBoundingClientRect(), from = envelope.getBoundingClientRect();
+      const dx = target.left + target.width/2 - (from.left + from.width/2);
+      const dy = target.top + target.height/2 - (from.top + from.height/2);
+      await animate(envelope,[
+        {transform:'translate(0,0) rotate(0deg) scale(1)',opacity:1},
+        {transform:'translate('+dx*.6+'px,'+(dy-50)+'px) rotate(-10deg) scale(.7)',opacity:1,offset:.65},
+        {transform:'translate('+dx+'px,'+dy+'px) rotate(3deg) scale(.45,.06)',opacity:0}
+      ],1000);
+      letter.reset(); letter.hidden = true; receipt.hidden = false;
+      status.textContent = 'Posted. Your letter has reached the Boomley inbox.';
+      receipt.focus({preventScroll:true});
+      receipt.scrollIntoView({behavior:'instant',block:'center'});
+    } catch {
+      status.textContent = 'We couldn’t confirm delivery. Your letter is still here. Please try again, or email hello@boomley.com.';
+    } finally {
+      clearTimeout(timeout); envelope.hidden = true; cleanAnimations();
+      fields.disabled = false; sending = false; letter.removeAttribute('aria-busy');
+    }
+  });
+}

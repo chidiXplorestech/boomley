@@ -113,3 +113,60 @@ footer{background:#101012;border-top:1px solid var(--line)}
 @media(prefers-reduced-motion:reduce){.ascii-field{animation:none}}
 
 .build-copy h2 em{color:#8aa5ff}.build-progress{color:#aaaab5}.build-progress b{color:#f5f5f0}
+
+/* The Signal Post: a tactile letter and a sculpted red destination. */
+.hero-film>.hero-scene-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.78;z-index:-2}
+.hero-film .ascii-field--hero{left:76%;opacity:.3;mix-blend-mode:screen}
+.post-office{background:radial-gradient(ellipse at 85% 55%,#331b1a55,transparent 50%),#101011;overflow:hidden}
+.post-heading{display:flex;justify-content:space-between;align-items:end;gap:50px;margin:60px 0}
+.post-heading .eyebrow{display:block;color:#b5a8a0;margin-bottom:22px}
+.post-heading h2{font-size:clamp(46px,5.8vw,92px)}
+.post-heading>p{color:#aaa8a5;font-size:16px;line-height:1.7;max-width:320px}
+.postal-layout{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr);gap:7vw;align-items:center}
+.letter-desk{position:relative;perspective:1200px;padding:14px 0}
+.signal-letter{position:relative;background:#eee9db;color:#242423;padding:clamp(24px,3vw,48px);box-shadow:0 24px 60px #0006,6px 7px 0 #c9c3b3;transform:rotate(-1deg);transform-origin:center; border:1px solid #fff6}
+.signal-letter:before{content:'';position:absolute;inset:0;pointer-events:none;opacity:.08;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23000' filter='url(%23n)' opacity='.5' d='M0 0h180v180H0z'/%3E%3C/svg%3E")}
+.letter-fields{border:0;padding:0;margin:0;min-width:0;position:relative}
+.letter-address{display:flex;justify-content:space-between;gap:15px;align-items:start;margin-bottom:30px}
+.letter-kicker{font:10px monospace;letter-spacing:.16em;color:#747064}
+.letter-address p{font-size:15px;line-height:1.6;margin-top:10px}
+.letter-stamp{width:88px;height:102px;border:2px dashed #9f493e;outline:5px solid #ded7c5;color:#9e362b;display:flex;flex-direction:column;justify-content:space-evenly;align-items:center;transform:rotate(8deg);background:#e2ddcf}
+.letter-stamp span{font:8px monospace;letter-spacing:.09em}.letter-stamp b{font-size:39px;font-weight:400;line-height:1}
+.letter-fields>label,.letter-signoff label{display:block;font-size:13px;margin:18px 0 8px}
+.letter-fields>input,.letter-fields>textarea,.letter-signoff input{display:block;width:100%;border:0;border-bottom:1px solid #a8a292;border-radius:0;background:transparent;color:#242423;padding:8px 0 12px;font-size:16px;line-height:1.65}
+.letter-fields>textarea{resize:vertical;min-height:180px;background:repeating-linear-gradient(transparent,transparent 31px,#b5ad982f 32px);line-height:32px}
+.letter-fields input::placeholder,.letter-fields textarea::placeholder{color:#797365;opacity:1}
+.letter-signoff label span{color:#797365;font-size:11px}
+.letter-bottom{display:flex;gap:18px;align-items:center;justify-content:space-between;margin-top:28px}
+.letter-bottom p{font-size:10px;line-height:1.6;color:#736d61;max-width:240px}
+.mail-button{display:flex;align-items:center;gap:25px;border:0;background:#a42e25;color:#fff8ec;font-size:13px;padding:16px 20px;white-space:nowrap;border-radius:2px;box-shadow:0 3px 0 #6c1f19}
+.mail-button:hover{background:#ba392e}
+.mail-status{font-size:13px;line-height:1.6;color:#ded4c8;min-height:24px;margin:22px 5px 0}
+.postbox-scene{position:relative;display:flex;flex-direction:column;align-items:center;padding:35px 0 0;isolation:isolate}
+.postbox-coordinate{font:10px monospace;letter-spacing:.13em;color:#8d817b;margin-bottom:50px}
+.postbox{position:relative;width:clamp(210px,22vw,310px);filter:drop-shadow(15px 25px 15px #0005);transform:rotate(3deg)}
+.postbox-cap{position:relative;height:48px;margin:0 -8px;background:linear-gradient(105deg,#d35342,#a52a21 55%,#5d1512);border-radius:70% 70% 12% 12% / 85% 85% 15% 15%;box-shadow:inset 0 3px 2px #ffb1a45c,0 5px 0 #54130e;z-index:2}
+.postbox-body{position:relative;min-height:355px;background:linear-gradient(95deg,#a12820,#cf4535 18%,#ae3025 55%,#641610);border-radius:4px 4px 13px 13px;border:1px solid #8f2a23;box-shadow:inset 8px 0 18px #ee827136,inset -15px 0 24px #2700003d;padding:15px 28px 22px;text-align:center}
+.postbox-brand{font-size:52px;letter-spacing:-.12em;color:#e8977e;text-shadow:0 2px #601c18;margin:0 0 10px;font-weight:550}.postbox-brand span{color:#efad89}
+.postbox-slot{height:18px;background:#180c0b;border-radius:3px;border-bottom:3px solid #e26752;box-shadow:inset 0 5px 3px #000,0 -4px 0 #78211b;margin:0 -10px 26px}
+.postbox-label{background:#e6dfcc;color:#3d3830;border:6px solid #88221b;outline:1px solid #e2756044;padding:13px 8px;box-shadow:0 3px 5px #59160f;transform:rotate(-1deg)}
+.postbox-label>span{font:9px monospace;letter-spacing:.2em;display:block;border-bottom:1px solid #b3aa97;padding-bottom:9px}
+.postbox-label strong{display:block;font-family:var(--serif);font-size:27px;line-height:1.05;font-weight:400;margin:13px 0}
+.postbox-label small{font:7px/1.6 monospace;letter-spacing:.05em}
+.postbox-lock{width:11px;height:15px;background:#292522;border:2px solid #d07953;border-radius:6px;margin:20px auto 10px}
+.postbox-number{font:9px monospace;color:#e3947c;letter-spacing:.18em}
+.postbox-base{height:23px;margin:0 -9px;background:linear-gradient(90deg,#591714,#86231b,#3c110f);border-radius:3px 3px 9px 9px;box-shadow:inset 0 2px #d45b424d}
+.postbox-shadow{width:90%;height:40px;background:#0009;filter:blur(16px);border-radius:50%;margin-top:3px;z-index:-1;transform:rotate(-6deg)}
+.postbox-caption{font-size:14px;line-height:1.6;text-align:center;color:#b4aaa0;margin-top:24px}.postbox-caption em{font-size:23px;color:#e4dcd0}
+.mail-envelope{position:fixed;width:180px;height:116px;z-index:200;pointer-events:none;background:#e9dfc8;border:1px solid #c7baa1;box-shadow:0 12px 35px #0004;perspective:500px}
+.mail-envelope[hidden],.mail-receipt[hidden]{display:none}
+.mail-envelope:before{content:'';position:absolute;inset:0;background:linear-gradient(33deg,transparent 49%,#c7baa1 50%,transparent 51%),linear-gradient(-33deg,transparent 49%,#c7baa1 50%,transparent 51%)}
+.envelope-address{position:absolute;bottom:16px;left:15px;font:8px/1.7 monospace;color:#82725c}
+.envelope-flap{position:absolute;inset:0 0 auto;height:66px;background:#f4edda;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transform:rotateX(165deg)}
+.envelope-seal{position:absolute;left:calc(50% - 15px);top:48px;border-radius:50%;width:30px;height:30px;display:grid;place-items:center;background:#a52e24;color:#efd5ae;font:17px var(--serif);box-shadow:inset 0 0 0 3px #7c241b;opacity:0}
+.mail-receipt{min-height:500px;background:#eee9db;color:#242423;padding:55px 30px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;box-shadow:6px 7px 0 #c9c3b3;transform:rotate(-1deg)}
+.receipt-mark{display:grid;place-items:center;width:64px;height:64px;border:2px solid #9e362b;border-radius:50%;color:#9e362b;font-size:32px;transform:rotate(-12deg);margin-bottom:28px}
+.mail-receipt .eyebrow{font-size:9px;color:#82735e}.mail-receipt h3{font-size:55px;font-weight:450;letter-spacing:-.05em;line-height:1;margin:25px 0}.mail-receipt p{font-size:14px;line-height:1.7;color:#736d61}
+.mail-again{border:0;border-bottom:1px solid #9e362b;background:none;color:#9e362b;font-size:13px;margin-top:30px;padding:10px 0}
+@media(max-width:900px){.postal-layout{gap:40px;grid-template-columns:minmax(0,1fr) 250px}.letter-bottom{align-items:start;flex-direction:column}.post-heading{align-items:start;flex-direction:column;gap:25px}.postbox-body{padding-inline:22px}}
+@media(max-width:680px){.postal-layout{grid-template-columns:1fr}.post-heading{margin:40px 0}.postbox-scene{grid-row:1;padding-top:0}.postbox-coordinate{margin-bottom:25px}.postbox{width:175px}.postbox-cap{height:28px}.postbox-body{min-height:230px;padding:7px 18px 13px}.postbox-brand{font-size:35px;margin-bottom:6px}.postbox-slot{height:13px;margin-bottom:15px}.postbox-label{padding:7px;border-width:4px}.postbox-label strong{font-size:21px;margin:8px 0}.postbox-label small{font-size:6px}.postbox-lock{margin:12px auto 4px}.postbox-base{height:15px}.postbox-shadow{width:230px;height:20px}.postbox-caption{margin-top:10px}.postbox-caption em{font-size:21px}.letter-bottom{flex-direction:row;align-items:center;gap:12px}.mail-button{padding:14px 12px;gap:12px}.letter-bottom p{font-size:9px}.signal-letter{padding:24px}.mail-receipt{min-height:450px}}
