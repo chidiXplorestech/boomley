@@ -1,104 +1,46 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import '../styles/editorial.css';
-// A deterministic character field: quiet noise bends around a clear signal.
-const asciiSignal = Array.from({ length: 42 }, (_, y) =>
-  Array.from({ length: 128 }, (_, x) => {
-    const dx = (x - 64) / 2.3;
-    const dy = y - 21;
-    const radius = Math.sqrt(dx * dx + dy * dy);
-    const wave = Math.sin(radius * .65 - Math.atan2(dy, dx) * 2);
-    if (radius > 27) return (x * 17 + y * 13) % 31 === 0 ? '.' : ' ';
-    return wave > .78 ? '#' : wave > .4 ? '+' : wave > 0 ? ':' : wave > -.45 ? '.' : ' ';
-  }).join('')
-).join('\n');
-const steps = [
-  { n: '01', title: 'Notice what keeps happening.', text: 'The workaround. The extra step. The thing everyone has quietly accepted. We look for problems that repeat, then ask who they affect.' },
-  { n: '02', title: 'Understand before we build.', text: 'We listen, research, and question our assumptions. Sometimes the right answer is software. Sometimes the problem needs something else entirely.' },
-  { n: '03', title: 'Make it real. Let people decide.', text: 'Product and engineering work together to turn the strongest idea into something people can use. We test it, learn from it, and listen again.' }
+import SignalPost from '../components/SignalPost.astro';
+import '../styles/observatory.css';
+const notes = [
+ ['01', 'Notice.', 'The workaround. The repeated frustration. The thing everyone has quietly accepted. That’s where we start.'],
+ ['02', 'Understand.', 'We listen to the people living with it. We ask better questions before deciding what needs to be built.'],
+ ['03', 'Make. Learn. Repeat.', 'Product and engineering turn an idea into something testable. Real use tells us what should happen next.']
 ];
 ---
-<BaseLayout>
+<BaseLayout title="Boomley — Good things begin with a better question.">
   <a class="skip-link" href="#main">Skip to content</a>
-  <dialog class="intro" aria-label="Welcome to Boomley">
-    <pre class="ascii-field ascii-field--intro" aria-hidden="true">{asciiSignal}</pre>\n    <button class="intro__skip" type="button" autofocus>Skip intro <span aria-hidden="true">↗</span></button>
-    <div class="intro__stage">
-      <p class="intro__caption">FROM NOISE TO POSSIBILITY</p>
-      <p class="intro__story" aria-live="polite" aria-atomic="true">A world that never stops.</p>
-      <div class="intro__ending" hidden>
-        <p class="intro__word">boomley<span class="brand-dot">.</span></p>
-        <p class="intro__promise">Less noise. More possibility.</p>
-        <button class="intro__enter" type="button">Explore what’s possible <span aria-hidden="true">↗</span></button>
-      </div>
-    </div>
-    <span class="intro__line" aria-hidden="true"></span>
+  <dialog class="opening" aria-label="Welcome to Boomley">
+    <button class="opening-skip" type="button" autofocus>Skip intro ↗</button>
+    <span class="micro">A SIGNAL FROM BOOMLEY</span>
+    <p class="opening-line" aria-live="polite">The world keeps getting louder.</p>
+    <div class="opening-end" hidden><span class="opening-brand">boomley<span>✳</span></span><p>Good things begin with a better question.</p><button class="action" type="button" data-enter>Explore what’s possible <span>↗</span></button></div>
+    <span class="opening-thread" aria-hidden="true"></span>
   </dialog>
-  <header class="header">
-    <a href="#top" class="wordmark" aria-label="Boomley home">boomley<span class="brand-dot">.</span></a>
-    <nav class="desktop-nav" aria-label="Primary"><a href="#about">The company</a><a href="#builds">In the works <span>01</span></a><a href="#people">The people</a></nav>
-    <a href="#signal" class="header-cta">Send a signal <span class="plus" aria-hidden="true">+</span></a>
-    <button class="menu-toggle" aria-expanded="false" aria-controls="mobile-nav">Menu <span aria-hidden="true">+</span></button>
-    <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile" hidden><a href="#about">The company</a><a href="#builds">In the works</a><a href="#people">The people</a><a href="#community">Community</a><a href="#signal">Send a signal</a></nav>
+  <header class="site-header wrap">
+    <a class="brand" href="#top" aria-label="Boomley home">boomley<span aria-hidden="true">✳</span></a>
+    <nav class="primary-nav" aria-label="Primary"><a href="#about">The idea</a><a href="#work">In the works <sup>01</sup></a><a href="#people">The people</a></nav>
+    <a class="header-mail" href="#signal">Send a signal <span aria-hidden="true">↗</span></a>
+    <button class="menu-toggle" type="button" aria-controls="mobile-menu" aria-expanded="false">Menu +</button>
+    <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile" hidden><a href="#about">The idea</a><a href="#work">In the works</a><a href="#people">The people</a><a href="#signal">Send a signal</a></nav>
   </header>
   <main id="main">
-    <section id="top" class="hero">
-      <div class="hero__eyebrow"><span class="eyebrow">INDEPENDENT MINDS. SHARED CURIOSITY.</span><span class="eyebrow hero__edition">EST. 2026 / CHAPTER 01</span></div>
-      <div class="hero__heading"><h1>Less noise.<br/>More <em>possibility.</em></h1><div class="hero__aside"><p>We pay attention to the things people have learned to live with. Then we work on making them better.</p><a class="text-link" href="#about">Meet Boomley <span class="small-line" aria-hidden="true"></span></a></div></div>
-      <div class="hero-film">
-        <img class="hero-scene-photo" src="/media/signal-light.webp" alt="A beam of light cutting through a dark architectural space" width="1536" height="1024" fetchpriority="high"/><pre class="ascii-field ascii-field--hero" aria-hidden="true">{asciiSignal}</pre><div class="signal-axis" aria-hidden="true"><span>+</span><span>+</span></div>
-        <div class="film-shade"></div>
-        <div class="film-top"><span>THE WORLD IS FULL OF SIGNALS.</span><button class="motion-toggle" aria-pressed="false" aria-label="Pause ambient motion"><span aria-hidden="true">Ⅱ</span> Pause motion</button></div>
-        <div class="film-bottom"><p>Something<br/>worth <em>noticing.</em></p><span class="film-note">A PRODUCT COMPANY.<br/>AN OPEN WORKBENCH.<br/>A PLACE TO BEGIN.</span></div>
-      </div>
-      <div class="hero-caption"><span>GOOD QUESTIONS COME BEFORE GOOD PRODUCTS.</span><a href="#about">SCROLL TO EXPLORE <span aria-hidden="true">↓</span></a></div>
+    <section class="hero" id="top">
+      <div class="hero-image" aria-hidden="true"><img src="/media/observatory/signal-lens-1536.webp" srcset="/media/observatory/signal-lens-640.webp 640w, /media/observatory/signal-lens-960.webp 960w, /media/observatory/signal-lens-1536.webp 1536w" sizes="100vw" width="1536" height="1024" alt="" fetchpriority="high"/></div>
+      <div class="wrap hero-content"><div class="hero-overline micro"><span><i class="live-dot"></i> INDEPENDENT MINDS. SHARED CURIOSITY.</span><span class="edition">NOTICING THINGS / SINCE 2026</span></div><h1>What if<br/>things worked<br/><em>better?</em></h1><div class="hero-summary"><p>We’re Boomley. A two-person product company turning everyday problems into thoughtful digital products.</p><div class="hero-actions"><a class="action" href="#signal">Send us a signal <span aria-hidden="true">↗</span></a><a class="quiet-link" href="#work">Meet our first build <span aria-hidden="true">↓</span></a></div></div><span class="lens-note micro" aria-hidden="true">FIG. 01<br/>A LITTLE LESS NOISE.<br/>A LITTLE MORE ATTENTION.</span><div class="hero-bottom micro"><span>A PRODUCT COMPANY. AN OPEN WORKBENCH.</span><button class="motion-toggle" type="button" aria-pressed="false">Ⅱ Pause motion</button></div></div>
     </section>
-    <section id="about" class="section about">
-      <div class="section-label"><span>01 / THE COMPANY</span><span>PAYING ATTENTION IS WHERE IT STARTS.</span></div>
-      <div class="about-layout"><h2 class="reveal">Modern-day problems.<br/><em>Thoughtful</em> solutions.</h2><div class="about-copy reveal"><p class="lead">Some things don’t need another app.<br/>They need a better question.</p><p>Boomley is a two-person product company exploring the friction in everyday life and technology. We notice recurring problems, investigate what matters, and build when something deserves to exist.</p><p>This is our public workbench. A place to share what we’re thinking, what we’re making, and what we’re still figuring out.</p><a href="#process" class="text-link">How we turn curiosity into work <span class="small-line" aria-hidden="true"></span></a></div></div>
-      <div class="principle reveal"><span class="asterisk" aria-hidden="true">✳</span><p>We’re interested in the things<br/>that could be <em>better.</em></p><span class="eyebrow">LESS FRICTION.<br/>MORE ROOM FOR LIFE.</span></div>
+    <div class="signal-strip" aria-hidden="true"><span>NOISE</span><pre data-ascii></pre><span class="signal-word">A SIGNAL ↗</span></div>
+    <section id="about" class="section wrap about">
+      <div class="section-top micro"><span>01 / A BETTER QUESTION</span><span>THE SMALL THINGS AREN’T ALWAYS SMALL.</span></div>
+      <div class="manifesto"><h2 class="reveal">The workaround<br/>you stopped<br/><em>noticing?</em></h2><div class="manifesto-note reveal"><span class="note-pin" aria-hidden="true"></span><span class="micro">FIELD NOTE / 001</span><p>“Why does it<br/>still have to<br/>be this hard?”</p><span class="micro">A PERFECTLY GOOD PLACE TO START.</span></div></div>
+      <div class="about-bottom"><p class="about-answer">We haven’t.</p><div><p>Technology moves quickly. Everyday life doesn’t always get easier. We’re interested in that gap.</p><p>Boomley begins with the things people put up with: scattered attention, unnecessary steps, systems that ask too much. We investigate what matters—and build when something deserves to exist.</p><a class="quiet-link" href="#process">Here’s how we work <span aria-hidden="true">↗</span></a></div></div>
     </section>
-    <section id="builds" class="build-section">
-      <div class="section-label"><span>02 / IN THE WORKS</span><span>ONE SIGNAL. TAKING SHAPE.</span></div>
-      <div class="build-layout"><div class="build-copy reveal"><span class="pill">OUR FIRST PRIVATE PRODUCT</span><h2>Room for<br/><em>one thing.</em></h2><p>Our first investigation starts with fragmented attention—and the question of what it takes to stay with something that matters.</p><p class="muted">The details are still behind the workbench. Join the list to hear when 0001 is ready to open.</p><a href="#waitlist" class="button button-light">Follow the first build <span aria-hidden="true">+</span></a></div><div class="build-art reveal" aria-label="Product 0001, private research and development"><pre class="ascii-field ascii-field--build" aria-hidden="true">{asciiSignal}</pre><div class="build-art__top"><span>BOOMLEY / PRIVATE BUILD</span><span>NO. 0001</span></div><div class="build-number">0001<span class="number-line"></span></div><div class="build-art__bottom"><span>THE TOOL SHOULD NOT<br/>BECOME THE TASK.</span><span class="asterisk" aria-hidden="true">✳</span></div></div></div>
-      <div class="build-progress"><span>RESEARCH <b>COMPLETE</b></span><span>EXPERIENCE <b>IN PROGRESS</b></span><span>TESTING <b>AHEAD</b></span></div>
-      <form id="waitlist" name="product-0001" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-async-form>
-        <input type="hidden" name="form-name" value="product-0001"/><p class="honeypot"><label>Leave empty<input name="bot-field"/></label></p>
-        <div><label for="wait-email">A first look, when it’s time.</label><p>Only updates about 0001. Unsubscribe whenever you like.</p></div><div class="waitlist-input"><input id="wait-email" name="email" type="email" required autocomplete="email" placeholder="Your email address"/><button type="submit" aria-label="Join the 0001 update list">Keep me posted <span aria-hidden="true">+</span></button></div><p class="form-status" role="status" aria-live="polite"></p>
-      </form>
-    </section>
-    <section id="process" class="section process"><div class="section-label"><span>03 / THE WAY WE WORK</span><span>CURIOUS BY NATURE. INTENTIONAL BY DESIGN.</span></div><div class="process-layout"><div class="process-heading reveal"><h2>Follow the question.<br/><em>Find the signal.</em></h2><p>Our process is a loop.<br/>The people living with the problem<br/>are always part of it.</p></div><div class="process-steps">{steps.map((step,i)=><details class="process-step" open={i===0}><summary><span>{step.n}</span><h3>{step.title}</h3><b class="detail-plus" aria-hidden="true">+</b></summary><p>{step.text}</p></details>)}</div></div></section>
-    <section id="people" class="section people"><div class="section-label"><span>04 / THE PEOPLE</span><span>TWO DISCIPLINES. ONE CONVERSATION.</span></div><div class="people-heading"><h2 class="reveal">Small team.<br/><em>Open minds.</em></h2><p>Product meets engineering.<br/>A shared curiosity about how things<br/>work—and how they could work better.</p></div><div class="people-grid"><article class="person reveal"><div class="portrait portrait-chidi"><img src="/media/founders/chidi.webp" alt="Chidi, co-founder of Boomley" width="512" height="512" loading="lazy"/><span class="portrait-caption">THE QUESTION / WHY?</span></div><div class="person-meta"><h3>Chidi</h3><span>PRODUCT & STRATEGY</span></div><p>Research, product thinking, and the experience of the person using it.</p></article><article class="person person-michael reveal"><div class="portrait portrait-michael"><img src="/media/founders/michael.webp" alt="Michael, co-founder of Boomley" width="512" height="512" loading="lazy"/><span class="portrait-caption">THE QUESTION / HOW?</span></div><div class="person-meta"><h3>Michael</h3><span>SOFTWARE ENGINEERING</span></div><p>Systems, architecture, and turning a good question into something real.</p></article></div></section>
-    <section id="community" class="community"><div class="section-label"><span>05 / AN OPEN INVITATION</span><span>YOU DON’T HAVE TO BE A BUILDER TO BELONG.</span></div><div class="community-main reveal"><span class="ascii-mark" aria-hidden="true">[+]</span><h2>For the people<br/>who keep asking<br/><em>“what if?”</em></h2><div><p>The problem-noticers. The developers. The designers, researchers, students, and quietly curious.</p><p>We’re building a community around better questions. Bring something you’ve noticed—or a way you’d like to help.</p><a class="text-link" href="mailto:hello@boomley.com?subject=Building%20with%20Boomley">Start a conversation <span class="small-line" aria-hidden="true"></span></a></div></div></section>
-    <section id="signal" class="section signal post-office">
-      <div class="section-label"><span>06 / THE SIGNAL POST</span><span>GOOD IDEAS DESERVE AN ADDRESS.</span></div>
-      <div class="post-heading"><div><span class="eyebrow">AN OPEN LINE TO CHIDI & MICHAEL</span><h2>A small letter.<br/><em>A possible beginning.</em></h2></div><p>An app you wish existed.<br/>A problem that won’t leave you alone.<br/>Put it in writing. We’re listening.</p></div>
-      <div class="postal-layout">
-        <div class="letter-desk">
-          <form class="signal-letter" name="boomley-signal" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-signal-mail>
-            <input type="hidden" name="form-name" value="boomley-signal"/>
-            <p class="honeypot"><label>Leave empty<input name="bot-field"/></label></p>
-            <fieldset class="letter-fields">
-              <div class="letter-address"><div><span class="letter-kicker">TO</span><p>Chidi & Michael<br/>The Boomley workbench</p></div><div class="letter-stamp" aria-hidden="true"><span>BOOMLEY</span><b>✳</b><span>SIGNAL POST</span></div></div>
-              <label for="mail-subject">This is about</label><input id="mail-subject" name="subject" required maxlength="160" placeholder="An app idea, a problem, a little friction…"/>
-              <label for="friction">Dear Boomley,</label><textarea id="friction" name="friction" rows="5" required maxlength="5000" placeholder="Here’s something I’ve noticed… Tell us what happens, who it affects, or the app you wish someone would build."></textarea>
-              <div class="letter-signoff"><label for="mail-name">From <span>(optional)</span></label><input id="mail-name" name="sender" maxlength="100" autocomplete="name" placeholder="Your name"/><label for="signal-email">Write back to</label><input id="signal-email" type="email" name="email" required autocomplete="email" placeholder="you@example.com"/></div>
-              <div class="letter-bottom"><p>Read by us. Kept between us.<br/>Please leave out sensitive personal details.</p><button class="mail-button" type="submit">Mail this signal <span aria-hidden="true">↗</span></button></div>
-            </fieldset>
-          </form>
-          <div class="mail-receipt" hidden tabindex="-1"><span class="receipt-mark" aria-hidden="true">✓</span><span class="eyebrow">DELIVERED TO THE BOOMLEY INBOX</span><h3>Your signal<br/>has <em>arrived.</em></h3><p>Thank you for putting it into words.<br/>We’ll read it and follow up if we have questions.</p><button class="mail-again" type="button">Write another letter ↗</button></div>
-          <p class="mail-status" role="status" aria-live="polite"></p>
-        </div>
-        <div class="postbox-scene">
-          <span class="postbox-coordinate">BOOMLEY POST / EST. 2026</span>
-          <div class="postbox" aria-label="Red Boomley postbox">
-            <div class="postbox-cap"></div><div class="postbox-body"><div class="postbox-brand" aria-hidden="true">b<span>.</span></div><div class="postbox-slot" aria-hidden="true"></div><div class="postbox-label"><span>SIGNAL MAIL</span><strong>Ideas welcome.<br/>Always.</strong><small>TO: CHIDI & MICHAEL<br/>FROM: THE QUIETLY CURIOUS</small></div><div class="postbox-lock" aria-hidden="true"></div><span class="postbox-number">No. 0001</span></div><div class="postbox-base"></div>
-          </div>
-          <div class="postbox-shadow"></div><p class="postbox-caption">No perfect pitches.<br/><em>Just something worth noticing.</em></p>
-        </div>
-      </div>
-      <div class="mail-envelope" hidden aria-hidden="true"><span class="envelope-address">TO: BOOMLEY<br/>THE SIGNAL POST</span><span class="envelope-flap"></span><span class="envelope-seal">b.</span></div>
-    </section>
+    <section id="work" class="work-section"><div class="wrap"><div class="section-top micro"><span>02 / ON THE WORKBENCH</span><span>PRIVATE FOR NOW. PURPOSEFUL FROM THE START.</span></div><div class="work-layout"><div class="work-copy reveal"><span class="label"><i class="live-dot"></i> IN DEVELOPMENT</span><h2>Room for<br/><em>one thing.</em></h2><p>Our first investigation begins with fragmented attention—and what it takes to stay with something that matters.</p><p class="muted">We’re still working behind the scenes. Leave your email for a first look when 0001 is ready.</p><form class="waitlist" name="product-0001" method="POST" action="/thank-you" data-netlify="true" netlify-honeypot="bot-field" data-waitlist><input type="hidden" name="form-name" value="product-0001"/><p class="honeypot"><label>Leave empty<input name="bot-field"/></label></p><label for="wait-email">Follow the first build</label><div class="email-row"><input id="wait-email" name="email" type="email" autocomplete="email" required placeholder="Your email address"/><button type="submit" aria-label="Join the 0001 update list">↗</button></div><p class="form-note">Only updates about 0001. Unsubscribe anytime.</p><p class="form-status" role="status" aria-live="polite"></p></form></div><div class="specimen reveal" role="img" aria-label="A blue research folder labelled private product 0001"><div class="specimen-grid" aria-hidden="true"></div><span class="specimen-coord micro">BOOMLEY RESEARCH / OBJECT 0001</span><div class="folder"><div class="folder-back"></div><div class="folder-paper"><span class="micro">A QUESTION WE’RE WORKING ON</span><p>What if your tools<br/>made room for<br/><em>your attention?</em></p><div class="paper-lines"></div></div><div class="folder-front"><span class="micro">PRIVATE BUILD / DO NOT RUSH</span><strong>0001</strong><div class="folder-bottom micro"><span>PRODUCT + ENGINEERING</span><span>✳</span></div></div></div><span class="specimen-caption micro">SOME THINGS DESERVE A LITTLE MORE THOUGHT.</span></div></div></div></section>
+    <section id="process" class="section wrap process"><div class="section-top micro"><span>03 / FROM FRICTION TO POSSIBILITY</span><span>OBSERVE. QUESTION. MAKE. REPEAT.</span></div><div class="process-intro"><h2>Curiosity,<br/><em>put to work.</em></h2><p>A good idea is a starting point.<br/>The people living with the problem<br/>help us find the way forward.</p></div><div class="process-visual" aria-hidden="true"><div class="observations"><span>the extra step</span><span>the workaround</span><span>the recurring problem</span></div><svg viewBox="0 0 800 180" preserveAspectRatio="none"><path class="process-track" d="M0 35C150 35 170 90 300 90H800M0 90H800M0 145C150 145 170 90 300 90"/><path class="process-line" d="M0 90H800"/></svg><div class="question-node">?</div><div class="test-node"><span>↗</span><small>A NEXT STEP</small></div></div><div class="process-notes">{notes.map(([n,title,body])=><article class="reveal"><span class="micro">{n}</span><h3>{title}</h3><p>{body}</p></article>)}</div></section>
+    <section id="people" class="section wrap people"><div class="section-top micro"><span>04 / THE PEOPLE BEHIND THE QUESTIONS</span><span>TWO DISCIPLINES. ONE CONVERSATION.</span></div><div class="people-intro"><h2>Small team.<br/><em>Open minds.</em></h2><p>No layers of introductions.<br/>Just the two of us, figuring things out<br/>and making things happen.</p></div><div class="people-grid"><article class="person"><div class="portrait"><img src="/media/founders/chidi.webp" alt="Chidi, co-founder of Boomley" width="1000" height="1000" loading="lazy"/><span class="portrait-tab micro">THE QUESTION / WHY?</span></div><div class="person-name"><h3>Chidi</h3><span aria-hidden="true">↗</span></div><span class="micro">PRODUCT & STRATEGY</span><p>Research, product thinking, and the experience of the person using it.</p></article><article class="person person-michael"><div class="portrait"><img src="/media/founders/michael.webp" alt="Michael, co-founder of Boomley" width="1000" height="1000" loading="lazy"/><span class="portrait-tab micro">THE QUESTION / HOW?</span></div><div class="person-name"><h3>Michael</h3><span aria-hidden="true">↗</span></div><span class="micro">SOFTWARE ENGINEERING</span><p>Systems, architecture, and turning a good question into something real.</p></article></div></section>
+    <section id="community" class="community"><div class="wrap"><div class="section-top micro"><span>05 / AN OPEN INVITATION</span><span>FOR THE QUIETLY CURIOUS.</span></div><div class="community-layout"><h2>There’s room<br/>for your<br/><em>“what if?”</em></h2><div><span class="community-mark" aria-hidden="true">[ ✳ ]</span><p>The problem-noticers. The developers. The designers, researchers, students, and people who see things a little differently.</p><p>Bring a question, an idea, or a way you’d like to help. You don’t have to be a builder to belong.</p><a class="quiet-link" href="mailto:hello@boomley.com?subject=Building%20with%20Boomley">Start a conversation <span aria-hidden="true">↗</span></a></div></div></div></section>
+    <SignalPost/>
   </main>
-  <footer><div class="footer-top"><p>Good things start<br/>with <em>a conversation.</em></p><a href="mailto:hello@boomley.com">hello@boomley.com</a></div><a class="footer-wordmark" href="#top" aria-label="Boomley, back to top">boomley<span>.</span></a><div class="footer-bottom"><span>© {new Date().getFullYear()} BOOMLEY</span><span>A PRODUCT COMPANY. A WORK IN PROGRESS.</span><a href="#top">BACK TO TOP ↑</a></div></footer>
-  <script>import '../scripts/editorial.ts';</script>
+  <footer class="site-footer wrap"><div class="footer-top"><p>Something on your mind?<br/><em>That’s how it starts.</em></p><a href="mailto:hello@boomley.com">hello@boomley.com ↗</a></div><a class="footer-brand" href="#top" aria-label="Boomley, back to top">boomley<span>✳</span></a><div class="footer-bottom micro"><span>© {new Date().getFullYear()} BOOMLEY</span><a href="/privacy">Privacy & your signal</a><a href="#top">BACK TO THE TOP ↑</a></div></footer>
+  <script>import '../scripts/observatory.ts';</script>
 </BaseLayout>
