@@ -1,0 +1,42 @@
+[
+  {
+    "width": 390,
+    "overflow": false,
+    "brand": "boomley",
+    "brokenImages": [],
+    "grainOpacity": "0.24",
+    "errors": []
+  },
+  {
+    "width": 768,
+    "overflow": false,
+    "brand": "boomley",
+    "brokenImages": [],
+    "grainOpacity": "0.24",
+    "errors": []
+  },
+  {
+    "width": 1366,
+    "overflow": false,
+    "brand": "boomley",
+    "brokenImages": [],
+    "grainOpacity": "0.24",
+    "errors": []
+  },
+  {
+    "width": 1920,
+    "overflow": false,
+    "brand": "boomley",
+    "brokenImages": [],
+    "grainOpacity": "0.24",
+    "errors": []
+  },
+  {
+    "test": "failure preserves draft",
+    "passed": true
+  },
+  {
+    "test": "mocked backend acceptance shows receipt",
+    "passed": true
+  }
+]
