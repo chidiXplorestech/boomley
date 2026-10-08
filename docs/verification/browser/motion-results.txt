@@ -1,0 +1,1 @@
+PASS intro skip, scroll restoration, once/session, founder navigation, Escape/focus restoration, pause state, no JS errors.

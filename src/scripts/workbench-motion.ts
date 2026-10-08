@@ -1,0 +1,72 @@
+import { gsap } from 'gsap';
+const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+const isPaused = () => reduced.matches || document.body.classList.contains('motion-paused');
+const welcome = document.querySelector<HTMLDialogElement>('.welcome-dialog');
+let introSeen = false;
+try { introSeen = sessionStorage.getItem('boomley-welcome-v2') === 'seen'; } catch {}
+if (welcome && !introSeen && !reduced.matches) {
+  const previous = document.body.style.overflow;
+  let exiting = false;
+  welcome.showModal(); document.body.style.overflow = 'hidden';
+  const entrance = gsap.fromTo('.welcome-copy > *', { opacity: 0, y: 12, filter: 'blur(5px)' }, { opacity: 1, y: 0, filter: 'blur(0px)', stagger: .17, duration: .7 });
+  const finish = () => {
+    if (exiting) return; exiting = true; clearTimeout(timer); entrance.kill();
+    gsap.to(welcome, { opacity: 0, filter: 'blur(12px)', duration: reduced.matches ? 0 : .6, onComplete: () => welcome.close() });
+  };
+  const timer = window.setTimeout(finish, 2400);
+  welcome.querySelector('[data-skip-intro]')?.addEventListener('click', finish);
+  welcome.addEventListener('cancel', e => { e.preventDefault(); finish(); });
+  welcome.addEventListener('close', () => { clearTimeout(timer); document.body.style.overflow = previous; try { sessionStorage.setItem('boomley-welcome-v2', 'seen'); } catch {} document.querySelector<HTMLAnchorElement>('.boomer-logo')?.focus({ preventScroll: true }); }, { once: true });
+  reduced.addEventListener('change', () => { if (reduced.matches) finish(); });
+}
+// Progressive enhancement: text remains visible if JavaScript is unavailable.
+const copy = document.querySelectorAll<HTMLElement>('.bench-story h2,.story-columns p,.people-intro h2,.post-heading h2');
+const reveal = new IntersectionObserver(entries => entries.forEach(entry => {
+  if (!entry.isIntersecting) return;
+  if (!isPaused()) gsap.fromTo(entry.target, { opacity: .55, y: 18, filter: 'blur(4px)' }, { opacity: 1, y: 0, filter: 'blur(0px)', duration: .85, ease: 'power2.out', clearProps: 'all' });
+  reveal.unobserve(entry.target);
+}), { threshold: .25 });
+copy.forEach(el => reveal.observe(el));
+
+const profiles = [
+  { id:'chidi', name:'Chidi', role:'CO-FOUNDER / PRODUCT & STRATEGY', copy:'I start with the person using it. What’s getting in their way? What would make a difference? I look after the research, product direction, and how it all feels to use.' },
+  { id:'michael', name:'Michael', role:'CO-FOUNDER / SOFTWARE ENGINEERING', copy:'I work on how the idea becomes a working product: the code, the systems behind it, and the details that make it reliable. I build, test, and keep improving it.' }
+];
+const dialog = document.querySelector<HTMLDialogElement>('.founder-dialog')!;
+let index = 0, opener: HTMLElement | null = null;
+const showPerson = (n: number) => {
+  index = (n + profiles.length) % profiles.length; const person = profiles[index];
+  dialog.querySelector('#founder-name')!.textContent = person.name;
+  dialog.querySelector('[data-founder-role]')!.textContent = person.role;
+  dialog.querySelector('[data-founder-copy]')!.textContent = person.copy;
+  const photo = dialog.querySelector<HTMLImageElement>('.founder-photo')!; photo.src = `/media/founders/${person.id}.webp`; photo.alt = `${person.name}, co-founder of Boomley`;
+  if (!isPaused()) gsap.fromTo([photo,dialog.querySelector('.founder-info')], { opacity: .4, y: 9 }, { opacity: 1, y: 0, duration: .35, stagger: .04, clearProps: 'all' });
+};
+document.querySelectorAll<HTMLButtonElement>('[data-person]').forEach(button => button.addEventListener('click', () => { opener = button; showPerson(profiles.findIndex(p=>p.id===button.dataset.person)); dialog.showModal(); }));
+dialog.querySelector('.founder-close')?.addEventListener('click', () => dialog.close());
+dialog.querySelector('[data-founder-prev]')?.addEventListener('click', () => showPerson(index-1));
+dialog.querySelector('[data-founder-next]')?.addEventListener('click', () => showPerson(index+1));
+dialog.querySelector('[data-founder-mail]')?.addEventListener('click', () => dialog.close());
+dialog.addEventListener('close', () => opener?.focus({preventScroll:true}));
+
+// Dot field responds to pointer proximity. Event-driven; no perpetual animation loop.
+const canvas = document.querySelector<HTMLCanvasElement>('.interactive-dots')!;
+const ctx = canvas.getContext('2d');
+let pointer = { x:-1000, y:-1000 }, frame = 0;
+const paint = () => {
+  frame = 0; if (!ctx) return;
+  const dpr = Math.min(devicePixelRatio || 1, 1.5), w = innerWidth, h = innerHeight;
+  if (canvas.width !== Math.round(w*dpr) || canvas.height !== Math.round(h*dpr)) { canvas.width = Math.round(w*dpr); canvas.height = Math.round(h*dpr); }
+  ctx.setTransform(dpr,0,0,dpr,0,0); ctx.clearRect(0,0,w,h);
+  if (isPaused() || document.hidden) return;
+  for (let y=20;y<h;y+=42) for(let x=20;x<w;x+=42) {
+    const dx=x-pointer.x,dy=y-pointer.y,d=Math.hypot(dx,dy),near=Math.max(0,1-d/160);
+    ctx.fillStyle=`rgba(229,239,130,${.09+near*.55})`;ctx.beginPath();ctx.arc(x+(d?dx/d:0)*near*8,y+(d?dy/d:0)*near*8,1+near*1.7,0,Math.PI*2);ctx.fill();
+  }
+};
+const schedule=()=>{if(!frame)frame=requestAnimationFrame(paint);};
+window.addEventListener('pointermove',e=>{if(e.pointerType==='touch'||isPaused())return;pointer={x:e.clientX,y:e.clientY};schedule();},{passive:true});
+document.addEventListener('pointerleave',()=>{pointer={x:-1000,y:-1000};schedule();});
+window.addEventListener('resize',schedule,{passive:true});document.addEventListener('visibilitychange',schedule);
+new MutationObserver(schedule).observe(document.body,{attributes:true,attributeFilter:['class']});
+reduced.addEventListener('change',schedule);schedule();

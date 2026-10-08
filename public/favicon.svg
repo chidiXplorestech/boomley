@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="boomley signal mark">
   <rect width="64" height="64" rx="14" fill="#0A0C10"/>
   <!-- signal dash -->
-  <rect x="18" y="10" width="28" height="7" rx="3.5" fill="#F2C94C"/>
+  <rect x="18" y="10" width="28" height="7" rx="3.5" fill="#e5ef82"/>
   <!-- soft lowercase b, redrawn as a favicon-safe vector in the Caer direction -->
   <path fill="#F7F3EA" fill-rule="evenodd" d="
     M20 19
