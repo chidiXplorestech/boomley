@@ -49,3 +49,7 @@ body{background-color:#173c70;background-attachment:scroll;background-size:100% 
 @media(prefers-reduced-motion:reduce){.portrait-button,.portrait-button img,.email-button{transition:none}.interactive-dots{display:none}}
 .founder-photo{height:auto;max-height:480px}.founder-close{z-index:2}.founder-dialog{height:auto}.founder-dialog[open]{margin:auto}
 .founder-dialog{height:fit-content;min-height:0;inset:0}
+
+/* Supplied blue grid: preserve its grading in a single seamless viewport layer. */
+body{background:#07112e;isolation:isolate}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:#07112e url('/media/workbench/blue-depth.webp') center center/cover no-repeat}
