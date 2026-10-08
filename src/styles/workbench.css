@@ -52,4 +52,4 @@ body{background-color:#173c70;background-attachment:scroll;background-size:100% 
 
 /* Supplied blue grid: preserve its grading in a single seamless viewport layer. */
 body{background:#07112e;isolation:isolate}
-body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:#07112e url('/media/workbench/blue-depth.webp') center center/cover no-repeat}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(#07112e40,#07112e40),url('/media/workbench/blue-drafting.webp') center center/cover no-repeat;background-color:#07112e}
