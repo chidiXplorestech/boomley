@@ -52,7 +52,7 @@ body{background-color:#173c70;background-attachment:scroll;background-size:100% 
 
 /* Full-width grid: preserve proportions, repeat vertically, and avoid side gaps. */
 body{background:#143e70;isolation:isolate}
-body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background-color:#143e70;background-image:linear-gradient(#08244940,#08244940),url('/media/workbench/full-width-grid.webp');background-position:center,center top;background-size:100% 100%,100% auto;background-repeat:no-repeat,repeat-y}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background-color:#143e70;background-image:linear-gradient(#06182d66,#06182d66),url('/media/workbench/full-width-grid.webp');background-position:center,center top;background-size:100% 100%,100% auto;background-repeat:no-repeat,repeat-y}
 
 /* Medium body weight; texture belongs to the wordmark, never reading copy. */
 body{font-weight:500}
@@ -73,3 +73,7 @@ p,label,input,textarea,button,.sidebar-caption,.sidebar-bottom,.archive-tab,.mic
 .contact-dialog>.index-label{display:block;padding-right:25px}.contact-dialog h2{font-family:var(--serif);font-size:clamp(38px,7vw,56px);line-height:1.1;margin:18px 0 12px}.contact-dialog p{font-size:15px;line-height:1.6}.contact-dialog label{display:block;margin:18px 0 6px;font-size:14px}
 .contact-dialog input,.contact-dialog textarea{display:block;width:100%;padding:11px 12px;border:1px solid #7d8b94;border-radius:6px;background:#fffdf7;color:#20364d;font:500 16px/1.5 var(--sans)}.contact-dialog textarea{resize:vertical;min-height:105px}.contact-dialog .contact-preview-note{font-size:13px;margin:16px 0;color:#455767}.contact-review h3{font-size:24px;margin-top:24px}.contact-review [data-contact-summary]{white-space:pre-wrap;overflow-wrap:anywhere;margin:16px 0}.contact-dialog [hidden]{display:none!important}
 .letter-fields .signal-question{font-family:var(--sans);font-size:16px;line-height:1.5;margin-top:24px;font-weight:600}.signal-question span{font-size:12px;font-weight:500}.letter-fields .signal-help{font-size:13px;line-height:1.6;color:#45525c;margin:7px 0 12px}.letter-fields #signal-outcome{min-height:90px}.post-heading>p{max-width:370px}.letter-fields>label[for="mail-subject"]{font-size:16px;font-weight:600}
+
+/* Reference texture is subdued and monochrome so the blue grade stays intact. */
+.film-layer{opacity:.02;background-image:url('/media/workbench/film-texture.webp');background-size:cover;background-position:center;filter:grayscale(1) brightness(.65);mix-blend-mode:soft-light}
+.dust-layer{opacity:.02}
