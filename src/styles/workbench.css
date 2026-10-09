@@ -50,13 +50,16 @@ body{background-color:#173c70;background-attachment:scroll;background-size:100% 
 .founder-photo{height:auto;max-height:480px}.founder-close{z-index:2}.founder-dialog{height:auto}.founder-dialog[open]{margin:auto}
 .founder-dialog{height:fit-content;min-height:0;inset:0}
 
-/* Keep the complete supplied image visible, turned to landscape on wide screens. */
-body{background:#11191e;isolation:isolate}
-body::before{content:"";position:fixed;left:50%;top:50%;width:100svh;height:100vw;z-index:-1;pointer-events:none;transform:translate(-50%,-50%) rotate(90deg);background:linear-gradient(#10192255,#10192255),url('/media/workbench/reeded-glass.webp') center/contain no-repeat;background-color:#11191e}
-@media(orientation:portrait){body::before{inset:0;width:auto;height:auto;transform:none}}
+/* Full supplied landscape board, with no cover crop. */
+body{background:#113969;isolation:isolate}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(#08244955,#08244955),url('/media/workbench/landscape-blueprint.webp') center/contain no-repeat;background-color:#113969}
+@media(orientation:portrait){body::before{inset:auto;left:50%;top:50%;width:100svh;height:100vw;transform:translate(-50%,-50%) rotate(90deg)}}
 
 /* Medium body weight; texture belongs to the wordmark, never reading copy. */
 body{font-weight:500}
 p,label,input,textarea,button,.sidebar-caption,.sidebar-bottom,.archive-tab,.micro,.index-label,.bench-header nav,.footer-email{font-weight:500}
 .wordmark-text{display:inline-block;font:inherit;-webkit-mask-image:url('/media/workbench/wordmark-wear.svg');mask-image:url('/media/workbench/wordmark-wear.svg');-webkit-mask-size:90px 40px;mask-size:90px 40px}
 @media(forced-colors:active){.wordmark-text{-webkit-mask-image:none;mask-image:none}}
+
+.sidebar-copy .email-button{white-space:normal;line-height:1.4;text-align:left}
+.sidebar-copy .email-button .icon{flex-shrink:0}
