@@ -50,10 +50,9 @@ body{background-color:#173c70;background-attachment:scroll;background-size:100% 
 .founder-photo{height:auto;max-height:480px}.founder-close{z-index:2}.founder-dialog{height:auto}.founder-dialog[open]{margin:auto}
 .founder-dialog{height:fit-content;min-height:0;inset:0}
 
-/* Full supplied landscape board, with no cover crop. */
-body{background:#113969;isolation:isolate}
-body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(#08244955,#08244955),url('/media/workbench/landscape-blueprint.webp') center/contain no-repeat;background-color:#113969}
-@media(orientation:portrait){body::before{inset:auto;left:50%;top:50%;width:100svh;height:100vw;transform:translate(-50%,-50%) rotate(90deg)}}
+/* Full-width grid: preserve proportions, repeat vertically, and avoid side gaps. */
+body{background:#143e70;isolation:isolate}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background-color:#143e70;background-image:linear-gradient(#08244940,#08244940),url('/media/workbench/full-width-grid.webp');background-position:center,center top;background-size:100% 100%,100% auto;background-repeat:no-repeat,repeat-y}
 
 /* Medium body weight; texture belongs to the wordmark, never reading copy. */
 body{font-weight:500}
