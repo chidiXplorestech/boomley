@@ -50,6 +50,7 @@ body{background-color:#173c70;background-attachment:scroll;background-size:100% 
 .founder-photo{height:auto;max-height:480px}.founder-close{z-index:2}.founder-dialog{height:auto}.founder-dialog[open]{margin:auto}
 .founder-dialog{height:fit-content;min-height:0;inset:0}
 
-/* Supplied blue grid: preserve its grading in a single seamless viewport layer. */
-body{background:#07112e;isolation:isolate}
-body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(#07112e40,#07112e40),url('/media/workbench/blue-drafting.webp') center center/cover no-repeat;background-color:#07112e}
+/* Keep the complete supplied image visible, turned to landscape on wide screens. */
+body{background:#11191e;isolation:isolate}
+body::before{content:"";position:fixed;left:50%;top:50%;width:100svh;height:100vw;z-index:-1;pointer-events:none;transform:translate(-50%,-50%) rotate(90deg);background:linear-gradient(#10192255,#10192255),url('/media/workbench/reeded-glass.webp') center/contain no-repeat;background-color:#11191e}
+@media(orientation:portrait){body::before{inset:0;width:auto;height:auto;transform:none}}
