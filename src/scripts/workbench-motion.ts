@@ -70,3 +70,35 @@ document.addEventListener('pointerleave',()=>{pointer={x:-1000,y:-1000};schedule
 window.addEventListener('resize',schedule,{passive:true});document.addEventListener('visibilitychange',schedule);
 new MutationObserver(schedule).observe(document.body,{attributes:true,attributeFilter:['class']});
 reduced.addEventListener('change',schedule);schedule();
+
+// Pointer cue follows the visitor inside each portrait; touch keeps a visible label.
+document.querySelectorAll<HTMLElement>('.portrait-button').forEach(portrait => {
+  portrait.addEventListener('pointermove', e => {
+    if(e.pointerType === 'touch' || isPaused()) return;
+    const bounds = portrait.getBoundingClientRect();
+    portrait.style.setProperty('--cue-x', `${Math.max(78,Math.min(bounds.width-78,e.clientX-bounds.left))}px`);
+    portrait.style.setProperty('--cue-y', `${Math.max(28,Math.min(bounds.height-65,e.clientY-bounds.top))}px`);
+  }, {passive:true});
+  portrait.addEventListener('pointerleave', () => {portrait.style.removeProperty('--cue-x');portrait.style.removeProperty('--cue-y');});
+});
+
+const contact = document.querySelector<HTMLDialogElement>('#contact')!;
+const contactForm = contact.querySelector<HTMLFormElement>('[data-contact-form]')!;
+const contactReview = contact.querySelector<HTMLElement>('.contact-review')!;
+let contactOpener: HTMLElement | null = null;
+let previousContactOverflow = '';
+document.querySelectorAll<HTMLElement>('[data-contact-open]').forEach(link => link.addEventListener('click', e => {
+  e.preventDefault(); contactOpener = link; previousContactOverflow = document.body.style.overflow;
+  contact.showModal(); document.body.style.overflow = 'hidden';
+  if(!isPaused()) gsap.fromTo(contact,{opacity:0,y:14},{opacity:1,y:0,duration:.25,clearProps:'opacity,transform'});
+}));
+contact.querySelector('.contact-close')?.addEventListener('click',()=>contact.close());
+contact.addEventListener('click',e=>{if(e.target!==contact)return;const r=contact.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)contact.close();});
+contact.addEventListener('close',()=>{document.body.style.overflow=previousContactOverflow;contactOpener?.focus({preventScroll:true});});
+contactForm.addEventListener('submit',e=>{
+  e.preventDefault();const data=new FormData(contactForm);
+  contact.querySelector<HTMLElement>('[data-contact-summary]')!.textContent=`From: ${data.get('name')}\nEmail: ${data.get('email')}\n\n${data.get('message')}`;
+  contactForm.hidden=true;contactReview.hidden=false;
+  contact.querySelector<HTMLButtonElement>('[data-contact-edit]')!.focus();
+});
+contact.querySelector('[data-contact-edit]')?.addEventListener('click',()=>{contactReview.hidden=true;contactForm.hidden=false;contact.querySelector<HTMLTextAreaElement>('#contact-message')!.focus();});

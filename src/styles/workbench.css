@@ -62,3 +62,14 @@ p,label,input,textarea,button,.sidebar-caption,.sidebar-bottom,.archive-tab,.mic
 
 .sidebar-copy .email-button{white-space:normal;line-height:1.4;text-align:left}
 .sidebar-copy .email-button .icon{flex-shrink:0}
+
+.portrait-tab{display:flex;align-items:center;gap:8px;font-size:12px!important;background:#10263a;color:#fffdf4;border:1px solid #fff7;border-radius:24px;padding:10px 14px}
+.mouse-profile-label{display:none}.portrait-cue{display:none;position:absolute;z-index:3;left:var(--cue-x,50%);top:var(--cue-y,45%);transform:translate(-50%,-50%);padding:14px 18px;background:#e5ef82;color:#10263a;border-radius:30px;white-space:nowrap;font-size:14px;font-weight:600;pointer-events:none;box-shadow:0 8px 25px #0003}
+@media(hover:hover) and (pointer:fine){.touch-profile-label{display:none}.mouse-profile-label{display:inline}.portrait-button:hover .portrait-cue{display:block}}
+.portrait-button:focus-visible{outline:3px solid #e5ef82;outline-offset:6px}.portrait-button:focus-visible .portrait-tab{background:#e5ef82;color:#10263a}
+.contact-dialog{position:fixed;inset:0;margin:auto;width:min(560px,calc(100% - 28px));height:fit-content;max-height:calc(100svh - 32px);overflow:auto;border:1px solid #d2ccbc;border-radius:16px;padding:clamp(24px,4vw,40px);background:#f4f0e4;color:#20364d;box-shadow:0 25px 90px #0005}
+.contact-dialog::backdrop{background:#061832b0;backdrop-filter:blur(10px)}
+.contact-close{position:absolute;right:12px;top:12px;width:38px;height:38px;display:grid;place-items:center;border:1px solid #a6b1b8;border-radius:50%;background:#f4f0e4;color:#20364d}
+.contact-dialog>.index-label{display:block;padding-right:25px}.contact-dialog h2{font-family:var(--serif);font-size:clamp(38px,7vw,56px);line-height:1.1;margin:18px 0 12px}.contact-dialog p{font-size:15px;line-height:1.6}.contact-dialog label{display:block;margin:18px 0 6px;font-size:14px}
+.contact-dialog input,.contact-dialog textarea{display:block;width:100%;padding:11px 12px;border:1px solid #7d8b94;border-radius:6px;background:#fffdf7;color:#20364d;font:500 16px/1.5 var(--sans)}.contact-dialog textarea{resize:vertical;min-height:105px}.contact-dialog .contact-preview-note{font-size:13px;margin:16px 0;color:#455767}.contact-review h3{font-size:24px;margin-top:24px}.contact-review [data-contact-summary]{white-space:pre-wrap;overflow-wrap:anywhere;margin:16px 0}.contact-dialog [hidden]{display:none!important}
+.letter-fields .signal-question{font-family:var(--sans);font-size:16px;line-height:1.5;margin-top:24px;font-weight:600}.signal-question span{font-size:12px;font-weight:500}.letter-fields .signal-help{font-size:13px;line-height:1.6;color:#45525c;margin:7px 0 12px}.letter-fields #signal-outcome{min-height:90px}.post-heading>p{max-width:370px}.letter-fields>label[for="mail-subject"]{font-size:16px;font-weight:600}

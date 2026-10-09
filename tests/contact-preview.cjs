@@ -1,0 +1,22 @@
+const {chromium}=require(process.env.PLAYWRIGHT_PACKAGE||'playwright');
+const assert=require('node:assert/strict');
+(async()=>{
+ const browser=await chromium.launch({executablePath:process.env.CHROME_PATH,args:['--no-sandbox'],headless:true});
+ const page=await browser.newPage({viewport:{width:1366,height:900}});
+ await page.addInitScript(()=>sessionStorage.setItem('boomley-welcome-v2','seen'));
+ const posts=[];page.on('request',r=>{if(r.method()==='POST')posts.push(r.url())});
+ await page.goto('http://127.0.0.1:4180');
+ await page.getByRole('link',{name:'Email us',exact:true}).click();
+ await page.locator('#contact').waitFor({state:'visible'});
+ await page.locator('#contact-name').fill('Test visitor');await page.locator('#contact-email').fill('qa@example.com');await page.locator('#contact-message').fill('Hello Boomley');
+ await page.getByRole('button',{name:'Review message'}).click();
+ assert.match(await page.locator('[data-contact-summary]').textContent(),/Hello Boomley/);assert.deepEqual(posts,[]);
+ await page.getByRole('button',{name:'Keep editing'}).click();assert.equal(await page.locator('#contact-message').inputValue(),'Hello Boomley');
+ await page.screenshot({path:'docs/verification/browser/contact-desktop.png'});
+ await page.keyboard.press('Escape');await page.waitForFunction(()=>document.body.style.overflow==='');assert.equal(await page.locator('#contact').evaluate(e=>e.open),false);assert.equal(await page.evaluate(()=>document.body.style.overflow),'');assert.equal(await page.getByRole('link',{name:'Email us',exact:true}).evaluate(e=>e===document.activeElement),true);
+ const portrait=page.getByRole('button',{name:'Meet Chidi',exact:true});await portrait.hover();assert.equal(await portrait.locator('.portrait-cue').isVisible(),true);await page.screenshot({path:'docs/verification/browser/profile-hover.png'});
+ await page.setViewportSize({width:390,height:844});await page.getByRole('link',{name:'Email us',exact:true}).click();await page.waitForFunction(()=>getComputedStyle(document.querySelector('#contact')).opacity==='1');await page.screenshot({path:'docs/verification/browser/contact-mobile.png'});assert.equal(await page.locator('#contact').evaluate(e=>e.scrollWidth>e.clientWidth),false);await page.keyboard.press('Escape');
+ await page.locator('#friction').scrollIntoViewIfNeeded();await page.screenshot({path:'docs/verification/browser/signal-prompts-mobile.png'});
+ assert.equal(await page.locator('#friction').getAttribute('aria-describedby'),'friction-help');assert.equal(await page.locator('#signal-outcome').count(),1);
+ await browser.close();console.log('PASS contact preview/edit, no POST, Escape/focus/scroll restoration, portrait hover cue, mobile dialog fit, persistent Signal Mail guidance');
+})().catch(e=>{console.error(e);process.exit(1)});
