@@ -102,3 +102,20 @@ contactForm.addEventListener('submit',e=>{
   contact.querySelector<HTMLButtonElement>('[data-contact-edit]')!.focus();
 });
 contact.querySelector('[data-contact-edit]')?.addEventListener('click',()=>{contactReview.hidden=true;contactForm.hidden=false;contact.querySelector<HTMLTextAreaElement>('#contact-message')!.focus();});
+
+const brand = document.querySelector<HTMLElement>('.header-brand')!;
+const revealBrand = () => {if(isPaused())return;brand.classList.add('brand-intro');window.setTimeout(()=>brand.classList.remove('brand-intro'),1800);};
+if(welcome?.open)welcome.addEventListener('close',revealBrand,{once:true});else revealBrand();
+const pillNav=document.querySelector<HTMLElement>('.pill-nav')!;
+const navLinks=Array.from(pillNav.querySelectorAll<HTMLAnchorElement>('a'));
+const indicator=pillNav.querySelector<HTMLElement>('.nav-indicator')!;
+const updatePill=(link:HTMLAnchorElement)=>{
+ navLinks.forEach(item=>{if(item===link)item.setAttribute('aria-current','location');else item.removeAttribute('aria-current');});
+ indicator.style.width=`${link.offsetWidth}px`;indicator.style.transform=`translateX(${link.offsetLeft}px)`;
+};
+navLinks.forEach(link=>link.addEventListener('click',()=>updatePill(link)));
+const sections=new IntersectionObserver(entries=>{for(const entry of entries){if(entry.isIntersecting){const link=navLinks.find(link=>link.hash===`#${entry.target.id}`);if(link)updatePill(link);}}},{rootMargin:'-15% 0px -65% 0px',threshold:0});
+navLinks.forEach(link=>{const section=document.querySelector(link.hash);if(section)sections.observe(section);});
+new ResizeObserver(()=>updatePill(navLinks.find(link=>link.hasAttribute('aria-current'))||navLinks[0])).observe(pillNav);
+document.fonts.ready.then(()=>updatePill(navLinks.find(link=>link.hasAttribute('aria-current'))||navLinks[0]));
+updatePill(navLinks[0]);
