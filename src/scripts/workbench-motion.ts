@@ -104,8 +104,28 @@ contactForm.addEventListener('submit',e=>{
 contact.querySelector('[data-contact-edit]')?.addEventListener('click',()=>{contactReview.hidden=true;contactForm.hidden=false;contact.querySelector<HTMLTextAreaElement>('#contact-message')!.focus();});
 
 const brand = document.querySelector<HTMLElement>('.header-brand')!;
-const revealBrand = () => {if(isPaused())return;brand.classList.add('brand-intro');window.setTimeout(()=>brand.classList.remove('brand-intro'),1800);};
-if(welcome?.open)welcome.addEventListener('close',revealBrand,{once:true});else revealBrand();
+let brandCycle: number | undefined;
+let brandClose: number | undefined;
+const stopBrand = () => {
+  window.clearInterval(brandCycle); window.clearTimeout(brandClose);
+  brandCycle = undefined; brand.classList.remove('brand-intro');
+};
+const scheduleBrand = () => {
+  stopBrand();
+  if (isPaused() || document.hidden || welcome?.open) return;
+  brandCycle = window.setInterval(() => {
+    brand.classList.add('brand-intro');
+    // 1.4-second slide out, 3-second hold, then a 1.4-second return.
+    brandClose = window.setTimeout(() => brand.classList.remove('brand-intro'), 4400);
+  }, 20000);
+};
+welcome?.addEventListener('close', scheduleBrand, { once: true });
+document.addEventListener('visibilitychange', scheduleBrand);
+reduced.addEventListener('change', scheduleBrand);
+new MutationObserver(scheduleBrand).observe(document.body, { attributes: true, attributeFilter: ['class'] });
+window.addEventListener('pagehide', stopBrand);
+window.addEventListener('pageshow', scheduleBrand);
+scheduleBrand();
 const pillNav=document.querySelector<HTMLElement>('.pill-nav')!;
 const navLinks=Array.from(pillNav.querySelectorAll<HTMLAnchorElement>('a'));
 const indicator=pillNav.querySelector<HTMLElement>('.nav-indicator')!;
